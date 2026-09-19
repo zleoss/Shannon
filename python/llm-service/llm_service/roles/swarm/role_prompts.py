@@ -1,14 +1,29 @@
-"""Role-specific prompt snippets for Swarm V2 agents.
+"""=============================================================================
+文件: python/llm-service/llm_service/roles/swarm/role_prompts.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  Swarm V2 角色专有 prompt 片段（三层架构的 Layer 2）。
+【关键内容】
+  SWARM_ROLE_PROMPTS[role] 提供角色方法论
+  “lead” 不在 SWARM_ROLE_PROMPTS（独立 prompt）
+  仅为方法指导，非完整 system prompt
+【协作关系】
+  被 agent_protocol.py 组合成最终 system prompt，供 agent step 使用。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Role-specific prompt snippets for Swarm V2 agents.
 
-These are Layer 2 of the 3-layer prompt architecture:
-  Layer 1: AGENT_LOOP_SYSTEM_PROMPT (core protocol, same for all agents)
-  Layer 2: SWARM_ROLE_PROMPTS[role] (role-specific methodology)
-  Layer 3: Dynamic context (task description, team state, iteration context)
+  These are Layer 2 of the 3-layer prompt architecture:
+    Layer 1: AGENT_LOOP_SYSTEM_PROMPT (core protocol, same for all agents)
+    Layer 2: SWARM_ROLE_PROMPTS[role] (role-specific methodology)
+    Layer 3: Dynamic context (task description, team state, iteration context)
 
-Design decisions (from architecture review 2026-02-20):
-- "lead" role is NOT in SWARM_ROLE_PROMPTS (Lead has its own dedicated prompt)
-- Role prompts are methodology guidance, NOT full system prompts
-- get_swarm_role_catalog() returns roles available for Lead to assign
+  Design decisions (from architecture review 2026-02-20):
+  - "lead" role is NOT in SWARM_ROLE_PROMPTS (Lead has its own dedicated prompt)
+  - Role prompts are methodology guidance, NOT full system prompts
+  - get_swarm_role_catalog() returns roles available for Lead to assign
+=============================================================================
 """
 
 from typing import Dict

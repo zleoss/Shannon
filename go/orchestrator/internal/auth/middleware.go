@@ -1,3 +1,10 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/auth/middleware.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 HTTP 和 gRPC 认证中间件，支持 JWT/API Key/skip-auth 模式
+// 【关键内容】 HTTPMiddleware 处理 Authorization 和 X-API-Key 头部；UnaryServerInterceptor gRPC 拦截；scope 权限检查
+// 【协作关系】 被网关和 gRPC 服务注册时使用
+// =============================================================================
 package auth
 
 import (

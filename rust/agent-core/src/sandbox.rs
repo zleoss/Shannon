@@ -1,3 +1,15 @@
+// =============================================================================
+// 文件: rust/agent-core/src/sandbox.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   备用沙箱：基于 libc::setrlimit 的进程级资源限制实现（RLIMIT_AS/CPU/NOFILE/NPROC）。
+// 【关键内容】
+//   ResourceLimits 定义 RLIMIT_AS/RLIMIT_CPU/RLIMIT_NOFILE/RLIMIT_NPROC（sandbox.rs:18）
+//   受 wasi feature 门控，作为 WASI 不可用时的降级路径
+// 【协作关系】
+//   被 tools::ToolExecutor 在禁用 WASI 时作为回退沙箱使用。
+//   依赖 config::Config 与 metrics 进行限幅/上报。
+// =============================================================================
 use crate::config::Config;
 use crate::metrics::{TOOL_DURATION, TOOL_EXECUTIONS};
 use anyhow::{Context, Result};

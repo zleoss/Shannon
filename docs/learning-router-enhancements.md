@@ -1,5 +1,27 @@
 # Learning Router Enhancements
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档说明 Shannon 的 Learning Router（学习型路由器）增强实现——基于 epsilon-greedy 算法（10% 探索、90% 利用）智能选择策略。文档详细介绍了策略评分计算公式（成功率 + 上下文加成 - 性能惩罚）、历史数据统计（当天/本周/本月/全部的成功/失败/尝试次数）、上下文匹配（查询特征与历史模式比对）以及持久化存储设计（PostgreSQL 存储学习结果，热重载）。
+
+### 章节导航
+- **Epsilon-Greedy Selection**: 90% 利用最优策略，10% 随机探索新策略
+- **Strategy Score Calculation**: 评分公式 = 成功率 + 上下文加成 - Token 惩罚 - 超时惩罚 - 轮次惩罚
+- **Historical Statistics**: 按时间维度的成功率统计（当天/本周/本月/全部）
+- **Contextual Pattern Matching**: 根据查询特征匹配历史相似场景的策略
+- **Data Storage**: PostgreSQL 存储学习数据，进程内缓存避免频繁读库，支持热重载
+- **Feature Flag**: config/features.yaml 中 learning_router.enabled 开关
+
+### 与 AI Agent 体系的关联
+- 学习路由器实现：`go/orchestrator/internal/workflows/learning_router.go`
+- 数据存储：PostgreSQL 中存储历史策略执行数据
+- 与 TemplateWorkflow（System 1 零 Token 匹配）和 AI Decomposition（全量分解）配合形成三级路由
+- 特征开关：`config/features.yaml`
+
+### 阅读建议
+关注 AI 路由和成本优化的开发者必读；理解 epsilon-greedy 和评分公式即可，统计实现细节可略读。
+
 ## Overview
 
 The learning router uses an **epsilon-greedy** algorithm to intelligently select strategies based on historical performance and exploration needs, with contextual pattern matching.

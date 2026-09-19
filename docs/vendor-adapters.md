@@ -1,5 +1,28 @@
 # Vendor Adapters for Custom Agent Integration
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档是 Vendor 适配器模式的完整指南——一种将领域特定 Agent 和工具集成到 Shannon 而不污染核心代码库的方法。模式保持通用 Shannon 基础设施（开源提交）和供应商特定实现（私有仓库）的清晰分离。文档涵盖适配器架构（config overlays + OpenAPI 工具扩展 + 内置 Python 工具）、快速开始示例、组件指南（auth/rate limiting/response transform/error mapping）和最佳实践。
+
+### 章节导航
+- **When to Use Vendor Adapters**: 集成私有 API、自定义 OpenAPI 转换、构建领域特定 Agent
+- **Architecture**: Config Overlays + OpenAPI 工具扩展 + 内置 Python 工具注册的三通道架构
+- **Quick Start Example**: 完整的分步示例（从创建 overlay 到验证）
+- **Component Guide**: 认证/速率限制/响应转换/动态参数/错误映射
+- **Best Practices**: 配置分层、secrets 管理、优雅降级、测试策略
+- **Testing & Verification**: 隔离测试方法、mock 策略
+- **Troubleshooting**: 常见集成问题排查
+
+### 与 AI Agent 体系的关联
+- Overlay 配置：`config/overlays/` 目录
+- 内置工具注册：`python/llm-service/llm_service/tools/registry.py`
+- OpenAPI 加载：`python/llm-service/llm_service/tools/openapi_loader.py`
+- 配置合并：Go orchestrator 的 config manager 处理 overlay 合并
+
+### 阅读建议
+需要将 Shannon 集成到现有企业系统的开发者必读；重点关注 Architecture 和 Quick Start 章节。
+
 **Complete guide for integrating custom agents and domain-specific tools into Shannon using the vendor adapter pattern**
 
 ---

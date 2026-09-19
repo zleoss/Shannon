@@ -1,3 +1,37 @@
+# =============================================================================
+# 文件: deploy/compose/docker-compose.yml  —— Shannon 服务编排总图
+# -----------------------------------------------------------------------------
+# 网络:  shannon-net(bridge)；卷: postgres_data / shannon-sessions /
+#        shannon-users（session workspace 与用户级 memory 共享卷）。
+# 服务依赖关系与端口、健康检查说明：
+#   temporal          :7233            依赖 postgres，运行工作流引擎
+#   temporal-ui       :8088->8080      依赖 temporal，Temporal Web 界面
+#   postgres          :5432            pgvector/pgvector:pg16（含向量扩展）
+#     healthcheck: pg_isready -U shannon；初始化挂载 ../../migrations/postgres
+#   redis             :6379            appendonly 持久化
+#     healthcheck: redis-cli ping
+#   agent-core        :50051(gRPC) :2113(metrics)  依赖 temporal+redis(healthy)
+#     healthcheck: nc -z localhost 50051；挂载 config 与 wasm-interpreters，
+#     通过 shannon-sessions/shannon-users 卷与 llm-service 共享沙箱工作区
+#     (PYTHON_EXECUTOR_MODE: wasi 默认；可切 firecracker)
+#   orchestrator      :50052(gRPC) :2112(metrics) :8081(events/admin)
+#     依赖 temporal + postgres(healthy) + redis(healthy)
+#     healthcheck: nc -z localhost 50052；env 大量覆盖见 .env，
+#     JWT_SECRET 必须与 gateway 一致以校验 JWT
+#   llm-service       :8000         依赖 redis(healthy)+postgres(healthy)
+#     healthcheck: urllib.urlopen /health/live；env_file 加载 ../../.env，
+#     挂载 wasm-interpreters；PYTHON_WASI_* 与 AGENT_CORE_ADDR 指向 agent-core
+#   playwright-service:8002  profiles:[browser] —— 仅 `docker compose
+#     --profile browser up` 启动；shm_size 2gb 以运行 Chromium
+#     healthcheck: urlopen /health，start_period 60s
+#   gateway           :8080->8080   依赖 orchestrator+redis(healthy)+
+#     postgres(healthy)
+#     healthcheck: wget --spider /health；处理 HTTP 鉴权(GATEWAY_SKIP_AUTH
+#     默认 1=dev，prod 必须 0)，将 REST/SSE 转为 orchestrator gRPC
+# -----------------------------------------------------------------------------
+# 重要：修改 .env 或本编排后需 `docker compose down && up -d` 重建容器，
+# `restart` 不会重读 env_file。
+# =============================================================================
 name: shannon
 
 networks:

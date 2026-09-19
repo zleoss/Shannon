@@ -1,7 +1,20 @@
-"""
-SSRF protection helpers for playwright-service.
+"""=============================================================================
+文件: python/playwright-service/security.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  playwright-service SSRF 防护辅助（stdlib 实现，便于单测）。
+【关键内容】
+  阻断 RFC1918 / loopback / CGNAT 等私有/元数据目标
+  基于 ipaddress + socket 解析与判定
+【协作关系】
+  被 app.py capture / browser action 在请求外部 URL 前调用。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  SSRF protection helpers for playwright-service.
 
-This module is stdlib-only so it can be unit tested without Playwright installed.
+  This module is stdlib-only so it can be unit tested without Playwright installed.
+=============================================================================
 """
 
 import ipaddress

@@ -1,3 +1,15 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/templates/compiler.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   模板编译器：将 Template 编译为可执行 ExecutablePlan（拓扑排序）。
+// 【关键内容】
+//   CompileTemplate :32 / topologicalOrder :124
+//   cloneFailure :154 / cloneMap :162
+// 【协作关系】
+//   被 orchestrator 在执行 TemplateWorkflow 前调用，产 ExecutablePlan 供执行器调度。
+// =============================================================================
+
 package templates
 
 import (

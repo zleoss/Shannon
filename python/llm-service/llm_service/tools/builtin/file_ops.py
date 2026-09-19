@@ -1,5 +1,18 @@
-"""
-File Operation Tools - Safe file read/write/edit operations with session isolation
+"""=============================================================================
+文件: python/llm-service/llm_service/tools/builtin/file_ops.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  文件读写/搜索/编辑/删除工具集，支持沙箱代理与 session 隔离。
+【关键内容】
+  FileRead :168 / Write :417 / List :620
+  Search :845 / Edit :1159 / Delete :1363
+【协作关系】
+  被 agent 调用；通过 sandbox_client / WASI 切换本地或远端执行。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  File Operation Tools - Safe file read/write/edit operations with session isolation
+=============================================================================
 """
 
 import fnmatch

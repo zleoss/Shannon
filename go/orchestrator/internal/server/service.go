@@ -1,3 +1,15 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/server/service.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   OrchestratorService gRPC 实现：任务入口 SubmitTask 等。
+// 【关键内容】
+//   SubmitTask RPC 入口 :362 等
+//   与 Temporal client、budget、pricing、session 等协作
+// 【协作关系】
+//   由 gateway（rust agent-core）通过 gRPC 调用，触发 orchestrator workflow。
+// =============================================================================
+
 package server
 
 import (

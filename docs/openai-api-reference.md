@@ -1,5 +1,28 @@
 # Shannon OpenAI-Compatible API Reference
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档是 Shannon OpenAI 兼容 API 的完整参考文档，允许用户使用标准 OpenAI SDK 调用 Shannon 的高级研究和聊天能力。文档说明了 Base URL、Bearer Token/X-API-Key 两种认证方式、Chat Completions 端点（支持流和工具调用）、Completions 端点（纯文本代理，不经过编排器）、Models 端点（列出可用模型）、以及 Shannon 特有的参数扩展（x_session_id/x_role 等 OpenAI 不支持的参数以 x_ 前缀注入）。
+
+### 章节导航
+- **Base URL & Authentication**: API 地址和两种认证方式
+- **Chat Completions (POST /v1/chat/completions)**: 请求体参数（model/messages/stream/tools 等），支持流式和非流式
+- **Completions (POST /v1/completions)**: 纯文本补全，代理模式不经过编排器
+- **Models (GET /v1/models)**: 列出可用的 Shannon 模型
+- **Shannon-Specific Extensions**: x_session_id/x_role/x_model_tier 等参数
+- **Research Capabilities**: 通过模型名触发深度研究能力
+- **Error Handling**: OpenAI 兼容错误格式
+
+### 与 AI Agent 体系的关联
+- Gateway 实现：`go/orchestrator/cmd/gateway/` 处理 HTTP 路由
+- 编排器路由：通过模型名或 x_ 参数触发编排工作流
+- /v1/completions 不经过编排器——适合不需要路由/分解/策略的简单调用
+- /v1/chat/completions 经过编排器——支持工具、研究、策略等完整功能
+
+### 阅读建议
+使用 OpenAI SDK 接入 Shannon 的开发者必读；注意 /v1/completions 和 /v1/chat/completions 的路由差异（是否经过编排器）。
+
 Shannon provides an OpenAI-compatible API layer that allows you to use Shannon's advanced research and chat capabilities through standard OpenAI SDKs.
 
 ## Base URL

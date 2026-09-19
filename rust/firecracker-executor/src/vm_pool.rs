@@ -1,3 +1,18 @@
+// =============================================================================
+// 文件: rust/firecracker-executor/src/vm_pool.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   VmPool：warm pool + session 亲和 + ext4 + 清理的微虚拟机池管理。
+// 【关键内容】
+//   VmInstance（vm_pool.rs:17）/ VmPool（:38）
+//   allocate_cid（:69）/ acquire（:77）/ release（:145）
+//   maintain_warm_pool（:200）/ evict_idle_sessions（:248）
+//   stats / PoolStats（vm_pool.rs:281, 580）
+//   spawn_firecracker_process（:368）；ext4 挂载逻辑（:457+）
+// 【协作关系】
+//   被 vm_runner acquire/release 调用以获取/归还微虚拟机实例。
+//   依赖 firecracker_api 启动 VM、workspace_sync 维护文件系统。
+// =============================================================================
 use crate::config::Settings;
 use crate::firecracker_api::FirecrackerApi;
 use crate::workspace_sync;

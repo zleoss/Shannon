@@ -1,3 +1,13 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/activities/schedule_activities.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   定时记录 activity —— 创建/更新/删除定时任务数据库记录。
+// 【关键内容】
+//   CreateScheduleRecord / UpdateScheduleRecord / DeleteScheduleRecord
+// 【协作关系】
+//   由定时任务的 Temporal workflow 调用，操作 schedule 相关数据库表。
+// =============================================================================
 package activities
 
 import (

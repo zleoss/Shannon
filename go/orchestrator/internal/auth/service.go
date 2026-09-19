@@ -1,3 +1,10 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/auth/service.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 认证核心服务，提供注册/登录/OAuth/API Key/ProvisionalUser 全流程
+// 【关键内容】 Register / Login / Refresh / ValidateAPIKey / RegisterFromOAuth / ProvisionUser；异步更新；配额管理
+// 【协作关系】 依赖 db、jwt、oauth 等子模块，为全系统提供身份认证
+// =============================================================================
 package auth
 
 import (

@@ -1,4 +1,19 @@
-"""Legacy provider base definitions - re-exports from core for backward compatibility."""
+"""=============================================================================
+文件: python/llm-service/llm_service/providers/base.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  历史兼容层：re-export ModelTier 与 ModelInfo dataclass。
+【关键内容】
+  re-export ModelTier :7
+  ModelInfo dataclass（旧版定义）
+【协作关系】
+  供 api/providers、api/complexity 等旧调用点引用，避免重复枚举。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Legacy provider base definitions - re-exports from core for backward compatibility.
+=============================================================================
+"""
 
 from dataclasses import dataclass
 from typing import Any

@@ -1,5 +1,27 @@
 # Multimodal Messages — Frontend Integration Guide
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档说明 Shannon 后端对多模态消息的支持——允许在聊天消息中发送文件附件（图片/PDF/文本文件），并通过 Tasks API 或 OpenAI 兼容 API 两种方式提交。附件以 base64 编码通过 context.attachments 传递，后端存 Redis 后按不同类型注入 LLM 消息（图片→image content block、PDF→document content block、文本→直接注入）。文档包含前端 UI 实现建议、文件大小限制和错误处理说明。
+
+### 章节导航
+- **Supported File Types**: 图片（PNG/JPEG/GIF/WebP 最大 20MB）、PDF（20MB）、文本文件（20MB）
+- **API Protocol - Tasks API**: 通过 POST /api/v1/tasks/stream 提交，attachments 含 media_type/data/filename
+- **API Protocol - OpenAI Compatible**: 通过 /v1/chat/completions 提交，遵循 OpenAI 多模态消息格式
+- **Frontend UI Requirements**: 文件选择器 UI、预览、拖放上传、上传进度和错误状态
+- **Error Handling**: 文件大小超限、类型不支持、base64 解码失败等情况处理
+- **Streaming vs Non-Streaming**: 流式模式下附件事件的处理
+
+### 与 AI Agent 体系的关联
+- 附件接收处理：`python/llm-service/llm_service/api/agent.py` 中的 attachments 解析
+- 附件存储：Redis（键值对，临时存储）
+- 注入 LLM 消息：由 provider 适配器将附件转换为对应格式的 content block
+- 前端可参考 OpenAI 兼容 API 的 SDK 实现
+
+### 阅读建议
+前端开发者必读；后端开发者了解 API 协议即可；重点关注文件类型支持和 attachment 数据格式。
+
 > Frontend target: any Shannon API client
 
 ## Overview

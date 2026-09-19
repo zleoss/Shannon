@@ -1,5 +1,23 @@
 # Troubleshooting
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档收集 Shannon 平台常见问题的排查方法。主要涵盖：Token 计数 > 0 但结果为空（GPT-5 Responses API 路由/缓存空响应/历史状态覆写）、工具意外启用或禁用（allowed_tools 三态语义）、会话结果在历史中不可见（单次保存原子操作）等典型问题的症状、原因、修复步骤和验证方法。
+
+### 章节导航
+- **Tokens count > 0 but result is empty**: GPT-5 Chat API 返回结构化 parts / 缓存空响应 / 历史状态覆写
+- **Tools unexpectedly enabled or disabled**: allowed_tools 三态语义（省略/空列表/非空列表）
+- **Session result not visible in history**: 历史状态非原子覆写的修复
+- **Common Error Patterns**: 各错误模式及对应的排查路径
+
+### 与 AI Agent 体系的关联
+- 问题涉及模块：GPT-5 路由（Python）、allowed_tools 处理（Python + Rust）、Session 管理（Go）
+- 排查需要查看 Temporal 历史、Redis 缓存和 PG event_logs
+
+### 阅读建议
+遇到对应问题的开发者必读；日常可快速翻阅了解常见问题。
+
 ## Tokens count > 0 but result is empty
 
 Symptoms:

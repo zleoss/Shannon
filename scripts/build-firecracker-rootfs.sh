@@ -1,4 +1,12 @@
 #!/bin/bash
+# =============================================================================
+# 文件: scripts/build-firecracker-rootfs.sh
+# -----------------------------------------------------------------------------
+# 【一句话功能】 构建 Firecracker microVM 根文件系统镜像与客户机 agent
+# 【关键内容】 使用 Docker buildx 构建 ARM64 交叉编译镜像
+#             生成 rootfs 镜像供 Firecracker 微虚拟机使用
+# 【协作关系】 被 Firecracker 沙箱部署流程调用；依赖 Docker buildx
+# =============================================================================
 # Build Firecracker microVM rootfs image and guest agent
 #
 # Prerequisites:

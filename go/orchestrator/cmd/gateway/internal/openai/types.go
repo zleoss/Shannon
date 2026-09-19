@@ -1,4 +1,14 @@
 // Package openai provides OpenAI-compatible API endpoints for Shannon.
+// =============================================================================
+// 文件: go/orchestrator/cmd/gateway/internal/openai/types.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   OpenAI 兼容端点共享类型定义 —— 请求/响应结构体。
+// 【关键内容】
+//   ChatCompletionRequest / ChatCompletionResponse / 枚举常量
+// 【协作关系】
+//   被 handler / translator / streamer 等引用，作为 HTTP 层的类型契约。
+// =============================================================================
 package openai
 
 import (

@@ -1,9 +1,22 @@
-"""
-X Search Tool — search X/Twitter via xAI Responses API.
+"""=============================================================================
+文件: python/llm-service/llm_service/tools/builtin/x_search.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  X/Twitter 搜索工具：通过 xAI Responses API 调 Grok 服务端 x_search。
+【关键内容】
+  XSearchTool :123
+  provider 无关 tool-call 接口；内部委托 xAI Grok
+【协作关系】
+  被 agent 调用获取推文与 citation；底层走 xAI provider。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  X Search Tool — search X/Twitter via xAI Responses API.
 
-Uses Grok's server-side ``x_search`` tool to retrieve posts and citations.
-The tool is provider-agnostic: any Shannon agent (Claude, GPT, etc.) can
-invoke it via a standard tool call; internally it delegates to xAI.
+  Uses Grok's server-side ``x_search`` tool to retrieve posts and citations.
+  The tool is provider-agnostic: any Shannon agent (Claude, GPT, etc.) can
+  invoke it via a standard tool call; internally it delegates to xAI.
+=============================================================================
 """
 
 from __future__ import annotations

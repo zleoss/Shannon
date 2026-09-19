@@ -1,3 +1,16 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/db/task_writer.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   任务执行链写入器：task/agent/tool/session 持久化与状态更新。
+// 【关键内容】
+//   SaveTaskExecution :68 / BatchSaveTaskExecutions :186
+//   SaveAgentExecution :313 / SaveToolExecution :406 / SaveSessionArchive :615
+//   GetTaskExecution :646 / UpdateTaskStatus :679
+// 【协作关系】
+//   被 orchestrator activity 在每阶段完成时调用，供 timeline/admin 查询。
+// =============================================================================
+
 package db
 
 import (

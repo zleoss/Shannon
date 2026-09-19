@@ -1,5 +1,25 @@
 # Release Process
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档说明 Shannon 的版本发布流程。版本通过 Git Tag 触发 CI 自动构建——构建所有服务的 Docker 镜像（agent-core/orchestrator/llm-service/gateway/playwright-service）、构建桌面应用（macOS 通用/Linux AppImage+deb/Windows MSI+NSIS）、推送到 Docker Hub 并创建 GitHub Release。文档包含从 CHANGELOG 更新到 tag 推送的完整操作步骤，以及用户的一行安装脚本。
+
+### 章节导航
+- **Cutting a Release**: 更新 CHANGELOG → 更新版本号 → git tag + push → CI 自动构建
+- **Docker Hub Images**: 各服务的 Docker 镜像命名和标签规范（version pin + latest）
+- **User Installation**: 一行 curl 安装脚本和指定版本安装方式
+- **Desktop Apps**: Tauri 构建的桌面端自动更新机制
+
+### 与 AI Agent 体系的关联
+- GitHub Actions CI 位于 `.github/workflows/`
+- Docker 构建文件：各服务的 Dockerfile
+- Tauri 配置：`src-tauri/` 目录
+- 发布管理涉及所有三个代码模块（Go/Rust/Python）
+
+### 阅读建议
+运维和发布经理必读；普通开发者了解流程即可。
+
 ## Overview
 
 Shannon releases are triggered by git tags. The CI workflow builds Docker images for all services, builds desktop apps for macOS/Windows/Linux, pushes images to Docker Hub, and creates a GitHub Release with desktop binaries attached.

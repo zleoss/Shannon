@@ -1,3 +1,16 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/circuitbreaker/redis_wrapper.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   Redis 熔断包装：RedisWrapper 包装 redis.Client 的 Ping/Get/Set/Del/Keys。
+// 【关键内容】
+//   RedisWrapper :12 / NewRedisWrapper :19
+//   Ping :34 / Get :57 / Set :83 / Del :105 / Keys :127
+//   Close :149 / GetClient :154 / IsCircuitBreakerOpen :159
+// 【协作关系】
+//   被 session/streaming/registry 等使用 Redis 的模块替代裸 redis.Client 使用。
+// =============================================================================
+
 package circuitbreaker
 
 import (

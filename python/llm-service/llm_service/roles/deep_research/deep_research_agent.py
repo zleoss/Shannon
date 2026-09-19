@@ -1,7 +1,22 @@
-"""Deep research agent role preset.
+"""=============================================================================
+文件: python/llm-service/llm_service/roles/deep_research/deep_research_agent.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  深度研究子 agent 角色 preset。
+【关键内容】
+  DEEP_RESEARCH_AGENT_PRESET 字典
+  system_prompt：来源核验 + 认知诚实
+  工具白名单、输出契约
+【协作关系】
+  被 api/agent.py 在 deep_research strategy 中按 context["role"] 取用。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Deep research agent role preset.
 
-Main subtask agent for deep research workflows. Conducts comprehensive
-investigation with source verification and epistemic honesty.
+  Main subtask agent for deep research workflows. Conducts comprehensive
+  investigation with source verification and epistemic honesty.
+=============================================================================
 """
 
 from typing import Dict

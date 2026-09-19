@@ -1,5 +1,22 @@
-"""
-Tools API endpoints for Shannon platform
+"""=============================================================================
+文件: python/llm-service/llm_service/api/tools.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  /tools 路由：工具列表、schema、执行、MCP/OpenAPI 注册与智能选择。
+【关键内容】
+  router :43；智能选择 5 分钟 TTL cache :46
+  startup_event 注册内置工具 :322-366
+  列表 :371 / 分类 :403 / schema :410 / 全 schema :431
+  MCP 注册 :474 / OpenAPI 校验 :518 / OpenAPI 注册 :588
+  执行 :690 / 批量执行 :754 / 元数据 :783 / 智能选择 :813
+【协作关系】
+  被 gateway 暴露给 orchestrator 与外部客户端；
+  与 ToolRegistry、MCP client、OpenAPI parser 协作。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Tools API endpoints for Shannon platform
+=============================================================================
 """
 
 from fastapi import APIRouter, HTTPException, Request

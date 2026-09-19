@@ -1,5 +1,27 @@
 # Python Code Execution in Shannon
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档提供 Shannon 中 Python 代码安全执行的设置和使用指南。通过 WASI（WebAssembly System Interface）沙箱实现完全隔离的 Python 执行环境。文档重点说明三个关键前置条件：下载 Python WASI 解释器（~20MB）、配置 WebAssembly 表限制（Python 需要 10000+，默认 1024 不够）、以及修改 Rust Agent Core 的 WASI 配置。还包含测试示例、环境变量配置和故障排查。
+
+### 章节导航
+- **Critical Setup Requirements**: 下载 Python WASI 解释器、配置表限制（10000+）、修改 Rust 配置
+- **Test Examples**: 简单 Python 代码、数学运算、文件操作、数据分析和错误处理测试
+- **Timeout Configuration**: WASI 执行超时配置（默认 30s）
+- **File System Access**: WASI 沙箱的文件系统访问（preopened dirs）
+- **Troubleshooting**: 常见 WASI 执行失败的排查方法
+
+### 与 AI Agent 体系的关联
+- WASI 沙箱：`rust/agent-core/src/wasi_sandbox.rs`
+- 下载脚本：`scripts/setup_python_wasi.sh`
+- Python 解释器：下载到 `wasm-interpreters/python-3.11.4.wasm`
+- 仅本地 Docker Compose 使用，生产 EKS 环境使用 Firecracker microVM
+- tool_executor 中的 python_executor 工具调用此沙箱
+
+### 阅读建议
+需要在 Shannon 中执行 Python 代码的开发者必读；初次配置务必确保表限制已修改正确；了解 WASI 沙箱限制（仅标准库，无第三方包）。
+
 ## Overview
 
 Shannon provides secure Python code execution through WebAssembly System Interface (WASI), ensuring complete sandboxing and resource isolation. This document covers the setup, usage, and architecture of the Python execution system.

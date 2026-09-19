@@ -1,3 +1,24 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/activities/synthesis.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 合成 activity 集合 —— 把多个 agent 的输出汇聚成单条最终答案。
+//
+// 【AI Agent 体系定位】 "合成器": DAG / Research / Swarm 等多 agent 策略的 fan-in
+// 阶段都依赖这里把并行结果整合成一条用户可读的回答。
+//
+// 【关键 activity 函数】
+//   SynthesizeResults    :456  主合成入口（规则+模板驱动）
+//   SynthesizeResultsLLM :633  带 LLM 的合成版本（可降级到规则合成）
+//   中间合成 IntermediateSynthesis (intermediate_synthesis.go) ——  长流程分段合成
+//   合成模板渲染 synthesis_templates.go（配合 config/templates/synthesis/*.tmpl）
+//
+// 【自定义格式】 context 参数 synthesis_template="myFormat" 或
+//   synthesis_template_override="..." 触发自定义答案模板（CLAUDE.md 详述）。
+//
+// 【协作】 Python /agent/* 返回结构化消息；本 activity 调 LLM provider 做最终
+// 拼装，再经 EmitTaskUpdate 发出最后一段流式输出。
+// =============================================================================
+
 package activities
 
 import (

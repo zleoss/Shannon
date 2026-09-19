@@ -1,14 +1,30 @@
-"""Lead orchestrator protocol for Swarm V2.
+"""=============================================================================
+文件: python/llm-service/llm_service/roles/swarm/lead_protocol.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  Swarm V2 Lead orchestrator 系统提示词。
+【关键内容】
+  Lead 为 single-shot 决策者（非 mini-loop）
+  Go orchestrator 预读数据注入 context
+  仅管理动作：spawn/assign/send/broadcast/revise/done
+  Quality Gate 强制对每个 agent_completed 触发
+【协作关系】
+  被 api/lead.py 在 Lead 决策时作为 system prompt 注入。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Lead orchestrator protocol for Swarm V2.
 
-Defines the system prompt that governs Lead agent behavior.
-Lead manages the team lifecycle: planning, spawning, assigning, quality gating, done.
+  Defines the system prompt that governs Lead agent behavior.
+  Lead manages the team lifecycle: planning, spawning, assigning, quality gating, done.
 
-Design decisions (from architecture review 2026-02-20):
-- Lead is a SINGLE-SHOT decision maker (not a mini-loop agent)
-- Go orchestrator feeds pre-read data into Lead's context
-- Lead has management actions only (spawn, assign, send, broadcast, revise, done)
-- Quality Gate is mandatory for every agent_completed event
-- "lead" role is NOT in SWARM_ROLE_PROMPTS (Lead has its own dedicated prompt)
+  Design decisions (from architecture review 2026-02-20):
+  - Lead is a SINGLE-SHOT decision maker (not a mini-loop agent)
+  - Go orchestrator feeds pre-read data into Lead's context
+  - Lead has management actions only (spawn, assign, send, broadcast, revise, done)
+  - Quality Gate is mandatory for every agent_completed event
+  - "lead" role is NOT in SWARM_ROLE_PROMPTS (Lead has its own dedicated prompt)
+=============================================================================
 """
 
 LEAD_SYSTEM_PROMPT = """You are the Lead orchestrator of an agent team. You manage the team from start to finish.

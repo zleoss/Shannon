@@ -1,3 +1,14 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/httpapi/daemon_signal.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   daemon 信号路由：通过 HTTP 触发 daemon workflow 的 Signal。
+// 【关键内容】
+//   NewDaemonSignalHandler :22 / HandleSignal :34 / RegisterRoutes :82
+// 【协作关系】
+//   使用 Temporal 客户端向 daemon workflow 发送 Signal，供运维触发动作。
+// =============================================================================
+
 package httpapi
 
 import (

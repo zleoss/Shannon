@@ -1,3 +1,19 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/activities/simple_task.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 ExecuteSimpleTask activity —— SimpleTaskWorkflow 专用单 agent
+// 直执 activity。当复杂度 < 0.3 且任务可直接处理时，绕过多 agent 编排直接走
+// 一次 LLM +（可选）工具调用。
+//
+// 【AI Agent 体系定位】 "快速直执": 避免为大任务起 DAG 的开销；适合"显式单步问答"
+// 型请求。
+//
+// 【关键 activity 函数】 ExecuteSimpleTask :41
+//
+// 【协作】 Python: /agent/query（含完整工具迭代循环 agent.py:1943 while True）。
+// 依赖 budget.budget.go 做预算，依赖 persistence.go 落库。
+// =============================================================================
+
 package activities
 
 import (

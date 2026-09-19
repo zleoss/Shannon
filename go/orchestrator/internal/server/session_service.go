@@ -1,3 +1,10 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/server/session_service.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 会话管理 gRPC 服务，提供创建/查询/更新/删除/消息管理
+// 【关键内容】 CreateSession / GetSession / UpdateSession / DeleteSession / AddMessage / ClearHistory
+// 【协作关系】 依赖 session.Manager 和 auth.GetUserContext，通过 protobuf 通信
+// =============================================================================
 package server
 
 import (

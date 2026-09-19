@@ -1,3 +1,28 @@
+// =============================================================================
+// 文件: protos/sandbox/sandbox.proto
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   定义 Rust agent-core 对外暴露的 SandboxService：在 WASI 隔离的 session
+//   workspace 内执行文件读写、列出、命令执行、搜索、查找替换与删除操作。
+// 【关键 message / service】
+//   service SandboxService: 7 个 RPC —— FileRead / FileWrite / FileList /
+//     ExecuteCommand / FileSearch / FileEdit / FileDelete
+//   FileReadRequest: session_id/path/max_bytes/encoding/user_id
+//   FileWriteRequest: session_id/path/content/append/create_dirs/encoding/user_id
+//   FileListRequest: session_id/path/pattern/recursive/include_hidden/user_id
+//     配套 FileEntry(name/path/is_file/size_bytes/modified_time) 与
+//     FileListResponse(success/entries/file_count/dir_count)
+//   FileSearchRequest: session_id/query/path/max_results/regex/include/
+//     context_lines；响应 SearchMatch + ContextLine，含 truncated 标志
+//   FileEditRequest: session_id/path/old_text/new_text/replace_all
+//   CommandRequest: session_id/command/timeout_seconds(<=30)/user_id；
+//     CommandResponse: success/stdout/stderr/exit_code/execution_time_ms
+//   FileDeleteRequest: session_id/path/pattern/recursive；
+//     FileDeleteResponse: success/deleted_count/deleted_paths
+// 【由谁实现 / 由谁调用】
+//   实现: Rust agent-core (sandbox_service.rs 约 279 行)
+//   调用: Python llm-service (sandbox_client.py:24)、Go orchestrator
+// =============================================================================
 syntax = "proto3";
 
 package shannon.sandbox;

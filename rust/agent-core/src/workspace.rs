@@ -1,3 +1,15 @@
+// =============================================================================
+// 文件: rust/agent-core/src/workspace.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   WorkspaceManager：每 session 独立工作目录、配额查询与大小统计。
+// 【关键内容】
+//   //! 模块文档：每 session 一个可挂入 WASI 的隔离读写目录（workspace.rs:1-4）
+//   创建/清理 session 目录、查询目录大小与配额
+// 【协作关系】
+//   被 sandbox_service、wasi_sandbox、tools 调用以挂载与校验会话工作区。
+//   受 config 中 workspace 配额参数约束。
+// =============================================================================
 //! Session workspace management for WASI sandbox isolation.
 //!
 //! Each session gets an isolated directory that can be mounted

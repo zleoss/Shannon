@@ -1,7 +1,21 @@
-"""Domain discovery role preset.
+"""=============================================================================
+文件: python/llm-service/llm_service/roles/deep_research/domain_discovery.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  公司官方域名发现专家角色 preset。
+【关键内容】
+  DOMAIN_DISCOVERY_PRESET
+  从搜索结果抽取官方站点域名，严格 JSON 输出
+【协作关系】
+  被公司研究 workflow 的 domain_discovery 子阶段调用。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Domain discovery role preset.
 
-Company official domain identification specialist. Extracts official
-website domains from web search results with strict JSON output.
+  Company official domain identification specialist. Extracts official
+  website domains from web search results with strict JSON output.
+=============================================================================
 """
 
 from typing import Dict

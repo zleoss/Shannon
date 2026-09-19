@@ -1,3 +1,29 @@
+// =============================================================================
+// 文件: protos/session/session.proto
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   定义多轮会话管理服务 SessionService，负责会话生命周期、消息历史、
+//   上下文持久化与统计指标，支持任务之间的上下文延续。
+// 【关键 message / service】
+//   service SessionService: 7 个 RPC ——
+//     CreateSession / GetSession / UpdateSession / DeleteSession /
+//     ListSessions / AddMessage / ClearHistory
+//   message CreateSessionRequest: user_id/initial_context/max_history/
+//     ttl_seconds
+//   message Session: id/user_id/context(Struct)/history(Message[])/
+//     created_at/last_active/expires_at/SessionMetrics
+//   message SessionSummary: id/user_id/created_at/last_active/
+//     message_count/total_tokens/is_active
+//   message Message: id/role("user"|"assistant"|"system")/content/
+//     timestamp/tokens_used/metadata
+//   message SessionMetrics: total_messages/total_tokens/total_cost_usd/
+//     tools_invoked/errors_encountered/avg_response_time_ms
+//   UpdateSession 支持 context_updates + extend_ttl_seconds
+//   ClearHistory 支持 keep_context（仅清消息保留持久化上下文）
+// 【由谁实现 / 由谁调用】
+//   实现: Go orchestrator（session 子系统，Redis + Postgres 持久化）
+//   调用: orchestrator 内部 workflow、以及对外 REST 接口透出的 session 操作
+// =============================================================================
 syntax = "proto3";
 
 package shannon.session;

@@ -1,5 +1,25 @@
 # Environment Configuration Guide
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档是 Shannon Docker Compose 部署的环境变量配置指南。说明 Docker Compose 的环境变量加载优先级（Shell 环境 > .env 文件 > env_file 指令 > environment 段）、.env 文件的创建与符号链接配置方法、所有必需的环境变量（API Keys、数据库连接、服务地址等）及其说明、常见问题排查与最佳实践。
+
+### 章节导航
+- **Overview**: Docker Compose 环境变量加载的 4 级优先级
+- **Environment Variable Loading**: .env 文件的创建和符号链接配置
+- **Required Configuration**: 所有必需的环境变量清单（API Keys、服务端点、特征开关）
+- **Common Issues**: 常见配置错误及其解决方案
+- **Best Practices**: 安全建议、Secret 管理、多环境配置策略
+
+### 与 AI Agent 体系的关联
+- 环境变量控制 Shannon 所有服务的运行配置
+- 对应文件：根目录 .env + `deploy/compose/.env`
+- 修改 .env 后需要 `docker compose down && up -d`（restart 不会重新读取）
+
+### 阅读建议
+所有部署 Shannon 的开发者必读；初次部署者按照文档步骤逐项配置即可。
+
 This guide explains how to properly configure environment variables for Shannon's Docker Compose deployment.
 
 ## Table of Contents

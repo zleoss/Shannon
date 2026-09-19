@@ -1,3 +1,16 @@
+// =============================================================================
+// 文件: rust/agent-core/src/memory.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   MemoryPool：512MB 内存池 + 后台 sweeper，回收过期分配并上报 Prometheus 指标。
+// 【关键内容】
+//   使用 Config 配置池上限（memory.rs:1 依赖 crate::config::Config）
+//   上报 MEMORY_POOL_TOTAL_BYTES / MEMORY_POOL_USED_BYTES（memory.rs:2）
+//   Bytes 内存块管理 + 后台 sweeper 过期回收
+// 【协作关系】
+//   被 sandbox_service / workspace 在内存配额校验时查询释放空间。
+//   向 metrics 暴露内存池水位。
+// =============================================================================
 use crate::config::Config;
 use crate::metrics::{MEMORY_POOL_TOTAL_BYTES, MEMORY_POOL_USED_BYTES};
 use anyhow::{Context, Result};

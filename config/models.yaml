@@ -1,3 +1,19 @@
+# =============================================================================
+# 文件: config/models.yaml  —— 模型配置【单一真相源 Single Source of Truth】
+# -----------------------------------------------------------------------------
+# 集中定义：模型 tier 分层 / 各 provider 模型清单 / 选择策略 / 成本上限 /
+#   prompt caching / provider 设置(base_url/timeout/max_retries) / 完整目录 /
+#   统一定价(USD/1K tokens) / feature_flags / 能力矩阵 / 速率限制 / 监控告警。
+# tier 目标分布 50/40/10 为参考而非强制配额（由复杂度驱动，详见下方注释）。
+# 仅 openai/anthropic/xai/google 模型经过完整测试。
+#
+# ⚠ 修改规则【必须同步以下 4 处，否则三端成本/检测/路由会不一致】：
+#   1) Go 定价     go/orchestrator/internal/pricing/pricing.go
+#   2) Go 检测     go/orchestrator/internal/models/provider.go
+#   3) Python provider  python/llm-service/llm_provider/{name}_provider.py
+#   4) Python registry  python/llm-service/llm_service/providers/__init__.py
+# 其他轻量字段（timeout/max_retries/小工具成本）可仅在本文件修改并热重载。
+# =============================================================================
 # Shannon Platform - Model Configuration
 # GitHub: https://github.com/Kocoro-lab/Shannon
 # Updated: November 2025 with latest AI models and pricing

@@ -1,3 +1,16 @@
+"""=============================================================================
+文件: python/llm-service/llm_service/api/context.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  上下文压缩端点：长对话/工具结果裁剪以适配模型窗口。
+【关键内容】
+  router :5；Message 模型 :8
+  压缩策略（按 token / 字符阈值丢弃旧消息）
+【协作关系】
+  被 agent loop、orchestrator 在 prompt 超长时调用。
+=============================================================================
+"""
+
 from fastapi import APIRouter, Request, HTTPException
 from pydantic import BaseModel, Field
 from typing import List, Dict, Any, Optional

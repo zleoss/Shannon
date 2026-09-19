@@ -1,4 +1,25 @@
 # Shannon Platform - Test Strategy Document
+
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档是 Shannon 平台的测试策略文档（v2.0），重点针对 OpenAI/Anthropic 模型更新后的验证方案。测试金字塔（单元→集成→自动化 E2E→手动 E2E）覆盖各层级的测试目标。v2.0 关键更新：所有测试必须验证 API 响应的 metadata 完整性（model_used/provider/usage tokens/cost），仅检查状态码已不充分。文档还包含 Provider 集成测试清单、Gateway API 验证、参数映射测试和元数据规范化测试等。
+
+### 章节导航
+- **Test Pyramid**: 单元测试（Provider 逻辑/参数变换/成本计算）→ 集成测试（Provider + Gateway API）→ 自动化 E2E → 手动 E2E
+- **Provider Integration Tests**: 各 Provider 的响应格式验证和参数映射测试
+- **Gateway API Tests**: HTTP 端点验证、认证测试、参数传递测试
+- **Metadata Validation (v2.0)**: 检查所有工作流类型的 model_used/provider/usage/cost 完整返回
+- **Model Migration Tests**: GPT-5/Claude 4.5 迁移的专项验证
+
+### 与 AI Agent 体系的关联
+- Provider 适配：`python/llm-service/llm_service/llm_provider/`
+- Gateway 测试：针对 `go/orchestrator/cmd/gateway/` 的 HTTP 端点
+- 参数映射：`python/llm-service/llm_service/llm_provider/openai_provider.py` 等
+
+### 阅读建议
+QA 和测试开发者必读；重点关注 v2.0 Metadata Validation 新增要求。
+
 ## OpenAI & Anthropic Model Validation
 
 **Version**: 2.0

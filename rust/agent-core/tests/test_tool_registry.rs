@@ -1,3 +1,11 @@
+// =============================================================================
+// 文件: rust/agent-core/tests/test_tool_registry.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】 测试 ToolRegistry 工具注册表的核心功能
+// 【关键内容】 测试注册表初始化、工具发现、能力查询
+//             验证 ToolCapability 与 ToolDiscoveryRequest 的正确性
+// 【协作关系】 依赖 agent-core 的 tool_registry 模块；单元测试无需外部服务
+// =============================================================================
 use shannon_agent_core::tool_registry::{ToolCapability, ToolDiscoveryRequest, ToolRegistry};
 
 #[test]

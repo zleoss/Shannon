@@ -1,3 +1,13 @@
+// =============================================================================
+// 文件: go/orchestrator/cmd/gateway/internal/handlers/workspace.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   工作区管理 handler —— 创建/查询/删除会话工作区。
+// 【关键内容】
+//   CreateWorkspace / GetWorkspace / DeleteWorkspace / ListWorkspaces
+// 【协作关系】
+//   通过 workspace 服务管理隔离的执行环境，与文件系统和 agent-core 交互。
+// =============================================================================
 package handlers
 
 import (

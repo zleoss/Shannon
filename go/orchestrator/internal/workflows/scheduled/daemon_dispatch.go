@@ -1,3 +1,14 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/workflows/scheduled/daemon_dispatch.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   daemon 分发 activity，周期性扫描待执行任务并派发到对应 workflow。
+// 【关键内容】
+//   - DispatchActivity: 扫描调度表并触发 ScheduledTaskWorkflow
+//   - 错误重试与去重处理
+// 【协作关系】
+//   作为 Temporal activity 被 daemon worker 周期调用。
+// =============================================================================
 package scheduled
 
 import (

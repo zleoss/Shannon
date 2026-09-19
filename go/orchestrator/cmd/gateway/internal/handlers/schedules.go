@@ -1,3 +1,13 @@
+// =============================================================================
+// 文件: go/orchestrator/cmd/gateway/internal/handlers/schedules.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   定时任务 handler —— 创建/更新/删除/列出定时任务。
+// 【关键内容】
+//   CreateSchedule / UpdateSchedule / DeleteSchedule / ListSchedules / GetSchedule
+// 【协作关系】
+//   通过 Temporal CronSchedule 实现定时触发，数据持久化在 Postgres。
+// =============================================================================
 package handlers
 
 import (

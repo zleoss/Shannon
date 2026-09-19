@@ -1,11 +1,25 @@
-"""
-Browser Tool for Shannon
+"""=============================================================================
+文件: python/llm-service/llm_service/tools/builtin/browser_use.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  统一浏览器工具：经 playwright-service 实现自动化操作。
+【关键内容】
+  action 参数 dispatch：navigate/click/type/screenshot/extract 等
+  BrowserTool :168 / _call_playwright_action :77
+  _close_playwright_session :124；session_id 绑定自动清理
+【协作关系】
+  被 agent / browser_use strategy 调用；下游 HTTP 调 playwright-service。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Browser Tool for Shannon
 
-Single unified tool for browser automation via Playwright.
-Uses an `action` parameter to dispatch: navigate, click, type,
-screenshot, extract, scroll, wait, close.
+  Single unified tool for browser automation via Playwright.
+  Uses an `action` parameter to dispatch: navigate, click, type,
+  screenshot, extract, scroll, wait, close.
 
-Sessions are tied to Shannon session_id and auto-cleanup after TTL.
+  Sessions are tied to Shannon session_id and auto-cleanup after TTL.
+=============================================================================
 """
 
 import base64

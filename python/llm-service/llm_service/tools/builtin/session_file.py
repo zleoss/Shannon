@@ -1,5 +1,18 @@
-"""
-Session-aware file operations tool that tracks files created/modified in a session
+"""=============================================================================
+文件: python/llm-service/llm_service/tools/builtin/session_file.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  session 级文件写/列工具，追踪会话内创建/修改的文件。
+【关键内容】
+  SessionFileWrite :19 / SessionFileList :113
+  按 session_id 隔离；记录 manifest
+【协作关系】
+  被 agent 用于在受控会话工作区内管理临时产物。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Session-aware file operations tool that tracks files created/modified in a session
+=============================================================================
 """
 
 import os

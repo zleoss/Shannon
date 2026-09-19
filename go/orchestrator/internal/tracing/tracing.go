@@ -1,3 +1,10 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/tracing/tracing.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 OpenTelemetry 分布式追踪初始化与辅助工具
+// 【关键内容】 Initialize 设置 OTLP gRPC exporter；StartSpan / StartHTTPSpan 创建追踪跨度；W3C traceparent 注入/解析
+// 【协作关系】 被 embeddings、vectordb、workflows 等包调用，提供可观测性
+// =============================================================================
 package tracing
 
 import (

@@ -1,5 +1,25 @@
 # Shannon Testing Guide
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档是 Shannon 平台测试的综合指南，涵盖单元测试（Go/Rust/Python 各自的方式）、集成测试（Temporal Workflow 内存测试 + Smoke 连通性测试）、端到端测试（Docker Compose 多服务场景）。文档包含 Go/Rust/Python 每种语言的详细测试命令、覆盖率收集、mock 策略（Go mock 接口 / Rust mock 结构 / Python unittest.mock）以及 CI/CD 集成说明。
+
+### 章节导航
+- **Test Types**: 单元测试（Go _test.go / Rust #[cfg(test)] / Python tests/）、集成测试（Temporal 测试套件/Smoke 测试）、E2E 测试
+- **Quick Start**: make test / make dev / make smoke / tests/e2e/run.sh
+- **Detailed Test Commands**: Go（go test -race）、Rust（cargo test）、Python（pytest）
+- **Coverage**: 各语言的覆盖率收集方式和目标
+- **Mock Strategies**: Go 接口 mock / Rust mockall / Python unittest.mock
+- **Temporal Workflow Testing**: 内存执行 + Stub 活动
+
+### 与 AI Agent 体系的关联
+- 测试覆盖所有模块：Go orchestrator / Rust agent-core / Python llm-service
+- Makefile：`make test` / `make smoke` / `make ci`
+
+### 阅读建议
+所有开发者必读——了解如何运行和编写测试；CI/CD 相关开发者重点关注 Coverage 和 Temporal Testing。
+
 Comprehensive guide for testing the Shannon platform, from unit tests to end-to-end scenarios.
 
 ## Test Types

@@ -1,3 +1,19 @@
+// =============================================================================
+// 文件: rust/agent-core/src/wasi_sandbox.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   基于 wasmtime 的 WASI 沙箱：路径白名单、超时、内存上限、会话/记忆 workspace 挂载与权限校验。
+// 【关键内容】
+//   WasiSandbox 结构体（wasi_sandbox.rs:17）、new（:36）
+//   with_config 配置（wasi_sandbox.rs:41-78）、allow_path（:81）
+//   set_execution_timeout（:86）/ set_memory_limit（:101）
+//   with_session_workspace（:108）/ with_memory_workspace（:120）
+//   execute_wasm（:149）/ execute_wasm_with_args（:153）
+//   validate_permissions 权限校验（wasi_sandbox.rs:522）；wasi-features: ref-types/bulk-memory/fuel/epoch + 64MB 内存 guard
+// 【协作关系】
+//   被 tools::ToolExecutor 在非 firecracker 路径下用于沙箱化执行 wasm/python。
+//   wasi feature 门控编译；与 workspace、memory_manager、config 协作挂载目录。
+// =============================================================================
 use anyhow::{Context, Result};
 use std::collections::HashMap;
 use std::path::PathBuf;

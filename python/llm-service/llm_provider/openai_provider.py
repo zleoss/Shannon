@@ -1,7 +1,21 @@
-"""
-OpenAI Provider Implementation
-Adds support for OpenAI Responses API with fallback to Chat Completions.
-Prefers provider-reported token usage; falls back to estimation only if needed.
+"""=============================================================================
+文件: python/llm-service/llm_provider/openai_provider.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  OpenAI provider：支持 Responses API 与 Chat Completions 回退。
+【关键内容】
+  import tiktoken :12；encoding cache :57
+  count_tokens :63（多模态 content_blocks :83-90）
+  complete :98 / stream_complete :520 / generate_embedding :752
+【协作关系】
+  被 LLMManager 实例化为 OpenAI tier 的 provider。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  OpenAI Provider Implementation
+  Adds support for OpenAI Responses API with fallback to Chat Completions.
+  Prefers provider-reported token usage; falls back to estimation only if needed.
+=============================================================================
 """
 
 import os

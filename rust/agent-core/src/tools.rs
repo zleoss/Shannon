@@ -1,3 +1,18 @@
+// =============================================================================
+// 文件: rust/agent-core/src/tools.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   ToolExecutor 工具路由：根据工具名/feature/环境变量决定走 firecracker、WASI 或备用沙箱。
+// 【关键内容】
+//   ToolCall（tools.rs:16）/ ToolResult（:55）/ ToolExecutor（:62）
+//   DISABLE_WASI_FALLBACK 环境变量（tools.rs:67-77）
+//   new_with_wasi 双实现（tools.rs:90-109）、set_wasi（:111-119）
+//   should_route_to_firecracker 直路由判断（tools.rs:366）；code_executor 仅 PYTHON_EXECUTOR_MODE=firecracker 且带 code/stdin（tools.rs:373-391）
+//   execute_tool 路由到 firecracker_client 或 WasiSandbox
+// 【协作关系】
+//   由 grpc_server::execute_tool_calls 调用执行具体工具。
+//   聚合 firecracker_client + wasi_sandbox + sandbox + tool_registry + tool_cache。
+// =============================================================================
 #[cfg(feature = "wasi")]
 use crate::wasi_sandbox::WasiSandbox;
 use crate::{

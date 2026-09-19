@@ -1,3 +1,16 @@
+"""=============================================================================
+文件: python/llm-service/llm_service/api/providers.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  /providers：列出当前可用模型与 tier 信息。
+【关键内容】
+  router 前缀 /providers :6
+  _model_info_to_dict :9 转换模型元数据
+【协作关系】
+  被客户端/agent 查询以选模型；读取 ProviderManager 与 models.yaml。
+=============================================================================
+"""
+
 from fastapi import APIRouter, Request, HTTPException
 from typing import Dict, Any, List, Optional
 

@@ -1,3 +1,15 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/schedules/types.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   Schedule 实体与输入类型定义。
+// 【关键内容】
+//   Schedule :17 / CreateScheduleInput :41
+//   UpdateScheduleInput :55 / ScheduledTaskInput :68
+// 【协作关系】
+//   被 schedules.DB 与 schedules.Manager 共享，作为参数与返回值载体。
+// =============================================================================
+
 package schedules
 
 import (

@@ -1,3 +1,15 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/httpapi/timeline.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   /timeline 路由：基于 Temporal 历史构建任务执行时间线。
+// 【关键内容】
+//   NewTimelineHandler :50 / RegisterRoutes :54
+//   handleBuildTimeline :59 / buildTimeline :128
+// 【协作关系】
+//   查询 Temporal 历史 + db.EventLog，供 admin UI 渲染活动链与失败摘要。
+// =============================================================================
+
 package httpapi
 
 import (

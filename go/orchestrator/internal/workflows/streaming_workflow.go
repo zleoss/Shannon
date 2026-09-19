@@ -1,3 +1,18 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/workflows/streaming_workflow.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 流式 agent 执行的 Temporal workflow（普通版 + 并行版）。
+//   把流式 token / 工具调用事件通过 EmitTaskUpdate activity 发送到 Redis
+//   pubsub，由 streaming manager + gateway SSE 推给客户端。
+// 【定位】 "实时流式通道"，配合 streaming 子系统（internal/streaming/manager.go）
+//   与 httpapi/streaming.go 的 SSE 端点工作。
+// 【触发】 registry.go:60 仅在 EnableStreamingWorkflows 开启时注册；
+//   主要服务于 `POST /api/v1/tasks/stream` 与 `GET /api/v1/tasks/{id}/stream`。
+// 【关键函数】 StreamingWorkflow :21 ；ParallelStreamingWorkflow :312
+// 【协作】 EmitTaskUpdate activity；StreamingActivities.StreamExecute (:42 in
+//   internal/activities/streaming.go)
+// =============================================================================
+
 package workflows
 
 import (

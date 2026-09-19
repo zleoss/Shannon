@@ -1,5 +1,28 @@
 # Shannon Skills System
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档介绍 Shannon 的 Skills（技能）系统——一种基于 Markdown 的工作流定义规范，兼容 Anthropic Agent Skills 规范。技能文件包含 YAML 前置元数据（版本、作者、类别、所需工具、角色、预算）和 Markdown 指令正文，执行时作为 System Prompt 注入引导 Agent 行为。文档详细说明了技能目录结构（core/user/vendor 三层）、匹配机制（名称/描述/关键字匹配）、执行流程以及命令行管理工具的使用方法。
+
+### 章节导航
+- **Overview**: 技能的定义——Markdown 文件 + YAML frontmatter，执行时作为 system prompt
+- **Directory Structure**: core/（内置）、user/（用户自定义，gitignored）、vendor/（第三方，gitignored）
+- **Skill File Format**: name/version/author/requires_tools/requires_role/budget_max 等元数据字段说明
+- **Matching Mechanism**: 通过名称、描述关键字、类别进行技能匹配
+- **Execution Flow**: 技能匹配→加载为 system prompt→Agent 按指令执行→结果输出
+- **CLI Tool Usage**: skill list/info/run/search 等命令行管理操作
+- **Best Practices**: 技能设计原则、版本管理、测试方法
+
+### 与 AI Agent 体系的关联
+- 技能目录：`config/skills/core/`、`config/skills/user/`、`config/skills/vendor/`
+- 技能加载与匹配：`python/llm-service/llm_service/skills/` 相关模块
+- 技能作为 system prompt 注入：通过 /agent/query API 的 role/skill 参数触发
+- 可与 TemplateWorkflow 组合使用（技能提供指令，模板提供路由）
+
+### 阅读建议
+AI Agent 开发者必读，尤其是需要为特定任务定制 Agent 行为的人员；初学者建议从 Quick Start 开始；仅使用默认功能者可略过 CLI Tool 部分。
+
 ## Overview
 
 Skills are markdown-based workflow definitions that provide structured prompts, tool configurations, and execution constraints for common tasks. They're compatible with Anthropic's Agent Skills specification.

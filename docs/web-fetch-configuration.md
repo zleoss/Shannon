@@ -1,5 +1,26 @@
 # Web Fetch Capabilities & Configuration
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档说明 Shannon 的网页抓取工具套件——三种不同深度的抓取能力：web_fetch（单页精确提取）、web_subpage_fetch（智能多页提取，Map+Scrape 模式按相关性评分筛选子页面）、web_crawl（深度递归爬虫，Firecrawl 异步 API）。文档包含工具的 LLM 决策逻辑流程图（根据用户需求自动选择合适工具）、相关性评分算法详解、配置选项和 Provider 对比。
+
+### 章节导航
+- **Tools Overview**: web_fetch（单页）/ web_subpage_fetch（智能多页）/ web_crawl（深度爬虫）三种工具
+- **LLM Decision Logic**: 决策流程图——知道 URL？→ 仅需该页？→ 选择对应工具
+- **Relevance Scoring**: web_subpage_fetch 的相关性评分（路径匹配/关键字/URL 深度/长度）
+- **Tool Configuration**: 各工具的配置参数（max_pages/timeout/user_agent 等）
+- **Provider Comparison**: Firecrawl 与纯 Python BFS 爬虫方案的对比
+
+### 与 AI Agent 体系的关联
+- 工具实现：`python/llm-service/llm_service/tools/web_fetch.py` 等
+- 配置：`config/shannon.yaml` 中的 web_fetch 配置段
+- 供 Agent 在研究（Research Workflow）和浏览器自动化场景中使用
+- SSRF 保护：Python 实现中内置的 URL 验证和域名白名单
+
+### 阅读建议
+需要网页数据采集能力的开发者必读；重点关注 Tools Overview 和 LLM Decision Logic 以理解工具选择。
+
 Shannon provides a comprehensive suite of web fetch tools designed to extract content from URLs with varying depths and precision. From single-page markdown extraction to full-site crawling, these tools power the agent's research capabilities.
 
 ## Tools Overview

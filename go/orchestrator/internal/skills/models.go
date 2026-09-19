@@ -3,6 +3,16 @@
 //
 // Skills are markdown files with YAML frontmatter that define reusable
 // system prompts, tool requirements, and execution constraints.
+// =============================================================================
+// 文件: go/orchestrator/internal/skills/models.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   Skill 数据模型 —— 定义 skill 的结构体、元数据与序列化。
+// 【关键内容】
+//   Skill / SkillMeta / Frontmatter 解析后的内存表示
+// 【协作关系】
+//   被 loader/registry 引用，作为整个 skill 系统的核心数据模型。
+// =============================================================================
 package skills
 
 import (

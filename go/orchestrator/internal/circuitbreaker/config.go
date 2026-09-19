@@ -1,3 +1,17 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/circuitbreaker/config.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   熔断器环境变量配置：Redis/Database/gRPC/HTTP 各类阈值加载。
+// 【关键内容】
+//   CircuitBreakerConfig :10
+//   GetRedisConfig :19 / GetDatabaseConfig :30 / GetGRPCConfig :41
+//   GetGRPCConnectionConfig :52 / GetHTTPConfig :63 / ToConfig :74
+//   getEnvUint32 :87 / getEnvDuration :96
+// 【协作关系】
+//   为各 wrapper 构造熔断器 Config，被各 wrapper NewXxxWrapper 调用。
+// =============================================================================
+
 package circuitbreaker
 
 import (

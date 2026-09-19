@@ -1,5 +1,27 @@
 # Rate-Aware Budgeting and Control
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档描述 Shannon 的速率感知预算控制系统，通过智能速率限制管理在不同 LLM Provider 间的请求频率。系统使用 Middleware Budget Controller 在编排器层施加确定性延迟（通过 workflow.Sleep() 保持 Temporal 确定性），确保不超出各 Provider 的 RPM（每分钟请求数）和 TPM（每分钟 Token 数）配额。文档包含 Provider 速率限制的 YAML 配置、优先级队列（任务级和 Agent 级两个层级的优先级）以及监控方案。
+
+### 章节导航
+- **Architecture**: Middleware Budget Controller → Rate Control Helper 的层级架构
+- **Configuration**: config/models.yaml 中的 rate_limits 段（default_rpm/default_tpm + provider 级覆盖）
+- **Rate Control Helper**: 计算最佳延迟、追踪 Token 和请求计数
+- **Priority Queuing**: 任务级优先级（critical/high/normal/low）和 Agent 级内部优先级
+- **Monitoring**: 通过 Prometheus 指标监控速率限制状态和延迟
+- **Best Practices**: Provider 配额规划、优先级策略配置建议
+
+### 与 AI Agent 体系的关联
+- 速率控制实现：`go/orchestrator/internal/ratecontrol/ratecontrol.go`
+- Middleware 配置：Go 编排器中的 middleware 配置段
+- 速率限制数据：`config/models.yaml` 的 rate_limits 段
+- 与 Token Budget Tracking 协同工作——速率控制 + Token 预算双重管控
+
+### 阅读建议
+运维和多 Provider 使用的开发者必读；单 Provider 小规模使用可了解默认值即可。
+
 ## Overview
 
 Shannon's rate-aware budgeting system provides intelligent rate limit management across different LLM providers and tiers, ensuring optimal throughput while respecting provider quotas.

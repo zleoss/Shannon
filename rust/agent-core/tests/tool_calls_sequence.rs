@@ -1,3 +1,11 @@
+// =============================================================================
+// 文件: rust/agent-core/tests/tool_calls_sequence.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】 测试工具调用序列的集成测试
+// 【关键内容】 验证 AgentService 的 tool_calls 方法调用顺序与结果
+//             测试多个工具连续调用的正确性与状态管理
+// 【协作关系】 依赖 agent-core 的 gRPC 服务；需要 Python 服务可用
+// =============================================================================
 use shannon_agent_core::grpc_server::proto::agent::agent_service_server::AgentService;
 use shannon_agent_core::grpc_server::{proto, AgentServiceImpl};
 use tonic::Request;

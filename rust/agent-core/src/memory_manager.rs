@@ -1,3 +1,15 @@
+// =============================================================================
+// 文件: rust/agent-core/src/memory_manager.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   MemoryManager：按 user_id 隔离的用户级持久记忆目录，跨会话保留。
+// 【关键内容】
+//   //! 模块文档：每 user 一个 /memory 目录，持久化跨会话存储（memory_manager.rs:1-4）
+//   按 user_id 创建/解析记忆目录路径
+// 【协作关系】
+//   被 sandbox_service、wasi_sandbox 调用以挂载用户记忆目录到 /memory。
+//   与 workspace::WorkspaceManager 配合提供会话级 + 用户级双目录。
+// =============================================================================
 //! User memory directory management for persistent cross-session storage.
 //!
 //! Each user gets an isolated memory directory that persists across sessions.

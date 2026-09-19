@@ -1,3 +1,16 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/pricing/pricing.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   价目表加载、热重载与成本计算；数据源 config/models.yaml。
+// 【关键内容】
+//   loadLocked 加载 :90 / get 查询 :127 / Reload 热重载 :160
+//   PricePerTokenForModel :181 / CostForTokens :201 / CostForSplit :220 / CostForSplitWithCache :270
+//   ValidateMap :318 / GetPriorityOneProvider :356 / GetPriorityOneModel :391 / GetProviderForModel :464
+// 【协作关系】
+//   被 budget 与 orchestrator 用于成本估算与预算扣减；由配置/热重载机制驱动。
+// =============================================================================
+
 package pricing
 
 import (

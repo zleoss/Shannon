@@ -1,3 +1,10 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/embeddings/cache.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 Embedding 向量缓存层，提供本地 LRU 和 Redis 两级缓存
+// 【关键内容】 LocalLRU 进程内 TTL 缓存；RedisCache 基于 circuit-breaker 的远程缓存；MD5 key 生成
+// 【协作关系】 被 service.go 调用，依赖 internal/circuitbreaker 和 go-redis
+// =============================================================================
 package embeddings
 
 import (

@@ -1,3 +1,20 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/activities/agent_loop.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 AgentLoopStep activity —— Swarm 中每个子 agent 的"单步推进"
+// activity。每调一次 = 让一个 swarm agent 走一步（思考+工具调用）。
+//
+// 【AI Agent 体系定位】 "工蜂的脚步": SwarmWorkflow (swarm_workflow.go:1737) 在
+// AgentLoop 子 workflow (swarm_workflow.go:488) 里循环调用本 activity 让子 agent
+// 推进，直到完成或退出条件触发。
+//
+// 【关键 activity 函数】 AgentLoopStep :133
+//
+// 【协作】 Python: /agent/loop（单步决策 API）—— 详见
+// python/llm-service/llm_service/api/agent.py:3901 agent_loop_step。返回的 JSON
+// 决策 action 可为 tool_call / idle / done / send_message / publish_data 等。
+// =============================================================================
+
 package activities
 
 import (

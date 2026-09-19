@@ -1,3 +1,16 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/circuitbreaker/metrics.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   熔断器指标采集：MetricsCollector 收集各熔断器状态与上报。
+// 【关键内容】
+//   MetricsCollector :54 / NewMetricsCollector :60
+//   RegisterCircuitBreaker :67 / RecordRequest :96 / UpdateMetrics :107
+//   splitKey :126 / StartMetricsCollection :139
+// 【协作关系】
+//   由各 wrapper 在请求成功/失败时回调，并向监控/Prometheus 暴露指标。
+// =============================================================================
+
 package circuitbreaker
 
 import (

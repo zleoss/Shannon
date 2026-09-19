@@ -1,5 +1,29 @@
 # Shannon Event Types Reference
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档是 Shannon 工作流事件的完整参考手册，涵盖 80+ 种事件类型的结构和语义。事件分为六大类别：核心工作流事件（生命周期）、Agent 事件（执行状态）、LLM 事件（模型交互）、工具事件（调用/结果/错误）、错误事件和 SSE 流控制事件。每种事件类型都注明触发时机、Agent ID、示例消息和典型序列位置。文档还包含 P2P 多 Agent 协调事件的说明。
+
+### 章节导航
+- **Event Structure**: 所有事件共享的通用字段（workflow_id/type/agent_id/message/timestamp/seq/stream_id）
+- **Core Workflow Events**: WORKFLOW_STARTED/COMPLETED/FAILED 等工作流生命周期事件
+- **Agent Events**: AGENT_STARTED/COMPLETED/FAILED/IDLE 等 Agent 状态事件
+- **LLM Events**: LLM_PARTIAL（流式 Token）/LLM_OUTPUT（完整输出）等模型交互事件
+- **Tool Events**: TOOL_INVOKED/OBSERVATION/ERROR 等工具调用事件
+- **Error Events**: ERROR_OCCURRED 等错误事件
+- **P2P Coordination Events**: MESSAGE_SENT/RECEIVED/WORKSPACE_UPDATED 等多 Agent 协调事件
+- **Stream Events**: HEARTBEAT/PING/STREAM_END 等流控制事件
+
+### 与 AI Agent 体系的关联
+- 事件定义：`go/orchestrator/internal/streaming/events.go`
+- 事件通过 SSE/WebSocket/gRPC 三种方式分发
+- Agent 端的 tool_executor 产生 TOOL_INVOKED 等事件
+- Redis Stream 存储 24h，PG event_logs 表长期保存关键事件
+
+### 阅读建议
+前端/客户端开发者必读（理解事件驱动 UI 更新）；后端调错人员参考 Agent/Tool 事件类型；初学者建议先看 Core Workflow Events 和 Agent Events。
+
 This document provides a comprehensive reference for all event types emitted by Shannon workflows.
 
 ## Overview

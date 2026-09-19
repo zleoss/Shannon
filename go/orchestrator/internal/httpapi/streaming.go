@@ -1,3 +1,15 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/httpapi/streaming.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   admin HTTP /streaming 路由：SSE 推送与 blob 取回。
+// 【关键内容】
+//   NewStreamingHandler :25 / SetTemporalClient :30 / RegisterRoutes :35
+//   handleBlobFetch :43 / handleSSE :86
+// 【协作关系】
+//   注册到 admin mux，复用 streaming.Manager 单例与 Temporal 客户端。
+// =============================================================================
+
 package httpapi
 
 import (

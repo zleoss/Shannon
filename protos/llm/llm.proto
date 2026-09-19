@@ -1,3 +1,34 @@
+// =============================================================================
+// 文件: protos/llm/llm.proto
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   定义 LLM 层相关的 gRPC 类型与 LLMService 接口：补全/流式补全/嵌入/
+//   复杂度分析/模型列表。
+// 【关键 message / service】
+//   service LLMService: 5 个 RPC ——
+//     GenerateCompletion / StreamCompletion(stream CompletionChunk) /
+//     EmbedText / AnalyzeComplexity / ListModels
+//   enum Provider: UNSPECIFIED/OPENAI/ANTHROPIC/GOOGLE/DEEPSEEK/QWEN/
+//     BEDROCK/OLLAMA/VLLM
+//   message Message: role/content/tool_calls(ToolCall[])/name
+//   message GenerateCompletionRequest: messages/ModelTier/specific_model/
+//     GenerationConfig/TaskMetadata/ToolDefinition[]
+//   message GenerationConfig: temperature/top_p/max_tokens/stop_sequences/
+//     presence_penalty/frequency_penalty/enable_caching/cache_key
+//   message GenerateCompletionResponse: completion/tool_calls/TokenUsage/
+//     model_used/Provider/cache_hit/finish_reason
+//   message CompletionChunk: delta/tool_call_delta/finish_reason/TokenUsage
+//   message AnalyzeComplexityResponse: recommended_mode/complexity_score/
+//     required_capabilities/estimated_agents/estimated_tokens/
+//     estimated_cost_usd/reasoning
+//   message ModelInfo: id/name/Provider/ModelTier/context_window/
+//     成本字段/supports_tools/supports_streaming/available
+// 【由谁实现 / 由谁调用】
+//   ⚠️ 历史演进说明：此 proto 定义的 LLM gRPC 服务在 Python 端**并未落地**。
+//   实际所有 LLM 调用均走 HTTP（如 /agent/query 等 llm-service 端点）。
+//   原 proto 接口为早期设计草案，保留供类型生成与未来 gRPC 化使用，
+//   但不应被视为现行调用契约 —— Python llm-service 未实现该 service。
+// =============================================================================
 syntax = "proto3";
 
 package shannon.llm;

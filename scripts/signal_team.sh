@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
+# =============================================================================
+# 文件: scripts/signal_team.sh
+# -----------------------------------------------------------------------------
+# 【一句话功能】 通过 Temporal CLI 发送动态团队信号（recruit/retire）到运行中的 workflow
+# 【关键内容】 在 docker compose 环境内向 team workflow 发送控制信号
+# =============================================================================
 set -euo pipefail
 
 # Send dynamic team signals (recruit/retire) to a running workflow via Temporal CLI inside docker compose.

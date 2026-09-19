@@ -1,5 +1,30 @@
 # Extending Shannon
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档是 Shannon 的扩展开发指南，介绍了不 Fork 核心代码即可添加功能的多种方式：自定义分解逻辑（System 2 规划）、模板工作流（System 1 确定性执行）、合成模板定制输出格式、MCP/OpenAPI/内置三种工具添加方式、Vendor 适配器模式集成领域特定 Agent、人工审批流程配置、以及特性开关与配置热重载。每种扩展方式都标注了对应的代码位置和关键文件。
+
+### 章节导航
+- **Extend Decomposition (System 2)**: 自定义 LLM 分解端点或添加 Go 启发式规则预处理
+- **Add/Customize Templates (System 1)**: 创建 YAML 模板，零 Token 确定性路由
+- **Synthesis Templates**: 自定义最终答案的格式化输出（命名模板/verbatim override）
+- **Add Tools Safely**: 通过 MCP（零代码）、OpenAPI 规范或 Python 内置三种方式添加工具
+- **Vendor Extensions**: 领域特定 Agent 集成模式，保持核心代码库纯净
+- **Human Approval**: 人工审批流程的配置与触发
+- **Feature Flags & Config**: 特性开关、配置热重载、降级策略
+
+### 与 AI Agent 体系的关联
+- 分解端点：`python/llm-service/llm_service/api/agent.py` + `go/orchestrator/internal/activities/decompose.go`
+- 模板注册：`go/orchestrator/internal/workflows/template_catalog.go`
+- 合成模板目录：`config/templates/synthesis/`
+- 工具注册：`python/llm-service/llm_service/tools/registry.py`
+- Vendor 配置：`config/overlays/` 目录覆盖文件
+- 特性开关：`config/features.yaml`
+
+### 阅读建议
+所有需要定制或扩展 Shannon 的开发者必读；仅使用默认功能的用户可跳过；初学者建议先读 Add Tools Safely 部分快速上手。
+
 This guide outlines simple, supported ways to extend Shannon without forking large subsystems.
 
 ---

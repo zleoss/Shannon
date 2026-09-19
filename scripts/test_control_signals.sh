@@ -1,4 +1,10 @@
 #!/bin/bash
+# =============================================================================
+# 文件: scripts/test_control_signals.sh
+# -----------------------------------------------------------------------------
+# 【一句话功能】 测试控制信号（暂停/恢复/取消）
+# 【关键内容】 测试所有 workflow 类型的 pause/resume/cancel 信号处理，不设置 -e 以便处理错误
+# =============================================================================
 # E2E tests for pause/resume/cancel across all workflow types
 # Don't set -e since we handle errors in individual tests
 

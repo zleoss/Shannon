@@ -1,3 +1,16 @@
+"""=============================================================================
+文件: python/llm-service/llm_service/api/embeddings.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  /embeddings 向量嵌入端点，多文本批量向量化。
+【关键内容】
+  router :5；EmbeddingRequest :8
+  委托 ProviderManager.generate_embedding
+【协作关系】
+  被 retrieval/记忆/相似度工具调用；底层走各 provider 嵌入接口。
+=============================================================================
+"""
+
 from fastapi import APIRouter, Request, HTTPException
 from pydantic import BaseModel, Field
 from typing import List, Optional

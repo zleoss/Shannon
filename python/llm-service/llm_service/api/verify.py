@@ -1,4 +1,19 @@
-"""Claim verification API for cross-referencing synthesis against citations."""
+"""=============================================================================
+文件: python/llm-service/llm_service/api/verify.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  引文核验：基于 BM25 对 synthesis 与 citations 做交叉验证。
+【关键内容】
+  router；BM25 相似度计算
+  claim 抽取与匹配；命中率/覆盖率统计
+【协作关系】
+  被研究 workflow 后期/验证阶段调用，确保引用真实性。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Claim verification API for cross-referencing synthesis against citations.
+=============================================================================
+"""
 
 import logging
 import json

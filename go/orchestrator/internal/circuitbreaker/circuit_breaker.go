@@ -1,3 +1,17 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/circuitbreaker/circuit_breaker.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   通用熔断器核心：State/Config/Counts/CircuitBreaker 与 Execute 执行包装。
+// 【关键内容】
+//   State :13 / Config :40 / DefaultConfig :50 / Counts :62
+//   CircuitBreaker :71 / NewCircuitBreaker :84 / Execute :97
+//   beforeRequest :130 / afterRequest :148 / currentState :166
+//   setState :210 / toNewGeneration :232
+// 【协作关系】
+//   被 database_wrapper/redis_wrapper/grpc_wrapper/http_wrapper 包装执行被各业务模块复用。
+// =============================================================================
+
 package circuitbreaker
 
 import (

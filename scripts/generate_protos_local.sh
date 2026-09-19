@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
+# =============================================================================
+# 文件: scripts/generate_protos_local.sh
+# -----------------------------------------------------------------------------
+# 【一句话功能】 本地生成 protobuf 文件，不依赖 BSR 依赖
+# 【关键内容】 确保所有服务的版本兼容性；调用 protoc 编译 .proto 文件
+#             输出到各语言对应的生成代码目录
+# 【协作关系】 被 make proto 调用；依赖 install_buf.sh 安装的 protoc 工具链
+# =============================================================================
 # Generate protobuf files locally without BSR dependencies
 # IMPORTANT: This script ensures version compatibility across all services
 

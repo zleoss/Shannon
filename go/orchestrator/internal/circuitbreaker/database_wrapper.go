@@ -1,3 +1,18 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/circuitbreaker/database_wrapper.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   数据库熔断包装：DatabaseWrapper/TxWrapper/StmtWrapper 包装 sql.DB 全套方法。
+// 【关键内容】
+//   DatabaseWrapper :12 / NewDatabaseWrapper :19
+//   PingContext :34 / QueryContext :54 / QueryRowContextCB :76
+//   QueryRowContext :100 / ExecContext :111
+//   TxWrapper :132 / BeginTx :139 / Commit :255 / Rollback :274
+//   StmtWrapper :280 / PrepareContext :287 / IsCircuitBreakerOpen :411
+// 【协作关系】
+//   被 db 包及其他业务模块替代裸 *sql.DB 使用，提供失败自动熔断保护。
+// =============================================================================
+
 package circuitbreaker
 
 import (

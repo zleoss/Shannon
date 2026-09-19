@@ -1,5 +1,23 @@
 # Python WASI Setup Guide for Shannon
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档是 Shannon Python WASI 执行的快速设置指南。与 python-code-execution.md 互补，该文档更侧重快速上手的操作步骤：下载解释器、配置环境变量、重启服务、测试验证。文档明确指出 WASI 解释器仅用于本地 Docker Compose 开发环境，生产 EKS 环境使用 Firecracker microVM（预装数据科学生态包）。
+
+### 章节导航
+- **Quick Setup**: 下载 Python WASI 解释器 → 配置 .env → 重启服务
+- **Testing**: 简单代码测试、数学运算和文件写入测试
+- **Verification**: 通过 logs 和数据库验证执行结果
+- **FAQ**: 常见环境问题（表限制、超时、路径问题）
+
+### 与 AI Agent 体系的关联
+- 同 python-code-execution.md，但更侧重操作步骤而非架构
+- 本地开发必须完成此设置才能使用 python_executor 工具
+
+### 阅读建议
+本地开发者必读，跟随 Quick Setup 步骤配置即可；生产环境部署者可略过。
+
 > **Scope**: This guide covers **local development** (Docker Compose) only. On EKS, Python execution uses Firecracker microVMs with pre-installed data science packages (pandas, numpy, scipy, torch, etc.) — the WASI interpreter is not used.
 
 ## Quick Setup

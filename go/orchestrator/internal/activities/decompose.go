@@ -1,3 +1,24 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/activities/decompose.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 DecomposeTask activity —— 调 Python llm_service 的
+// /complexity 端点得到任务复杂度评分与分解结果。
+//
+// 【AI Agent 体系定位】 "任务分析师": orchestrator_router.go 在做路由决策前
+// 一定会先调它，用结果决定走 SimpleTask 还是 DAG 还是策略 workflow。
+//
+// 【关键 activity / 数据结构】
+//   Activities.DecomposeTask :51
+//   DecompositionResult 字段：ComplexityScore（0..1，阈值 0.3）
+//                             Mode（simple/complex）
+//                             CognitiveStrategy（react/tot/...）
+//                             子任务 AgentTask 列表
+//
+// 【协作】 Python llm_service/api/complexity.py 实现实际的复杂度推理与 LLM 分解。
+// 【路由】 orchestrator_router.go:103-106 决定 simpleThreshold、:889 判定
+// isSimple、:1021 主 switch 按 isSimple+策略选择对应 workflow。
+// =============================================================================
+
 package activities
 
 import (

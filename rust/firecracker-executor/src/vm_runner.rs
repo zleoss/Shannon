@@ -1,3 +1,17 @@
+// =============================================================================
+// 文件: rust/firecracker-executor/src/vm_runner.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   VmRunner：单次执行编排——申请 VM、同步工作区、经 vsock 执行、释放并 post-sync。
+// 【关键内容】
+//   ExecuteError（PoolExhausted/VmBootFailed/ExecutionFailed）（vm_runner.rs:16）
+//   VmRunner 结构体（:25）
+//   translate_workspace_path（:39）
+//   execute（:66）/ release+post-sync（:90-120）/ execute_inner（:176）
+// 【协作关系】
+//   被 main.rs /execute handler 调用执行单次请求。
+//   依赖 vm_pool 取机、vsock_client 通信、workspace_sync 同步目录。
+// =============================================================================
 use crate::config::Settings;
 use crate::models::{ExecuteRequest, ExecuteResponse, GuestRequest};
 use crate::vm_pool::{VmInstance, VmPool};

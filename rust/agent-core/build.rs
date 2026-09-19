@@ -1,3 +1,16 @@
+// =============================================================================
+// 文件: rust/agent-core/build.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   tonic-build 编译 common/agent/sandbox 三个 .proto，并产出 shannon_descriptor.bin 供 gRPC reflection。
+// 【关键内容】
+//   fn main() 入口（build.rs:4）
+//   确保可用 protoc（内置 vendored fallback）
+//   编译三个 proto 并生成 descriptor.bin 用于反射
+// 【协作关系】
+//   由 cargo build 阶段执行，生成代码供 lib crate 与 main.rs 使用。
+//   产物被 grpc_server 反射注册使用。
+// =============================================================================
 use std::io::Result;
 use std::path::Path;
 

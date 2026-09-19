@@ -1,5 +1,28 @@
 # Shannon Session Workspaces
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档说明 Shannon 的 Session 工作空间机制——为每个用户会话提供隔离的文件系统环境。所有文件操作（file_read/file_write/file_list/bash/python_executor）限定在会话工作区内，实现多租户安全隔离。文档详细对比了本地 Docker Compose（WASI sandbox）与 EKS 生产环境（Firecracker microVM）的不同执行后端，并说明了文件工具的 Role 权限门控（developer/generalist/critic 角色控制 file_write 等敏感操作的可用性）。
+
+### 章节导航
+- **Overview**: 工作空间隔离的重要性（多租户安全、可复现性、资源管理）
+- **Local vs EKS Execution**: WASI sandbox vs Firecracker microVM 的后端差异对比表
+- **Role Requirements for File Tools**: developer（完全权限）/generalist（只读）/critic（只读）的角色门控
+- **Session ID Format**: 自定义 Session ID 规则与示例
+- **Workspace Directory Structure**: 工作目录结构、文件持久化机制（Docker volume / EFS）
+- **Cleanup Policies**: 会话结束后工作空间的清理策略和 TTL
+
+### 与 AI Agent 体系的关联
+- 文件工具实现：`python/llm-service/llm_service/tools/file_*.py`
+- 会话管理：`go/orchestrator/internal/activities/session.go`
+- WASI 沙箱：`rust/agent-core/src/wasi_sandbox.rs`
+- 角色预设：`python/llm-service/llm_service/roles/presets.py`
+- Session ID 传到 gRPC 元数据 → 控制工作空间路径
+
+### 阅读建议
+平台安全和运维人员必读；开发者需要了解文件操作权限限制时参考 Role Requirements 部分；仅使用聊天接口者可略读 Local vs EKS 细节。
+
 ## Overview
 
 Session workspaces provide isolated filesystem environments for each user session. All file operations are scoped to the session's workspace directory, ensuring that different sessions cannot access each other's files.

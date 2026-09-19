@@ -1,3 +1,10 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/workflows/cognitive_wrappers.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 认知策略工作流的封装桥接，保持 TaskInput/TaskResult 接口兼容
+// 【关键内容】 ExploratoryWorkflow / ScientificWorkflow 委托子工作流执行
+// 【协作关系】 桥接 workflows 包和 strategies 子包的类型系统
+// =============================================================================
 package workflows
 
 import (

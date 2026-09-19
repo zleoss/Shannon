@@ -1,5 +1,23 @@
 # Providers and Routing
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档说明 Shannon 中 LLM Provider 的路由和工具门控语义。GPT-5 系列模型路由到 OpenAI Responses API（避免 Chat API 返回空 content）、Chat 内容归一化防御（content 为 list 时提取 text 拼接）、以及 allowed_tools 的三种语义（省略→角色预设决定、空列表→禁用工具、非空列表→仅列出的工具可用）。
+
+### 章节导航
+- **GPT-5 Family Routing**: GPT-5 模型路由到 Responses API，优先使用 output_text
+- **Chat Content Normalization**: 对 Chat API 返回的 content list 进行 text 提取拼接
+- **Tool Gating Semantics**: allowed_tools 的三态语义——省略/空列表/非空列表
+
+### 与 AI Agent 体系的关联
+- Provider 路由：`python/llm-service/llm_service/llm_provider/` 下各 provider 实现
+- GPT-5 特殊处理：`python/llm-service/llm_service/llm_provider/openai_provider.py`
+- 工具门控：`python/llm-service/llm_service/api/agent.py` 中的 allowed_tools 处理
+
+### 阅读建议
+集成 LLM Provider 的开发者必读；普通用户重点了解 allowed_tools 三种语义即可。
+
 ## GPT‑5 family routing
 
 - GPT‑5 models are routed to the OpenAI Responses API.

@@ -1,8 +1,22 @@
-"""
-gRPC client for agent-core SandboxService.
+"""=============================================================================
+文件: python/llm-service/llm_service/tools/builtin/sandbox_client.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  agent-core SandboxService 的 gRPC 客户端封装。
+【关键内容】
+  import sandbox_pb2(_grpc) :18
+  SandboxClient :24；SandboxServiceStub :43-45
+  文件读写代理、超时与重试
+【协作关系】
+  当 SHANNON_USE_WASI_SANDBOX=1 时被 file_ops 工具替代本地执行。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  gRPC client for agent-core SandboxService.
 
-When SHANNON_USE_WASI_SANDBOX=1, file tools proxy to this service
-instead of executing locally.
+  When SHANNON_USE_WASI_SANDBOX=1, file tools proxy to this service
+  instead of executing locally.
+=============================================================================
 """
 
 import logging

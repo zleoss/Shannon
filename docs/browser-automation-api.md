@@ -1,5 +1,26 @@
 # Browser Automation API Guide
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档说明如何使用 Shannon 的浏览器自动化功能。通过设置 context.role 为 "browser_use"，任务会被路由到多轮 ReAct 工作流，使 Agent 能够执行一系列浏览器操作（导航、截图、提取内容、滚动等）。文档包含 Quick Start 示例、完整的 API 参考（Task API 和 SSE 流式两种方式）、Tool 参考（browser_navigate/browser_screenshot/browser_click 等 10+ 种工具）以及 Session 管理说明。
+
+### 章节导航
+- **Quick Start**: 设置 role: "browser_use" 提交任务的 curl 示例
+- **How It Works**: React Workflow 路由 → 多轮迭代执行 → Session 持久化 → 自动清理（5分钟 TTL）
+- **API Reference**: Task API（同步）和 SSE（流式）两种接入方式
+- **Tool Reference**: 各 browser_* 工具的用途、参数和返回值
+- **Session Management**: 浏览器会话的生命周期管理
+
+### 与 AI Agent 体系的关联
+- 通过 context.role == "browser_use" 触发 BrowserUseWorkflow
+- 工作流实现：`go/orchestrator/internal/workflows/strategies/browser_use.go`
+- 浏览器自动化由 Playwright 服务支持
+- 服务部署：`deploy/compose/docker-compose.yml` 中的 playwright-service
+
+### 阅读建议
+需要网页自动化能力的应用开发者必读；重点关注 Quick Start 和 Tool Reference 部分。
+
 This guide explains how to use Shannon's browser automation tools via the API.
 
 ## Quick Start

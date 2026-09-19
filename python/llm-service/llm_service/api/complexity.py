@@ -1,3 +1,16 @@
+"""=============================================================================
+文件: python/llm-service/llm_service/api/complexity.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  任务复杂度分析端点，输出 0-1 分数与推荐策略。
+【关键内容】
+  router :9；导入 ModelTier :7
+  关键词/结构/上下文加权评分；映射简单/复合/DAG 等流转
+【协作关系】
+  被 Go DecayTask 与 orchestrator workflow router 调用，决定 workflow 选型。
+=============================================================================
+"""
+
 from fastapi import APIRouter, Request
 from pydantic import BaseModel, Field
 from typing import List, Optional, Dict, Any

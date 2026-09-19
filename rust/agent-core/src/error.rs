@@ -1,3 +1,16 @@
+// =============================================================================
+// 文件: rust/agent-core/src/error.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   agent enforcement gateway 的核心错误类型定义（基于 thiserror）。
+// 【关键内容】
+//   use thiserror::Error（error.rs:1）
+//   AgentError 枚举（error.rs:4 起）
+//   为各模块提供统一错误向 anyhow::Result 的转换基础
+// 【协作关系】
+//   被 enforcement / grpc_server / sandbox_service 等模块复用错误类型。
+//   可转换为 tonic::Status 用于 gRPC 返回。
+// =============================================================================
 use thiserror::Error;
 
 /// Core error type for Shannon agent enforcement gateway

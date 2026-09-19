@@ -1,3 +1,16 @@
+// =============================================================================
+// 文件: rust/firecracker-executor/src/config.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   Settings::from_env：读取 firecracker_bin、vsock_cid_base、vsock_port、pool_warm_count、efs_mount_point 等。
+// 【关键内容】
+//   Settings 结构体（config.rs:3-4）
+//   from_env 环境变量装配（config.rs:25）
+//   字段含 firecracker_bin / vsock_cid_base / vsock_port / pool_warm_count / efs_mount_point
+// 【协作关系】
+//   被 main.rs、vm_pool、vm_runner、firecracker_api 读取统一运行参数。
+//   由 .env 与 docker-compose 环境变量提供输入。
+// =============================================================================
 use std::path::PathBuf;
 
 #[derive(Clone, Debug)]

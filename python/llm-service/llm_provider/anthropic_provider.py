@@ -1,5 +1,19 @@
-"""
-Anthropic Claude Provider Implementation
+"""=============================================================================
+文件: python/llm-service/llm_provider/anthropic_provider.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  Anthropic Claude provider，支持 1h/5m prompt cache。
+【关键内容】
+  CacheBreakDetector :331；__init__ :402
+  count_tokens :426 / complete :1024 / stream_complete :1158
+【协作关系】
+  被 LLMManager 实例化为 Anthropic tier provider；
+  使用 _record_cache_metrics 与 base.CacheManager 协同。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Anthropic Claude Provider Implementation
+=============================================================================
 """
 
 import hashlib

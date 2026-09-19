@@ -1,3 +1,15 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/workflows/strategies/exploratory.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 ExploratoryWorkflow —— Tree-of-Thoughts (ToT) 探索式策略。
+//   agent 在搜索空间上展开多分支思考，根据启发式评估选出最有希望的支路继续探索。
+// 【定位】 "探险家"，适合开放性、解不唯一的问题（创意、规划）。
+// 【触发】 strategy=='exploratory'，或 decomposition.CognitiveStrategy==exploratory
+//   （由 orchestrator_router 或学习 router 识别）
+// 【关键函数】 ExploratoryWorkflow :19
+// 【协作】 patterns/exploratory.go 等执行模式；EvaluateCoverage 类评估 activity。
+// =============================================================================
+
 package strategies
 
 import (

@@ -1,3 +1,11 @@
+{{/* 中文导读：_base.tmpl —— 受保护合成契约（Tier 4 系统层）。
+   所有 synthesis 模板必须遵守此最小契约，保证 SSE 等场景引用格式一致；
+   通过 define 提供 system_contract / citation_list / language_instruction
+   以及 citation_handling_research / citation_handling_concise /
+   coverage_checklist_citations 等可复用 partial，禁止覆盖受保护规则。
+   引用注入受 CitationAgentEnabled 控制：开启时 synthesis 不加 [n]，由
+   Citation Agent 单独注入；关闭时 synthesis 自己加 [n]。 */}}
+
 {{/*
   _base.tmpl - Protected synthesis contract (Tier 4 system layer)
 

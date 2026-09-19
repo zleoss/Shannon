@@ -1,3 +1,17 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/db/models.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   数据库表模型与聚合过滤类型定义。
+// 【关键内容】
+//   JSONB 自定义类型 :13
+//   TaskExecution :80 / AgentExecution :136 / ToolExecution :162
+//   SessionArchive :186 / UsageDailyAggregate :204 / AuditLog :233
+//   TaskExecutionFilter :253 / AggregateStats :265
+// 【协作关系】
+//   由 task_writer/schedules 等进行 CRUD；与 db.Client 的 schema 一一对应。
+// =============================================================================
+
 package db
 
 import (

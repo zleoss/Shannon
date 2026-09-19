@@ -1,4 +1,19 @@
-"""Lead Agent decision endpoint for Swarm V2."""
+"""=============================================================================
+文件: python/llm-service/llm_service/api/lead.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  Swarm V2 Lead Agent 单步决策端点（spawn/assign/revise/done）。
+【关键内容】
+  router 决策端点；解析 Lead JSON 动作
+  对接 roles/swarm/lead_protocol 提示词
+【协作关系】
+  被_go orchestrator SwarmWorkflow 经 HTTP 调用，进行子 agent 编排。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Lead Agent decision endpoint for Swarm V2.
+=============================================================================
+"""
 
 import asyncio
 import json as json_module

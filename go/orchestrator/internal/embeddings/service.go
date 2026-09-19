@@ -1,3 +1,10 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/embeddings/service.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 Embedding 生成服务，支持单文本和批量请求，集成缓存/追踪/指标
+// 【关键内容】 GenerateEmbedding / GenerateBatchEmbeddings；LRU→Redis→LLM 三级查找；OpenTelemetry 追踪
+// 【协作关系】 调用 cache.go 做缓存、tracing 包做追踪、metrics 包做指标采集
+// =============================================================================
 package embeddings
 
 import (

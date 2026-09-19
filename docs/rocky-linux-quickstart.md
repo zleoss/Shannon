@@ -1,5 +1,28 @@
 # Rocky Linux Shannon Development Environment Quick Start Guide
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档是 Rocky Linux 系统上快速部署 Shannon 开发环境的指南。涵盖系统环境要求（Rocky Linux 9.6）、依赖安装（Docker/Docker Compose/Go/Python/Protoc）、项目部署（克隆/配置 / 构建/启动）、服务验证（健康检查/gRPC/HTTP）、运行第一个任务和 Web 界面访问。中文+英文混合内容。
+
+### 章节导航
+- **System Environment**: 验证的操作系统和推荐配置
+- **Dependencies Installation**: 安装 Docker/Docker Compose/Go/Python/Protoc 等依赖
+- **Project Deployment**: 克隆/配置 / 构建/启动全流程
+- **Service Verification**: 健康检查端口和各服务验证
+- **Running Your First Task**: 提交第一个任务的示例
+- **Web Interface Access**: 访问 Shannon Web UI
+- **Common Management Commands**: 常用运维命令
+- **Troubleshooting**: 常见问题排查
+
+### 与 AI Agent 体系的关联
+- 部署脚本参考：`scripts/setup_python_wasi.sh` 等
+- Docker Compose：`deploy/compose/docker-compose.yml`
+- 环境配置：`.env` 文件配置 API Keys 和服务参数
+
+### 阅读建议
+Rocky Linux / RHEL 系列用户必读；其他 Linux 发行版用户参考 ubuntu-quickstart.md。
+
 This guide is designed for Rocky Linux system users to quickly deploy and configure the Shannon production-grade AI agent platform development environment.
 
 ## Table of Contents

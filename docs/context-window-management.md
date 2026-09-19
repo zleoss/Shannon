@@ -1,5 +1,26 @@
 # Context Window Management System
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档描述 Shannon 的上下文窗口管理系统——一种 Token 感知的滑动窗口压缩机制，使 Agent 能够在 Token 预算内保持长时间对话连续性。系统支持可配置窗口大小（默认 50 条消息，调试模式 75 条）、基于优先级的配置覆写（请求覆写 > 用例预设 > 环境变量 > 默认值）和自动压缩（历史超过预算 75% 时压缩为「前 3 条 + 摘要 + 后 20 条」）。
+
+### 章节导航
+- **Configurable Context Windows**: 窗口大小配置层次、硬限制（5-200 条）、优先级顺序
+- **Token Budget Management**: 每个 Agent 5 万 Token、每个 Task 20 万 Token 的默认预算设置
+- **Sliding Window Compression**: 超过预算 75% 时触发的压缩机制——保留 Primer + 生成摘要 + 保留 Recent
+- **Implementation**: 压缩器代码结构和配置项
+- **Performance Metrics**: 压缩对 Token 消耗的节省效果
+
+### 与 AI Agent 体系的关联
+- 上下文压缩活动：`go/orchestrator/internal/activities/context_compress.go`
+- 窗口大小配置：`config/shannon.yaml` 中的 history_window 配置段
+- 预算管理：`go/orchestrator/internal/workflows/budget_manager.go`
+- 环境变量：HISTORY_WINDOW_MESSAGES、AGENT_BUDGET_TOKENS、TASK_BUDGET_TOKENS
+
+### 阅读建议
+需要处理长对话场景的开发者必读；普通对话场景用户可了解默认值；重点看压缩触发条件和配置覆写优先级。
+
 ## Overview
 
 Shannon implements a sophisticated token-aware context window management system that enables Claude Code-like long-running debugging sessions while staying within token budgets. The system uses sliding window compression to preserve conversation continuity across hundreds of turns.

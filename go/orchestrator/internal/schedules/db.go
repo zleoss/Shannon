@@ -1,3 +1,17 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/schedules/db.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   定时任务 DAL：schedule 表的 CRUD 与执行记录。
+// 【关键内容】
+//   DBOperations :14 / NewDBOperations :19
+//   CreateSchedule :24 / GetSchedule :42 / ListSchedules :89
+//   UpdateScheduleStatus :172 / UpdateScheduleNextRun :181 / UpdateSchedule :190
+//   GetAllActiveSchedules :254 / RecordScheduleExecution :301
+// 【协作关系】
+//   被 schedules.Manager 封装使用，承接 Temporal Schedule 与 DB 之间持久化。
+// =============================================================================
+
 package schedules
 
 import (

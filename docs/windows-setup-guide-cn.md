@@ -1,5 +1,23 @@
 # Shannon 项目 Windows 本地环境适配指南
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档（中文版）是 Windows 环境下部署 Shannon 的详细指南。由于项目原生脚本主要针对 Linux/macOS，Windows 上需要特定的适配：通过 WSL 2 运行 Docker、使用 Git Bash 作为终端、手动复制 .env 文件（代替 ln -sf）、单独安装 Go/Python/Protoc。文档特别强调了 Protoc 的 include 目录问题和 Python 应用执行别名的坑。全篇中文。
+
+### 章节导航
+- **前置软件准备**: Git + WSL 2 + Docker Desktop + Go + Python + Protoc 的安装和避坑说明
+- **项目初始化与配置**: 克隆项目、手动配置 .env（根目录 + deploy/compose 两个文件）
+- **构建与启动**: 在 Git Bash 中执行 make setup / make dev 的方式
+- **验证与测试**: 服务验证和第一个任务的提交
+- **常见问题解答**: Protoc include 路径、Python 别名、WSL 网络等常见问题
+
+### 与 AI Agent 体系的关联
+同 ubuntu-quickstart.md，但面向 Windows 环境的特殊适配。
+
+### 阅读建议
+Windows 用户首次部署必读；重点注意前置软件准备的避坑说明。
+
 本文档旨在帮助开发人员在 Windows 环境下顺利搭建和运行 Shannon 智能体平台。由于项目原生脚本主要针对 Linux/macOS 环境，在 Windows 上运行时需要进行特定的适配和配置。
 
 ## 1. 前置软件准备 (Prerequisites)

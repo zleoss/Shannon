@@ -1,3 +1,16 @@
+// =============================================================================
+// 文件: rust/agent-core/src/tool_cache.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   工具结果 TTL 缓存：以 CacheKey 索引 CachedResult，统计命中率与内存占用。
+// 【关键内容】
+//   CacheKey（tool_cache.rs:15）/ CachedResult（:44）/ CacheStats（:52）
+//   ToolCache 结构体（tool_cache.rs:71）
+//   基于 RwLock + HashMap + TTL 过期清理
+// 【协作关系】
+//   由 tools::ToolExecutor 在执行前查询、命中则直接返回缓存结果。
+//   向 metrics 上报命中率/内存指标。
+// =============================================================================
 use crate::tools::{ToolCall, ToolResult};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;

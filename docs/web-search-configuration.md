@@ -1,5 +1,28 @@
 # Web Search Configuration
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档说明 Shannon 平台对多种网络搜索 Provider 的支持——通过环境变量切换不同提供商。支持 Google Custom Search（最广泛，100次/天免费）、Serper（性价比最高，2500次注册免费）、SerpAPI（Google 搜索/地图/新闻全面支持）、Bing Search（Azure 企业集成）、Exa Search（AI 原生语义搜索）和 Tavily（AI 研究优化）。文档包含各 Provider 的配置方法、免费额度、定价和速率限制对比。
+
+### 章节导航
+- **Google Custom Search**: 配置方法、免费额度（100次/天）、速率限制（100次/100秒）
+- **Serper**: 配置方法、免费额度（2500次注册）、定价（$50/5万次）
+- **SerpAPI**: Google 搜索/地图/新闻多类型支持
+- **Bing Search**: Azure 企业级集成
+- **Exa Search**: AI 原生语义搜索，支持自然语言查询
+- **Tavily**: 专为 AI 研究优化的搜索
+- **Provider Comparison**: 各 Provider 的特性、定价和适用场景对比表
+
+### 与 AI Agent 体系的关联
+- 搜索工具实现：`python/llm-service/llm_service/tools/web_search.py`
+- 通过 WEB_SEARCH_PROVIDER 环境变量切换 Provider
+- 各 Provider API Key 在 .env 中配置
+- Agent 在 Research Workflow 中使用 web_search 工具进行信息检索
+
+### 阅读建议
+需要网络搜索能力的开发者必读；根据预算和需求选择合适的 Provider；个人开发推荐 Serper 性价比最高。
+
 The Shannon platform supports multiple web search providers to deliver real-time information for AI agents. Configure your preferred provider through environment variables.
 
 ## Supported Providers

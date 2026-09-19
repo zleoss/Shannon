@@ -1,3 +1,16 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/httpapi/auth.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   admin HTTP 鉴权路由：注册/登录/刷新 token。
+// 【关键内容】
+//   NewAuthHTTPHandler :22 / RegisterRoutes :27
+//   handleRegister :33 / handleLogin :70 / handleRefresh :96
+//   writeJSON :125 / sanitizeErr :132
+// 【协作关系】
+//   依赖 internal/auth.Service 签发 JWT，被 admin mux 挂载。
+// =============================================================================
+
 package httpapi
 
 import (

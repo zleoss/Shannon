@@ -1,18 +1,33 @@
-"""Role-aware agent protocol for Swarm V2.
+"""=============================================================================
+文件: python/llm-service/llm_service/roles/swarm/agent_protocol.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  Swarm V2 子 agent 共享协议（identity + 各角色 PHASE 2 工作方法）。
+【关键内容】
+  _PROTOCOL_HEADER：身份、notes 策略、continue 协议
+  + role protocol：HOW TOOLS WORK（角色特定）+ PHASE 2 工作流
+  三层 prompt 架构：base / role / dynamic
+【协作关系】
+  被 swarm agent step 在构建 system prompt 时与 role_prompts 组合使用。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Role-aware agent protocol for Swarm V2.
 
-Splits the monolithic AGENT_LOOP_SYSTEM_PROMPT into a shared base and
-role-specific PHASE 2 work protocols. Every agent gets the same identity,
-actions, JSON format, and quality rules — only the *execution strategy*
-changes per role.
+  Splits the monolithic AGENT_LOOP_SYSTEM_PROMPT into a shared base and
+  role-specific PHASE 2 work protocols. Every agent gets the same identity,
+  actions, JSON format, and quality rules — only the *execution strategy*
+  changes per role.
 
-Architecture:
-  _PROTOCOL_HEADER    Identity, notes strategy, continue protocol
-  + role protocol     HOW TOOLS WORK (role-specific) + PHASE 2
-  + _PROTOCOL_FOOTER  PHASE 1, PHASE 3, error recovery, actions, rules, JSON constraint
+  Architecture:
+    _PROTOCOL_HEADER    Identity, notes strategy, continue protocol
+    + role protocol     HOW TOOLS WORK (role-specific) + PHASE 2
+    + _PROTOCOL_FOOTER  PHASE 1, PHASE 3, error recovery, actions, rules, JSON constraint
 
-get_work_protocol(role) assembles header + role_protocol + footer.
-COMMON_PROTOCOL_BASE = _PROTOCOL_HEADER + _PROTOCOL_FOOTER (for test imports).
-AGENT_LOOP_SYSTEM_PROMPT = get_work_protocol("researcher") for backward compat.
+  get_work_protocol(role) assembles header + role_protocol + footer.
+  COMMON_PROTOCOL_BASE = _PROTOCOL_HEADER + _PROTOCOL_FOOTER (for test imports).
+  AGENT_LOOP_SYSTEM_PROMPT = get_work_protocol("researcher") for backward compat.
+=============================================================================
 """
 
 # ---------------------------------------------------------------------------

@@ -1,3 +1,14 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/httpapi/websocket.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   /websocket 路由：向浏览器长连接推送 streaming 事件。
+// 【关键内容】
+//   StreamingHandler.RegisterWebSocket :19 / handleWS :23
+// 【协作关系】
+//   复用 streaming.Manager.Subscribe，前端通过 WebSocket 接收实时事件。
+// =============================================================================
+
 package httpapi
 
 import (

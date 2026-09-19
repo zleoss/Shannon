@@ -1,3 +1,16 @@
+// =============================================================================
+// 文件: rust/firecracker-executor/src/firecracker_api.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   Firecracker Unix socket REST API 客户端：经 UnixStream + hyper http1 调用 PUT/PATCH/POST。
+// 【关键内容】
+//   FirecrackerApi 结构体（firecracker_api.rs:12）
+//   put_json（:25）/ patch_json（:30）/ post_json（:35）
+//   hyper http1 + TokioIo + UnixStream（firecracker_api.rs:47-54）
+// 【协作关系】
+//   被 vm_pool 调用以引导微虚拟机（boot source / drives / vsock / network 等）。
+//   通过 Firecracker API Unix socket 控制 VM 生命周期。
+// =============================================================================
 use anyhow::{anyhow, Result};
 use http_body_util::Full;
 use hyper::{body::Bytes, Method, Request};

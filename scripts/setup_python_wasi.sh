@@ -1,4 +1,12 @@
 #!/bin/bash
+# =============================================================================
+# 文件: scripts/setup_python_wasi.sh
+# -----------------------------------------------------------------------------
+# 【一句话功能】 下载并配置 Python WASI 解释器，用于沙箱化执行
+# 【关键内容】 下载 Python WASI 解释器二进制；配置 WASI 运行环境
+#             确保沙箱内 Python 代码可正常执行
+# 【协作关系】 被 agent-core 的 WASI 沙箱依赖；为 Python 工具执行提供运行时
+# =============================================================================
 
 # Setup Python WASI Interpreter for Shannon Platform
 # This script downloads and configures the Python WASI interpreter for sandboxed execution

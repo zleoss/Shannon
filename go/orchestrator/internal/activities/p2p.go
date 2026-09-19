@@ -1,3 +1,13 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/activities/p2p.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   P2P agent 协作 activity —— 支持 agent 之间的直接通信与协作。
+// 【关键内容】
+//   SendPeerMessage / ReceivePeerMessage / PeerDiscovery
+// 【协作关系】
+//   被 swarm 和 multi-agent workflow 调用，实现 agent 间消息传递。
+// =============================================================================
 package activities
 
 import (

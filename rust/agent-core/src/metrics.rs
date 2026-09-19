@@ -1,3 +1,16 @@
+// =============================================================================
+// 文件: rust/agent-core/src/metrics.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   Prometheus 指标导出：enforcement 通过/丢弃、工具执行耗时计数、内存池水位等。
+// 【关键内容】
+//   start_metrics_server 启动独立 HTTP metrics 服务
+//   ENFORCEMENT_DROPS / ENFORCEMENT_ALLOWED / TOOL_EXECUTIONS / TOOL_DURATION 等指标
+//   register_counter_vec / register_gauge / register_histogram_vec 注册
+// 【协作关系】
+//   被 main.rs 启动、enforcement/tools/memory 等模块上报。
+//   对外暴露 /metrics 供 Prometheus 抓取。
+// =============================================================================
 use anyhow::{Context, Result};
 use prometheus::{
     register_counter_vec, register_gauge, register_histogram_vec, CounterVec, Encoder, Gauge,

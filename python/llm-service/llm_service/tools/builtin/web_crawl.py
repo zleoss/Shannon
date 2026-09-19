@@ -1,16 +1,11 @@
-"""
-Web Crawl Tool - Exploratory multi-page crawling
-
-Uses Firecrawl Crawl API for automatic link discovery and content extraction.
-This is an async operation that may take 30-60 seconds.
-
-Use Cases:
-- Unknown website structure
-- Discovering what content exists
-- Sites with dynamic/nested navigation
-
-For targeted page extraction where you know the paths, use web_subpage_fetch instead.
-"""
+"""=============================================================================
+文件: python/llm-service/llm_service/tools/builtin/web_crawl.py
+-------------------------------------------------------------------------------
+【一句话功能】 基于 Firecrawl Crawl API 的探索式多页爬取工具
+【关键内容】 自动链接发现与内容提取；异步操作（30-60 秒）
+             适用于未知网站结构、动态/嵌套导航的探索式爬取
+【协作关系】 与 web_subpage_fetch 互补（探索 vs 定向）；被 tool_executor 路由调用
+============================================================================="""
 
 import aiohttp
 import asyncio

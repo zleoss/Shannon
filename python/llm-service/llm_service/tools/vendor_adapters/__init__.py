@@ -1,20 +1,34 @@
-"""Vendor adapters for domain-specific API transformations.
+"""=============================================================================
+文件: python/llm-service/llm_service/tools/vendor_adapters/__init__.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  厂商 API 转换适配器注册表（OpenAPI 工具用）。
+【关键内容】
+  get_vendor_adapter :21 按 vendor 名取适配器
+  ALLOWED_VENDORS 白名单（安全控制）
+【协作关系】
+  被 OpenAPITool 调用以在请求/响应阶段做厂商特定改写。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Vendor adapters for domain-specific API transformations.
 
-This module provides adapter registries for vendor-specific tool integrations.
+  This module provides adapter registries for vendor-specific tool integrations.
 
-get_vendor_adapter() - For OpenAPI-based tools
-  - Purpose: Transform request/response bodies for OpenAPI specs
-  - Security: Whitelist-based (must manually add vendors to ALLOWED_VENDORS)
-  - Usage: OpenAPITool uses these adapters to modify API calls
+  get_vendor_adapter() - For OpenAPI-based tools
+    - Purpose: Transform request/response bodies for OpenAPI specs
+    - Security: Whitelist-based (must manually add vendors to ALLOWED_VENDORS)
+    - Usage: OpenAPITool uses these adapters to modify API calls
 
-ADDING NEW ADAPTERS:
+  ADDING NEW ADAPTERS:
 
-For OpenAPI tools:
-  1. Create vendor_adapters/myvendor/adapter.py with MyVendorAdapter class
-  2. Add "myvendor" to ALLOWED_VENDORS whitelist (see get_vendor_adapter)
-  3. Add explicit import in get_vendor_adapter() function
+  For OpenAPI tools:
+    1. Create vendor_adapters/myvendor/adapter.py with MyVendorAdapter class
+    2. Add "myvendor" to ALLOWED_VENDORS whitelist (see get_vendor_adapter)
+    3. Add explicit import in get_vendor_adapter() function
 
-See docs/vendor-adapters.md for complete guide.
+  See docs/vendor-adapters.md for complete guide.
+=============================================================================
 """
 
 

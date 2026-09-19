@@ -1,5 +1,18 @@
-"""
-Calculator Tool - Safe mathematical expression evaluation
+"""=============================================================================
+文件: python/llm-service/llm_service/tools/builtin/calculator.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  安全表达式计算与统计计算工具。
+【关键内容】
+  CalculatorTool :52（ast.literal_eval + 运算符白名单）
+  StatisticalCalculatorTool :206
+【协作关系】
+  被 agent loop 作为数学工具调用，避免 LLM 数值幻觉。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Calculator Tool - Safe mathematical expression evaluation
+=============================================================================
 """
 
 import ast

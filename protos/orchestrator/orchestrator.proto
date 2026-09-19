@@ -1,3 +1,41 @@
+// =============================================================================
+// 文件: protos/orchestrator/orchestrator.proto
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   定义 Go orchestrator 对外暴露的 OrchestratorService gRPC 接口，
+//   覆盖任务提交/状态查询/取消/列表、模板目录、人工审批(HITL)、
+//   工作流控制(pause/resume)、研究审核、token 用量上报、Swarm 交互、
+//   以及定时调度(CRUD + Pause/Resume) 等全部业务能力。
+// 【关键 message / service】
+//   service OrchestratorService：约 23 个 RPC，分组为 ——
+//     任务: SubmitTask / GetTaskStatus / CancelTask / ListTasks /
+//       GetSessionContext / ListTemplates
+//     审批(HITL): ApproveTask / GetPendingApprovals /
+//       SubmitReviewDecision / RecordTokenUsage / SendSwarmMessage
+//     工作流控制: PauseTask / ResumeTask / GetControlState
+//     调度: CreateSchedule / GetSchedule / ListSchedules /
+//       UpdateSchedule / DeleteSchedule / PauseSchedule / ResumeSchedule
+//   enum TaskStatus: UNSPECIFIED/QUEUED/RUNNING/COMPLETED/FAILED/
+//     CANCELLED/TIMEOUT/PAUSED
+//   message TaskDecomposition: mode/complexity_score/agent_tasks/dag
+//   message SubmitTaskRequest:
+//     metadata/query/context/auto_decompose/manual_decomposition/
+//     SessionContext/require_approval
+//   message SessionContext: history(ConversationMessage)/
+//     persistent_context/files_created/tools_used/total_tokens_used/
+//     total_cost_usd（多轮会话延续上下文）
+//   message GetTaskStatusResponse: task_id/TaskStatus/progress/result/
+//     ExecutionMetrics/agent_statuses/error_message
+//   message ScheduleInfo / CreateScheduleRequest / UpdateScheduleRequest:
+//     定时调度的完整字段（cron_expression/timezone/task_query/budget 等）
+//   message PendingApproval / ApproveTaskRequest:
+//     人工审批工作流所需字段
+//   message SendSwarmMessageRequest / SubmitReviewDecisionRequest:
+//     Swarm 交互与研究审核所需字段
+// 【由谁实现 / 由谁调用】
+//   实现: Go orchestrator (internal/server/service.go)
+//   调用: Go gateway（将 HTTP REST/SSE 转换为 gRPC）
+// =============================================================================
 syntax = "proto3";
 
 package shannon.orchestrator;

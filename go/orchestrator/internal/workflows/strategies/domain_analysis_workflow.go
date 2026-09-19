@@ -1,3 +1,27 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/workflows/strategies/domain_analysis_workflow.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 DomainAnalysisWorkflow —— 公司/实体级域内分析的子 workflow。
+//
+// 【三阶段执行】
+//  1. Discovery: 用 WebSearch 找官方域名
+//  2. Prefetch:  并行抓取 5-15 个相关子页面
+//  3. Digest:    LLM 合成结构化证据
+//
+// 【在 AI Agent 体系中的定位】 "情报调查员"，作为 ResearchWorkflow 的子 workflow
+// 被调用，也可由 strategy=='domain_analysis' 直接触发。
+//
+// 【关键函数】 DomainAnalysisWorkflow :83
+//
+// 【信号协作】 作为子 workflow 时通过 RegisterChildWorkflow /
+//   UnregisterChildWorkflow 接收父 workflow 的 pause/resume/cancel 信号
+//   （workflows/control/ 子包）。
+//
+// 【Python 端配套】 see
+//   python/llm-service/llm_service/roles/deep_research/{domain_discovery,
+//   domain_prefetch, deep_research_agent}.py
+// =============================================================================
+//
 // DomainAnalysisWorkflow performs company/entity research as a child workflow.
 //
 // It executes in three phases:

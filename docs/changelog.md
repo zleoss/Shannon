@@ -1,5 +1,24 @@
 # Changelog
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档是 Shannon 项目的版本变更日志，按时间倒序记录了 2025 年各版本的 feature 新增、bug 修复和重构改进。涵盖流式 API 增强（SSE 事件改进、PG 写入优化、多 Agent 协调事件）、Deep Research 2.0、合成模板系统、Memory 系统升级、Skills 系统、P2P 协调、Template Workflows、浏览器自动化等重要里程碑的变更记录。
+
+### 章节导航
+- **2025-12 变更**: 流式事件修复、Deep Research 2.0、GPT-5 响应格式处理
+- **2025-11 变更**: SvelteKit 前端、Web Fetch BFS 爬虫、合成模板、P2P、Memory 3.0、Skills 系统、模板工作流
+- **2025-10 变更**: Swarm 模式、浏览器自动化、SSE 改进、Python 代码执行、Vendor 适配器
+- **2025-09 变更**: 控制信号（暂停/恢复/取消）、Session 工作空间、OpenAPI 工具
+- **各版本演进**: 从早期 gRPC/基础设施到多 Agent 编排的渐进过程
+
+### 与 AI Agent 体系的关联
+- 直接反映 Shannon 各模块（Go/Rust/Python）的演进历史
+- 可追踪特定功能的引入时间和对应 PR
+
+### 阅读建议
+所有开发者均可翻阅了解平台演进；升级时务必查看近期变更以注意 breaking changes。
+
 ## 2025-12-03
 
 - fix(streaming): TOOL_OBSERVATION messages now use 80 char limit via `MsgToolCompleted()` helper in gRPC path

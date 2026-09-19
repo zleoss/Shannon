@@ -1,47 +1,11 @@
-"""
-LangChain Integration Bridge for Shannon
-
-This module provides a bridge between Shannon's secure execution environment and
-LangChain's ecosystem of tools and integrations. It allows Shannon to leverage
-LangChain's 700+ integrations while maintaining enterprise-grade security and
-monitoring.
-
-FUTURE INTEGRATION GUIDE:
-========================
-
-1. ENABLE LANGCHAIN TOOLS IN AGENT CORE:
-   - Add 'langchain_*' pattern to rust/agent-core/src/tools/available_tools.rs
-   - Update tool validation in rust/agent-core/src/enforcement/mod.rs
-   - Example: tools.insert("langchain_notion".to_string(), ToolCapability::External);
-
-2. UPDATE PERSONAS CONFIGURATION:
-   - Add langchain tools to config/personas.yaml for relevant personas
-   - Example:
-     researcher:
-       allowed_tools: ["web_search", "langchain_arxiv", "langchain_wikipedia"]
-
-3. TOOL ROUTING IN LLM SERVICE:
-   - Update python/llm-service/tools/tool_executor.py to route langchain_* calls
-   - Example: if tool_name.startswith("langchain_"): return langchain_bridge.execute()
-
-4. MONITORING INTEGRATION:
-   - Add LangChain tool metrics to python/llm-service/monitoring/metrics.py
-   - Track usage, latency, and success rates per integration
-
-5. SECURITY CONSIDERATIONS:
-   - All LangChain tools execute within Shannon's existing WASI sandbox
-   - API keys managed via Shannon's secure environment variables
-   - Tool usage subject to Shannon's token budget and rate limiting
-
-6. TESTING:
-   - Add integration tests in tests/integrations/test_langchain_bridge.py
-   - Test common tools: Notion, Slack, Google Drive, etc.
-
-7. DOCUMENTATION:
-   - Update CLAUDE.md with langchain tool usage examples
-   - Add troubleshooting guide for common integration issues
-"""
-
+"""=============================================================================
+文件: python/llm-service/integrations/langchain_bridge.py
+-------------------------------------------------------------------------------
+【一句话功能】 Shannon 与 LangChain 700+ 工具生态的安全桥接模块
+【关键内容】 提供 LangChain 工具注册与路由机制；维护未来集成指南（7 步流程）
+             所有 LangChain 工具在 Shannon WASI 沙箱内执行，受 token 预算与速率限制
+【协作关系】 被 tool_executor.py 路由调用；工具注册需同步更新 agent-core 与 personas.yaml
+============================================================================="""
 import logging
 import json
 from typing import Dict, Any, List, Optional

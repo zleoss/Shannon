@@ -1,5 +1,23 @@
 # Shannon Project Windows Local Setup Guide
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+This document (English version) helps developers set up Shannon on Windows. Since native scripts target Linux/macOS, Windows requires WSL 2 for Docker, Git Bash as terminal, manual .env copying, and separate Go/Python/Protoc installation. Key warnings include Protoc include folder and Python app execution aliases. English content with Chinese annotation.
+
+### 章节导航
+- **Prerequisites**: Git + WSL 2 + Docker Desktop + Go + Python + Protoc installation with pitfalls
+- **Project Initialization**: Clone repo, manual .env configuration (root + deploy/compose)
+- **Build & Start**: Using Git Bash for make setup / make dev
+- **Verification & Testing**: Service verification and first task submission
+- **FAQ**: Protoc include path, Python aliases, WSL network issues
+
+### 与 AI Agent 体系的关联
+Same as linux quickstarts, adapted for Windows-specific environment.
+
+### 阅读建议
+Windows users deploying Shannon for the first time must read this; focus on Prerequisites and environment pitfalls.
+
 This document aims to help developers successfully set up and run the Shannon agent platform in a Windows environment. Since the project's native scripts are primarily designed for Linux/macOS environments, specific adaptations and configurations are required when running on Windows.
 
 ## 1. Prerequisites

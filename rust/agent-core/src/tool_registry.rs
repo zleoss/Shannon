@@ -1,3 +1,17 @@
+// =============================================================================
+// 文件: rust/agent-core/src/tool_registry.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   工具能力注册表：声明工具 schema、限速、示例，并提供 discovery 与统计接口。
+// 【关键内容】
+//   ToolCapability（tool_registry.rs:8）/ ToolExample（:27）/ RateLimit（:34）
+//   ToolDiscoveryRequest（:41）/ ToolDiscoveryResponse（:51）
+//   ToolRegistry 结构体（:56）
+//   discovery_tools（tool_registry.rs:282）/ statistics（:341）
+// 【协作关系】
+//   由 grpc_server::discover_tools / get_tool_capability 调用对外暴露工具能力。
+//   为 tools::ToolExecutor 提供工具元数据与限速配置。
+// =============================================================================
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::sync::{Arc, RwLock};

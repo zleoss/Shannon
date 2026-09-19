@@ -1,3 +1,16 @@
+// =============================================================================
+// 文件: rust/agent-core/src/tracing.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   OpenTelemetry tracing 初始化：配置 OTLP exporter 与 service.name/version 资源属性。
+// 【关键内容】
+//   global + trace::TracerProvider（tracing.rs:1）
+//   opentelemetry_otlp SpanExporter + WithExportConfig（tracing.rs:2）
+//   Resource 带 SERVICE_NAME / SERVICE_VERSION（tracing.rs:4）
+// 【协作关系】
+//   由 main.rs 调用 init 初始化全局 tracer。
+//   向 OTLP collector 上报 span。
+// =============================================================================
 use opentelemetry::{global, trace::TracerProvider};
 use opentelemetry_otlp::{SpanExporter, WithExportConfig};
 use opentelemetry_sdk::{trace, Resource};

@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
+# =============================================================================
+# 文件: scripts/stream_smoke.sh
+# -----------------------------------------------------------------------------
+# 【一句话功能】 Shannon 流式端点（SSE + gRPC）的冒烟测试
+# 【关键内容】 测试 /api/v1/tasks/stream SSE 端点；验证 gRPC 流式通信
+#             检查流式事件格式与完整性
+# 【协作关系】 被 CI 冒烟测试流程调用；依赖 orchestrator 与 agent-core 运行
+# =============================================================================
 set -euo pipefail
 
 # Simple smoke test for Shannon streaming endpoints (SSE + gRPC).

@@ -1,3 +1,17 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/circuitbreaker/grpc_wrapper.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   gRPC 熔断包装：GRPCWrapper 与 GRPCConnectionWrapper 包装 unary/stream 调用。
+// 【关键内容】
+//   GRPCWrapper :13 / NewGRPCWrapper :21 / Execute :37
+//   UnaryClientInterceptor :71 / StreamClientInterceptor :80
+//   IsCircuitBreakerOpen :93 / GetState :98 / isCircuitBreakerError :103
+//   GRPCConnectionWrapper :130 / NewGRPCConnectionWrapper :138 / DialContext :154
+// 【协作关系】
+//   被 orchestrator 与 gateway 间、以及与各下游服务 gRPC 通信使用，提供熔断保护。
+// =============================================================================
+
 package circuitbreaker
 
 import (

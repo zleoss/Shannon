@@ -1,3 +1,10 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/daemon/dispatch_bridge.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 通过 Redis Stream 实现编排器→网关的跨进程消息派发
+// 【关键内容】 PublishDispatch 写入 Redis Stream；SubscribeDispatches 消费者组读取并路由到本地 WebSocket
+// 【协作关系】 编排器调用 PublishDispatch，网关 Hub 后台订阅并分发到 daemon 连接
+// =============================================================================
 package daemon
 
 import (

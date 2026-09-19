@@ -1,3 +1,19 @@
+// =============================================================================
+// 文件: rust/firecracker-executor/src/main.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   axum HTTP server 入口：默认监听 0.0.0.0:9001，提供 /execute 与 /workspace/* 路由，503 触发 agent-core WASI 回退。
+// 【关键内容】
+//   mod config / firecracker_api / models / vm_pool / vm_runner 等模块声明（main.rs:1-5）
+//   AppState（main.rs:27-31）
+//   503 返回便于 agent-core 触发 WASI fallback（main.rs:54-59, 151-162）
+//   后台 warm pool maintainer（main.rs:511-514）
+//   路由 /execute（:525） /workspace/{download,list,cleanup} /health /metrics
+//   监听 FIRECRACKER_EXECUTOR_BIND 默认 0.0.0.0:9001（main.rs:521-522）
+// 【协作关系】
+//   由 docker-compose 部署，被 agent-core 的 firecracker_client 通过 HTTP 调用。
+//   下游聚合 vm_runner / vm_pool / workspace_sync / firecracker_api。
+// =============================================================================
 mod config;
 mod firecracker_api;
 mod models;

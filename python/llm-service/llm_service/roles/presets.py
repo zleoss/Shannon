@@ -1,8 +1,22 @@
-"""Role presets for roles_v1.
+"""=============================================================================
+文件: python/llm-service/llm_service/roles/presets.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  角色系统 prompt 与工具 allowlist 的中心总线（roles_v1）。
+【关键内容】
+  按 context["role"] 映射 system_prompt + 工具白名单
+  纯静态、无 I/O（确定性优先）
+【协作关系】
+  被 api/agent.py 的 render_system_prompt / 角色 preset :1060 调用。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Role presets for roles_v1.
 
-Keep this minimal and deterministic. The orchestrator passes a role via
-context (e.g. context["role"]). We map that to a system prompt and a
-conservative tool allowlist. This file intentionally avoids dynamic I/O.
+  Keep this minimal and deterministic. The orchestrator passes a role via
+  context (e.g. context["role"]). We map that to a system prompt and a
+  conservative tool allowlist. This file intentionally avoids dynamic I/O.
+=============================================================================
 """
 
 from typing import Dict

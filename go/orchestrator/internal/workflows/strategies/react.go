@@ -1,3 +1,15 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/workflows/strategies/react.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 ReactWorkflow —— ReAct (Reasoning + Acting) 推理循环。
+//   agent"思考一步 → 工具调用 → 观察结果 → 再思考一步" 直到达成目标。
+// 【AI Agent 体系定位】 "推理小工"：相比 DAG 的"并行多 agent 一次性 fan-out"，ReAct
+//   强调"同一 agent 串行多轮边推理边动作"，适合需要逐步逼近答案的任务。
+// 【触发】 orchestrator_router.go:936,941（strategy=='react'，或 role=browser_use
+//   的 legacy v1 路由，或学习 router 推荐为 react）
+// 【关键函数】 ReactWorkflow :22
+// =============================================================================
+
 package strategies
 
 import (

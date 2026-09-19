@@ -1,5 +1,26 @@
 # Streaming Manager Improvements
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档记录 Shannon Streaming Manager（`go/orchestrator/internal/streaming/manager.go`）的关键改进：Goroutine 泄漏修复（基于 Context 取消的订阅管理）、Redis 错误的指数退避重试（1s→30s 动态调整）、Panic 恢复与优雅降级、死订阅自动检测与清理、订阅列表的并发安全优化（sync.Map + RWMutex）、以及改进后的结构化日志记录。这些改进对生产环境的可靠性至关重要。
+
+### 章节导航
+- **Goroutine Leak Prevention**: 通过 context.WithCancel 管理订阅生命周期
+- **Exponential Backoff for Redis Errors**: 1s→2s→4s→...→30s 的动态退避策略
+- **Panic Recovery**: 流式处理中的 recover 与优雅降级
+- **Dead Subscription Detection**: 自动检测并清理不活跃订阅
+- **Concurrency Safety**: sync.Map 和 RWMutex 保护订阅列表
+- **Improved Logging**: 结构化日志、请求 ID 追踪
+
+### 与 AI Agent 体系的关联
+- 直接对应文件：`go/orchestrator/internal/streaming/manager.go`
+- 影响所有流式 API（SSE/WebSocket）的可靠性和性能
+- 订阅事件通过 Redis Stream 分发给各个客户端
+
+### 阅读建议
+Go 后端开发者必读，尤其是关注流式可靠性和并发安全的人员；前端开发者可略过。
+
 ## Summary
 
 Improved `go/orchestrator/internal/streaming/manager.go` with critical fixes for production reliability, goroutine leak prevention, and better error handling.

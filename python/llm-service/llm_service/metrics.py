@@ -1,4 +1,21 @@
-"""Prometheus metrics for Shannon LLM Service"""
+"""=============================================================================
+文件: python/llm-service/llm_service/metrics.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  Prometheus 指标定义与采集辅助。
+【关键内容】
+  全局 Counter/Histogram/Gauge 声明 :6 起
+  MetricsCollector :65；单例 metrics :136
+  TimedOperation :139 上下文管理器统一计时
+【协作关系】
+  被 prometheus ASGI app 暴露在 /metrics；
+  被 providers、tools、agent 调用以记录请求耗时与缓存命中。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Prometheus metrics for Shannon LLM Service
+=============================================================================
+"""
 
 import time
 from prometheus_client import Counter, Histogram, Gauge, Info

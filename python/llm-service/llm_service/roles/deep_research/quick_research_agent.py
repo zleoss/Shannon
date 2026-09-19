@@ -1,9 +1,23 @@
-"""Quick research agent role preset.
+"""=============================================================================
+文件: python/llm-service/llm_service/roles/deep_research/quick_research_agent.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  快速研究 agent 角色 preset（deep_research_agent 的轻量版）。
+【关键内容】
+  保留 search→fetch→think 核心循环与来源标注
+  去除 OODA 详细框架、区域源表、关系分类等重结构
+【协作关系】
+  被 quick research strategy 调用以快速产出结论。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Quick research agent role preset.
 
-Lightweight variant of deep_research_agent for quick strategy.
-Preserves core search→fetch→think cycle and source attribution,
-but removes detailed OODA framework, regional source tables,
-relationship classification, and heavy output structure.
+  Lightweight variant of deep_research_agent for quick strategy.
+  Preserves core search→fetch→think cycle and source attribution,
+  but removes detailed OODA framework, regional source tables,
+  relationship classification, and heavy output structure.
+=============================================================================
 """
 
 from typing import Dict

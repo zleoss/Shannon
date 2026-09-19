@@ -1,3 +1,13 @@
+// =============================================================================
+// 文件: go/orchestrator/cmd/gateway/internal/handlers/approval.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   审批 handler —— 处理待审批操作的 approve/reject 请求。
+// 【关键内容】
+//   HandleApproval / ListPendingApprovals / SubmitApprovalDecision
+// 【协作关系】
+//   与 HITL 系统通信，更新审批状态并通知 workflow 继续执行。
+// =============================================================================
 package handlers
 
 import (

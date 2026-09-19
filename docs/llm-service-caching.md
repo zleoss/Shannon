@@ -1,5 +1,27 @@
 # LLM Service Response Caching
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档说明 Python LLM Service 的响应缓存机制。Shannon 采用「状态与计算分离」架构——Go Orchestrator 负责所有持久化状态（Qdrant 向量存储、语义搜索），Python LLM Service 为无状态计算层仅维护精确匹配缓存。缓存仅缓存非流式调用的最终响应，使用 Redis（推荐）或内存作为后端，按配置 TTL 自动过期。文档明确了缓存范围（只缓存 exact-match，语义相似性由 Go 负责）。
+
+### 章节导航
+- **Separation of State and Compute**: Go 管状态，Python 管计算——单数据源、确定性重放
+- **What Is Cached**: 非流式 completions 的最终响应（exact-match 缓存）
+- **What Is Not Cached**: 流式 chunk、Provider KV 缓存、语义匹配（Go 负责）
+- **Single Cache Strategy**: Manager 层缓存（llm_provider/manager.py），Redis 键前缀 llm:cache:*
+- **Backends**: 内存（LRU, 最大 1000 条）和 Redis（TTL 配置, 共享多进程）
+- **Configuration**: config/models.yaml 的 prompt_cache 段（enabled + ttl_seconds）
+
+### 与 AI Agent 体系的关联
+- 缓存实现：`python/llm-service/llm_service/llm_provider/manager.py`
+- 配置位置：`config/models.yaml` 的 prompt_cache 段
+- 语义搜索由 Go Orchestrator 通过 Qdrant 实现
+- 对于流式请求，缓存响应会作为单 chunk 发射
+
+### 阅读建议
+关注 API 响应延迟和成本优化的开发者必读；了解哪些被缓存、哪些不被缓存即可（避免对语义缓存有错误预期）。
+
 This document explains the Python LLM service's exact-match response cache. It does not modify or depend on any provider's internal KV‑cache.
 
 ## Architecture: Separation of State and Compute

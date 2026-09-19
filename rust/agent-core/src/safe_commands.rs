@@ -1,3 +1,16 @@
+// =============================================================================
+// 文件: rust/agent-core/src/safe_commands.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   “安全命令”内建枚举：ls/cat/head/wc/mkdir/rm 等纯 Rust 实现，杜绝 shell 注入。
+// 【关键内容】
+//   SafeCommand 枚举定义（safe_commands.rs:12-49）
+//   DANGEROUS_PATTERNS 元字符黑名单 `| ; && || > < >> $(` 直接拒（safe_commands.rs:53-54）
+//   命令参数解析与执行使用纯 Rust，替代子进程 spawn
+// 【协作关系】
+//   由 sandbox_service::execute_command 调用，作为 WASI 沙箱内文件操作的安全子集。
+//   完全消除 shell 解析风险，不依赖 /bin/sh。
+// =============================================================================
 //! Safe command implementations for WASI sandbox.
 //!
 //! These commands are implemented natively in Rust instead of spawning

@@ -1,3 +1,13 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/activities/human_intervention.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   HITL 审批 activity —— 暂停工作流等待人工审批决策。
+// 【关键内容】
+//   RequestHumanApproval / CheckApprovalStatus / SubmitDecision
+// 【协作关系】
+//   与 Gateway 审批 API 和 Temporal Signal 配合，阻塞工作流直到人工响应。
+// =============================================================================
 package activities
 
 import (

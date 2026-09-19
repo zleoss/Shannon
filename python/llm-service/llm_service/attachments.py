@@ -1,11 +1,25 @@
-"""
-Attachment resolver: reads attachments from Redis, converts to provider-specific
-content block formats (OpenAI, Anthropic, Gemini).
+"""=============================================================================
+文件: python/llm-service/llm_service/attachments.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  附件解析器：从 Redis 读取附件并转换为各 provider 的内容块格式。
+【关键内容】
+  AttachmentResolver :18 / :41
+  Redis key 形如 shannon:att:{id}，TTL 1800s
+  支持 image/pdf/text 多种 MIME 类型
+【协作关系】
+  被 api/agent.py 在构建消息时调用；依赖 Redis（config 中配置）。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Attachment resolver: reads attachments from Redis, converts to provider-specific
+  content block formats (OpenAI, Anthropic, Gemini).
 
-Supported file categories:
-- Binary vision: image/png, image/jpeg, image/gif, image/webp → native image blocks
-- Binary document: application/pdf → native document blocks
-- Text files: text/*, application/json, application/xml → decoded to text, injected inline
+  Supported file categories:
+  - Binary vision: image/png, image/jpeg, image/gif, image/webp → native image blocks
+  - Binary document: application/pdf → native document blocks
+  - Text files: text/*, application/json, application/xml → decoded to text, injected inline
+=============================================================================
 """
 import asyncio
 import base64

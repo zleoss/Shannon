@@ -1,8 +1,23 @@
-"""
-Bash Executor Tool - Execute allowlisted commands with session isolation
+"""=============================================================================
+文件: python/llm-service/llm_service/tools/builtin/bash_executor.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  危险 bash 工具：仅允许在 orchestrated workflow 内执行 allowlist 命令。
+【关键内容】
+  BashTool :18
+  asyncio.create_subprocess_exec + shell=False + 二进制 allowlist
+  会话隔离
+【协作关系】
+  gateway 层阻断直接 /tools/execute 调用；
+  仅 orchestrator workflow 内 agent 调用通过。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Bash Executor Tool - Execute allowlisted commands with session isolation
 
-Design note: Uses asyncio.create_subprocess_exec() with shell=False + an allowlist
-of binaries to avoid shell injection. Blocklists alone are not sufficient.
+  Design note: Uses asyncio.create_subprocess_exec() with shell=False + an allowlist
+  of binaries to avoid shell injection. Blocklists alone are not sufficient.
+=============================================================================
 """
 
 import asyncio

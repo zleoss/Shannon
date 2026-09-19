@@ -1,3 +1,16 @@
+// =============================================================================
+// 文件: rust/firecracker-executor/src/workspace_sync.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   ext4 ↔ 目录 rsync 双向同步、e2fsck 一致性校验、dirty/clean 状态文件管理。
+// 【关键内容】
+//   基于 std::process::Command 调用 rsync（workspace_sync.rs:1-4）
+//   Serialize/Deserialize 状态文件（dirty/clean）记录同步状态
+//   e2fsck 一致性校验
+// 【协作关系】
+//   被 vm_pool 在 VM acquire/release 时调用维护工作区一致性。
+//   与 vm_runner 协作在执行前后做双向同步。
+// =============================================================================
 use chrono::Utc;
 use serde::{Deserialize, Serialize};
 use std::path::Path;

@@ -1,3 +1,16 @@
+// =============================================================================
+// 文件: rust/agent-core/src/llm_client.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   LLM 服务的 HTTP 客户端封装：转发 chat/completion 请求并透传流式响应。
+// 【关键内容】
+//   基于 reqwest::Client 的同步/流式调用
+//   Serialize/Deserialize 请求响应结构
+//   Cow 与 TryStreamExt 透传 SSE 流
+// 【协作关系】
+//   被 grpc_server 在需要直接调用 LLM 服务时使用。
+//   对接 python/llm-service 的 HTTP 接口。
+// =============================================================================
 use futures::TryStreamExt;
 use reqwest::Client;
 use serde::{Deserialize, Serialize};

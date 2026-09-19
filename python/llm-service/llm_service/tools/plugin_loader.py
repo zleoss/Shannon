@@ -1,6 +1,21 @@
-"""
-Dynamic Plugin Loader for Shannon Tool System
-Supports hot reloading and external tool plugins
+"""=============================================================================
+文件: python/llm-service/llm_service/tools/plugin_loader.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  外部工具插件加载器，支持 watchdog 热重载。
+【关键内容】
+  from watchdog observers :14
+  ToolPluginLoader :24
+  enable_hot_reload :372 / disable :390
+  PluginFileHandler :430 / on_modified :436
+【协作关系】
+  启动后监听插件目录变化，热增删工具到 ToolRegistry。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Dynamic Plugin Loader for Shannon Tool System
+  Supports hot reloading and external tool plugins
+=============================================================================
 """
 
 import os

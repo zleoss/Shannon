@@ -1,9 +1,11 @@
-"""
-Data Processing Tools - diff_files and json_query for swarm agents.
-
-These tools help agents compare files and extract data from JSON without
-reading entire files into LLM context.
-"""
+"""=============================================================================
+文件: python/llm-service/llm_service/tools/builtin/data_tools.py
+-------------------------------------------------------------------------------
+【一句话功能】 为 swarm agent 提供文件差异比较与 JSON 数据提取工具
+【关键内容】 diff_files：比较两个文件内容差异；json_query：从 JSON 中提取数据
+             避免将整个文件读入 LLM 上下文，节省 token
+【协作关系】 被 swarm agent 的工具执行器调用；运行在 WASI 沙箱内
+============================================================================="""
 
 import difflib
 import json

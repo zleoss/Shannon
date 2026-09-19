@@ -1,5 +1,25 @@
 # Pattern Usage Guide
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档是 Shannon 认知模式库的实践指南，详细介绍了 Chain-of-Thought（CoT）、Debate、ReAct、Reflection、Tree-of-Thoughts（ToT）等六种推理模式的用途、配置方法与输入输出流程。每种模式均附有 Go 代码配置示例、适用场景分析以及模式组合的最佳实践。文档还提供了模式选择决策树，帮助开发者根据任务类型快速匹配合适的认知策略。
+
+### 章节导航
+- **Pattern Catalog**: CoT（逐步推理）、Debate（多智能体辩论）、ReAct（推理-行动循环）、Reflection（自我反思评审）、ToT（树状思维探索）、Ensemble（多模式投票集成）
+- **Pattern Combinations**: 如何组合多种模式（如 ReAct + Reflection、Research + Debate）实现复杂工作流
+- **Decision Tree**: 根据任务性质（数学/研究/编码/创意写作等）选择最佳模式的决策流程
+- **Best Practices**: 模式参数调优建议、预算控制策略、错误处理
+
+### 与 AI Agent 体系的关联
+- 模式库实现：`go/orchestrator/internal/patterns/` 目录中各模式 Go 实现
+- 模式在策略工作流中被组合调用，例如 ResearchWorkflow 使用 React + Reflection 模式
+- Python LLM Service 可通过 `/agent/query` API 指定 `strategy` 参数触发不同模式
+- 配置参数位于 `config/shannon.yaml` 中的 strategy 配置段
+
+### 阅读建议
+AI 应用开发者必读，重点看 Pattern Catalog 和 Decision Tree；运维人员可略读代码示例但需要了解模式选择逻辑；初学者从 CoT 和 ReAct 模式入手即可。
+
 ## Quick Start
 
 This guide provides practical examples of using Shannon's pattern library to build sophisticated multi-agent workflows.

@@ -1,6 +1,20 @@
-"""
-Minimal OpenAPI 3.x parser for Shannon tool generation.
-Supports OpenAPI 3.0 and 3.1 with MVP feature set.
+"""=============================================================================
+文件: python/llm-service/llm_service/tools/openapi_parser.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  OpenAPI 3.x（含 3.1）最小解析器，供工具生成使用。
+【关键内容】
+  validate_spec :169 / extract_base_url :198
+  extract_operations :288 / extract_parameters :392
+  extract_request_body :469；含 SSRF/IP 校验
+【协作关系】
+  被 tools/openapi_tool.py 在加载外部 OpenAPI 时调用。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Minimal OpenAPI 3.x parser for Shannon tool generation.
+  Supports OpenAPI 3.0 and 3.1 with MVP feature set.
+=============================================================================
 """
 
 from typing import Any, Dict, List, Optional

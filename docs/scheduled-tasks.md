@@ -1,5 +1,27 @@
 # Scheduled Tasks
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档说明 Shannon 的定时任务系统——基于 Temporal Schedule API 实现 Cron 表达式触发的周期性任务执行。系统提供资源限制（每用户最多 50 个定时任务、最小间隔 60 分钟、每次执行最大预算 $10）、暂停/恢复/删除操作、执行历史与成本追踪以及多租户隔离。架构包含 Gateway → Schedule Manager → Temporal Schedule API → ScheduledTaskWorkflow → OrchestratorWorkflow 的完整链路。
+
+### 章节导航
+- **Features**: Cron 调度、资源限制、预算控制、历史追踪、暂停/恢复/删除、多租户隔离
+- **Architecture**: Gateway → Schedule Manager → Temporal → ScheduledTaskWorkflow → OrchestratorWorkflow
+- **Components**: Schedule Manager（业务逻辑+配额执行）、ScheduledTaskWorkflow（包装执行）、Schedule Activities（Temporal 活动）
+- **Configuration**: 环境变量（SCHEDULE_MAX_PER_USER/SCHEDULE_MIN_INTERVAL_MINS/SCHEDULE_MAX_BUDGET_USD）
+- **Database Tables**: scheduled_tasks（配置）和 scheduled_task_executions（执行历史）
+- **API Reference**: 创建/查看/暂停/恢复/删除定时任务的 API 说明和示例
+
+### 与 AI Agent 体系的关联
+- Schedule Manager：`go/orchestrator/internal/schedules/manager.go`
+- ScheduledTaskWorkflow：`go/orchestrator/internal/workflows/scheduled/`
+- 相关活动：`go/orchestrator/internal/activities/schedule_activities.go`
+- 数据库迁移：包含 scheduled_tasks 和 scheduled_task_executions 表
+
+### 阅读建议
+需要定时执行 AI 任务的开发者必读；重点关注 Architecture 和 API Reference 章节。
+
 Shannon supports recurring task execution using Temporal's native Schedule API. Users can create cron-based schedules that automatically execute tasks at specified intervals.
 
 ## Features

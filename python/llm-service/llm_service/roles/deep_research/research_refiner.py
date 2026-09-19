@@ -1,7 +1,21 @@
-"""Research refiner role preset.
+"""=============================================================================
+文件: python/llm-service/llm_service/roles/deep_research/research_refiner.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  研究 query 扩展与计划精炼专家角色 preset。
+【关键内容】
+  RESEARCH_REFINER_PRESET
+  把模糊 query 转为结构化研究计划
+【协作关系】
+  被研究 workflow 在 /agent/research-plan 阶段调用。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Research refiner role preset.
 
-Query expansion and research planning expert. Transforms vague queries
-into comprehensive, well-structured research plans.
+  Query expansion and research planning expert. Transforms vague queries
+  into comprehensive, well-structured research plans.
+=============================================================================
 """
 
 from typing import Dict

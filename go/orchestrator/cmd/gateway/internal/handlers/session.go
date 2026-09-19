@@ -1,3 +1,13 @@
+// =============================================================================
+// 文件: go/orchestrator/cmd/gateway/internal/handlers/session.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   Session 管理 handler：创建、获取、删除、列表会话及工作区管理。
+// 【关键内容】
+//   CreateSession / GetSession / DeleteSession / ListSessions / Workspace ops
+// 【协作关系】
+//   通过 gRPC 与 agent-core 交互，数据持久化在 Postgres。
+// =============================================================================
 package handlers
 
 import (

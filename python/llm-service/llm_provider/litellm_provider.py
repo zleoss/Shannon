@@ -1,4 +1,19 @@
-"""LiteLLM AI Gateway provider; embedded SDK, no proxy server."""
+"""=============================================================================
+文件: python/llm-service/llm_provider/litellm_provider.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  LiteLLM provider：内嵌 SDK 支持 100+ LLM 后端，无需代理服务。
+【关键内容】
+  import LiteLLM；reusing base CompletionRequest/Response
+  complete / stream_complete / count_tokens 转发到 LiteLLM
+【协作关系】
+  作为通用网关 provider 被 LLMManager 选用；拓展 Shannon 模型覆盖面。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  LiteLLM AI Gateway provider; embedded SDK, no proxy server.
+=============================================================================
+"""
 
 import logging
 import time

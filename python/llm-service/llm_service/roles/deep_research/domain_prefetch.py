@@ -1,7 +1,21 @@
-"""Domain prefetch role preset.
+"""=============================================================================
+文件: python/llm-service/llm_service/roles/deep_research/domain_prefetch.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  官方域名内容预取专家角色 preset。
+【关键内容】
+  DOMAIN_PREFETCH_PRESET
+  从官方域名抽取公司关键信息
+【协作关系】
+  被公司研究 workflow 在 domain_discovery 后调用，预填充上下文。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Domain prefetch role preset.
 
-Website content pre-fetching specialist for company research. Extracts
-key company information from official domains.
+  Website content pre-fetching specialist for company research. Extracts
+  key company information from official domains.
+=============================================================================
 """
 
 from typing import Dict

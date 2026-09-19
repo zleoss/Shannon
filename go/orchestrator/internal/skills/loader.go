@@ -1,3 +1,14 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/skills/loader.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   Skill 单文件加载：解析 frontmatter 与正文，计算内容哈希与版本。
+// 【关键内容】
+//   LoadSkill :17 / CalculateContentHash :119 / ParseVersion :126
+// 【协作关系】
+//   被 skills.Registry.LoadDirectory 反复调用，产出 Registry.Entry。
+// =============================================================================
+
 package skills
 
 import (

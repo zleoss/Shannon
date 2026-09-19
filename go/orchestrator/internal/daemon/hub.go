@@ -1,3 +1,15 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/daemon/hub.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   Daemon WebSocket Hub：管理 agent 连接、claim/reply 调度。
+// 【关键内容】
+//   NewHub :57 / Register :80 / Dispatch :197
+//   HandleClaim :318 / HandleReply :388 / Claims :429
+// 【协作关系】
+//   被 daemon server 与 orchestrator 行为 activity 协作以拉取 tool 执行结果。
+// =============================================================================
+
 package daemon
 
 import (

@@ -1,3 +1,16 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/models/types.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   编排骨干类型定义：请求/响应/任务/用量/会话上下文。
+// 【关键内容】
+//   TaskRequest :29 / TaskResponse :41 / ComplexityScore :50
+//   AgentTask :62 / AgentResult :72 / TokenUsage :92
+//   SessionContext :103 / TaskSummary :114
+// 【协作关系】
+//   被 orchestrator workflow/activity、server、httpapi 共享引用作消息载体。
+// =============================================================================
+
 package models
 
 import "time"

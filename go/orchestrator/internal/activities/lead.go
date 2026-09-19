@@ -1,3 +1,21 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/activities/lead.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 Swarm Lead 的 activity 集合 —— Lead 决策、直接执行工具、
+// 列工作区文件。
+//
+// 【AI Agent 体系定位】 "蜂群之王的大脑+双手": 让 Lead Agent 单步决定下一步
+// 是分配任务还是亲自下场；同时支持执行工具（如搜索/抓取）。
+//
+// 【关键 activity 函数】
+//   LeadDecision      :122  Lead 决策：分配任务、调度子 agent
+//   LeadExecuteTool     :228  Lead 自己直接执行一个工具
+//   ListWorkspaceFiles  :194  列出当前工作区文件供 Lead 参考
+//
+// 【协作】 Python: /lead/* 路由（llm_service/api/lead.py）；swarm 协议见
+// python/llm-service/llm_service/roles/swarm/lead_protocol.py & role_prompts.py。
+// =============================================================================
+
 package activities
 
 import (

@@ -1,7 +1,20 @@
-"""
-Groq Provider Implementation
-High-performance LLM inference using Groq's LPU (Language Processing Unit).
-Aligned with OpenAI, xAI, and Google provider patterns for consistency.
+"""=============================================================================
+文件: python/llm-service/llm_provider/groq_provider.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  Groq provider：基于 Groq LPU 的高性能推理。
+【关键内容】
+  count_tokens :59 / complete :91（内部 complete_stream :201）
+  stream_complete :309；tenacity 重试装饰
+【协作关系】
+  被 LLMManager 实例化为 Groq tier provider。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Groq Provider Implementation
+  High-performance LLM inference using Groq's LPU (Language Processing Unit).
+  Aligned with OpenAI, xAI, and Google provider patterns for consistency.
+=============================================================================
 """
 
 import os

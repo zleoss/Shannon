@@ -1,3 +1,60 @@
+// =============================================================================
+// 文件: go/orchestrator/main.go
+// 翻译源: package main
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   Shannon 编排器主进程入口。同时承担：Temporal Worker + gRPC server
+//   (:50052) + admin HTTP (:8081)。是整个系统的"大脑中枢"。
+//
+// 【在 AI Agent 体系中的定位】
+//   "大脑额叶决策区"：
+//     - 启动 Temporal worker，注册全部 workflows/activities（registry.go）
+//     - 暴露 OrchestratorService / SessionService / StreamingService 三个 gRPC
+//     - 暴露 admin HTTP（/health /streaming /approval /timeline /events
+//       /websocket /daemon_signal 等），供 gateway 回环调用与内部运维
+//     - 加载所有运行时子系统：budget、pricing、streaming、skills、daemon、
+//       embeddings、vectordb、policy、templates、scheduled
+//     - 给 activities 注入全局 DB client（SetGlobalDBClient）
+//
+// 【本文件主要内容（按行号区间）】
+//   1-50  : 导入 —— activities/auth/circuitbreaker/config/db/embeddings/...，几乎
+//           所有 internal 子系统都参与。
+//   51-200: main() 启动序列上半段：
+//           - logger、config 加载（shannon.yaml + models.yaml）
+//           - pricing 热重载注册（pricing.ValidateMap）
+//           - DB client（sqlx）与熔断包装、Redis v9 客户端
+//           - session manager（Redis 存）
+//           - activities.SetGlobalDBClient 给所有 activity 注入 DB
+//           - streaming manager 初始化（InitializeRedis）
+//   200-500: 中段：
+//           - skills registry（DefaultSkillDirs/SKILLS_PATH）
+//           - embeddings + vectordb 客户端
+//           - templates registry（workflows.InitTemplateRegistry）
+//           - gRPC server 启动（OrchestratorService/Session/Streaming）
+//           - admin HTTP mux 注册 httpapi.* handler
+//           - daemon dispatch bridge
+//   500-875: 下段：
+//           - Temporal client dial（temporal.NewClient）与 worker 启动
+//           - registry.NewOrchestratorRegistry：统一 RegisterWorkflows/
+//             RegisterActivities（见 internal/registry/registry.go:42/91）
+//           - 优先级队列模式（priorityQueues 分支）
+//           - 优雅退出
+//
+// 【关键调用点】
+//   - gRPC service 注册：见文件内 `RegisterService`
+//   - workflow/activity 注册：通过 registry 包；不直接在 main 写
+//   - DB 注入 activity：activities.SetGlobalDBClient(dbClient)
+//     → activity 内通过 GetGlobalDBClient() 拿到，避免参数漂移
+//
+// 【鉴权/限流环境变量】
+//   - GATEWAY_SKIP_AUTH（gateway 进程的 HTTP 鉴权）
+//   - config/shannon.yaml 的 auth.skip_auth（本进程的 gRPC 鉴权）
+//   → 两者要同步，且 docker compose 必须 down + up -d（restart 不重读 env_file）
+//
+// 【学习建议】先看 main() 总流程，再去看 internal/registry/registry.go 的
+//   统一注册函数，最后挑一个 workflow + 一个 activity 跟踪。
+// =============================================================================
+
 package main
 
 import (

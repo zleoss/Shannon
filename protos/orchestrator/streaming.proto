@@ -1,3 +1,22 @@
+// =============================================================================
+// 文件: protos/orchestrator/streaming.proto
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   定义 orchestrator 的流式执行订阅接口 StreamingService，供客户端通过
+//   gRPC server-stream 实时消费工作流事件，并支持断点续传。
+// 【关键 message / service】
+//   service StreamingService: 1 个 RPC ——
+//     StreamTaskExecution(StreamRequest) returns (stream TaskUpdate)
+//   message StreamRequest: workflow_id / types(事件类型过滤，可空) /
+//     last_event_id(旧版兼容，exclusive 续传点) /
+//     last_stream_id(新版 Redis Stream ID，推荐使用)
+//   message TaskUpdate: workflow_id / type / agent_id / message /
+//     timestamp / seq(旧版兼容) / stream_id(Redis Stream ID，稳健续传)
+// 【由谁实现 / 由谁调用】
+//   实现: Go orchestrator；配套 Redis Stream 作为事件后端（ring_capacity
+//     由 config/shannon.yaml 的 streaming.ring_capacity 配置）
+//   调用: Go gateway，将流转换为对外 SSE（/api/v1/tasks/stream 等）
+// =============================================================================
 syntax = "proto3";
 
 package shannon.orchestrator;

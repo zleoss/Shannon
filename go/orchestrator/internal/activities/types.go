@@ -1,3 +1,13 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/activities/types.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   Activity 共享类型定义 —— 所有 activity 之间传递的输入/输出结构体。
+// 【关键内容】
+//   ComplexityAnalysisInput/Output / AgentTaskInput/Output / SynthesisInput/Output
+// 【协作关系】
+//   作为 activity 间数据交换的类型契约，被 workflows 和 activities 共同引用。
+// =============================================================================
 package activities
 
 import "time"

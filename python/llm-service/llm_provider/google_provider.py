@@ -1,7 +1,20 @@
-"""
-Google Gemini Provider Implementation
-Provides access to Google's Gemini models via the Google AI Python SDK.
-Aligned with OpenAI and xAI provider patterns for consistency.
+"""=============================================================================
+文件: python/llm-service/llm_provider/google_provider.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  Google Gemini provider（经 Google AI SDK）。
+【关键内容】
+  complete :226（内部 complete_stream :333）
+  stream_complete :472 / count_tokens :445 / _estimate_tokens :440
+【协作关系】
+  被 LLMManager 实例化为 Google tier provider；与其他 provider 对齐接口模式。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Google Gemini Provider Implementation
+  Provides access to Google's Gemini models via the Google AI Python SDK.
+  Aligned with OpenAI and xAI provider patterns for consistency.
+=============================================================================
 """
 
 import logging

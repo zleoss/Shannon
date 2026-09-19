@@ -1,3 +1,16 @@
+// =============================================================================
+// 文件: rust/firecracker-executor/guest-agent/src/lib.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   guest-agent 库：定义 GuestRequest/GuestResponse 结构并附单元测试（from_output 解析）。
+// 【关键内容】
+//   //! Guest agent library for unit testing（lib.rs:1）
+//   GuestRequest（:6）/ GuestResponse（:13）
+//   from_output 辅助构造（lib.rs:22-40）
+// 【协作关系】
+//   被 guest-agent main.rs 复用通信结构。
+//   提供可独立测试的纯逻辑。
+// =============================================================================
 //! Guest agent library for unit testing.
 
 use serde::{Deserialize, Serialize};

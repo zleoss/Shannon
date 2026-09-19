@@ -1,11 +1,25 @@
-"""
-MiniMax LLM Provider Implementation
+"""=============================================================================
+文件: python/llm-service/llm_provider/minimax_provider.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  MiniMax LLM provider（OpenAI 兼容 chat completions）。
+【关键内容】
+  temperature 限制 (0.0, 1.0]，<=0 钳到 0.01
+  M2.7 模型会发 <model_thinking> 块，需剥离
+  base URL https://api.minimax.io/v1
+【协作关系】
+  被 LLMManager 实例化为 MiniMax tier provider。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  MiniMax LLM Provider Implementation
 
-MiniMax exposes an OpenAI-compatible chat completions API.
-Key constraints:
-  - Temperature must be in (0.0, 1.0] — values <= 0 are clamped to 0.01
-  - M2.7 models may emit <think>...</think> blocks; these are stripped
-  - API base URL: https://api.minimax.io/v1
+  MiniMax exposes an OpenAI-compatible chat completions API.
+  Key constraints:
+    - Temperature must be in (0.0, 1.0] — values <= 0 are clamped to 0.01
+    - M2.7 models may emit <think>...</think> blocks; these are stripped
+    - API base URL: https://api.minimax.io/v1
+=============================================================================
 """
 
 from __future__ import annotations

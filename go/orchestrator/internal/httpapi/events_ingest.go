@@ -1,3 +1,14 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/httpapi/events_ingest.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   /events 入口：接收 Python llm-service 回推事件并转发给 streaming.Manager。
+// 【关键内容】
+//   NewIngestHandler :19 / RegisterRoutes :23 / handleIngest :36
+// 【协作关系】
+//   被 Python llm-service 通过 HTTP POST 调用；事件经 streaming.Manager 持久化与分发。
+// =============================================================================
+
 package httpapi
 
 import (

@@ -1,3 +1,19 @@
+// =============================================================================
+// 文件: rust/agent-core/src/enforcement.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   执行网关核心：限流（令牌桶 + 滑动窗口 + 可选 Redis）、熔断、超时、token 上限组合校验。
+// 【关键内容】
+//   RequestEnforcer 结构体与 new/from_global（enforcement.rs:15, 26, 40）
+//   rate_check 限流入口与 enforce 主流程（enforcement.rs:45, 83）
+//   RedisLimiter 分布式限流 + try_take（enforcement.rs:150, 189）
+//   TokenBucket 令牌桶 + try_take（enforcement.rs:208, 224）
+//   RollingWindow 滑动窗口（enforcement.rs:240）；cb_allow/cb_record 熔断（enforcement.rs:64, 75）
+//   timeout 包裹（enforcement.rs:112-121）
+// 【协作关系】
+//   被 grpc_server 的 execute_task / execute_tool_calls 路径调用，作为所有执行请求的前置闸门。
+//   可选 Redis 提供 multi-node 限流；本地态用 TokenBucket + RollingWindow。
+// =============================================================================
 use std::collections::{HashMap, VecDeque};
 use std::sync::{Arc, Mutex};
 use std::time::{Duration, Instant};

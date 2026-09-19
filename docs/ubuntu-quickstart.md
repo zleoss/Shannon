@@ -1,5 +1,28 @@
 # Ubuntu Shannon Development Environment Quick Start Guide
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档是 Ubuntu 系统上快速部署 Shannon 开发环境的指南。涵盖系统环境要求（Ubuntu 22.04）、依赖安装（Docker 26.1.3 / Docker Compose / Go / Python 3.10+ / Protoc）、项目部署（克隆/ .env 配置 / 构建/启动）、服务验证（健康检查/Temporal 页面/各服务端点）、运行第一个任务和 Web 界面访问。
+
+### 章节导航
+- **System Environment**: 验证的系统版本和推荐的 Docker / Go / Python 版本
+- **Dependencies Installation**: 各依赖的安装命令和版本要求
+- **Project Deployment**: make setup + vim .env + make dev 三步部署
+- **Service Verification**: 各端口（8080 Gateway / 8000 LLM / 50051 Agent-Core / 8233 Temporal）验证
+- **Running Your First Task**: 提交测试任务的 curl 示例
+- **Web Interface Access**: 访问 Shannon Dashboard
+- **Common Management Commands**: 日志查看、重启、重建等命令汇总
+- **Troubleshooting**: 常见部署问题排查
+
+### 与 AI Agent 体系的关联
+- 部署脚本：`scripts/setup_python_wasi.sh`、Makefile
+- Docker Compose：`deploy/compose/docker-compose.yml`
+- 环境配置参考：`docs/environment-configuration.md`
+
+### 阅读建议
+Ubuntu 用户首次部署必读；其他发行版参考 rocky-linux-quickstart.md。
+
 This guide is designed for Ubuntu system users to quickly deploy and configure the Shannon production-grade AI agent platform development environment.
 
 ## Table of Contents

@@ -1,5 +1,26 @@
 # OpenAPI Tools Configuration Guide
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档是 Shannon 中配置和使用 OpenAPI 3.x 工具的完整参考。Shannon 可自动从 OpenAPI 3.0/3.1 规范生成工具（一个 operation 一个工具），支持 Bearer/API Key/Basic 三种认证、路径/查询/标头参数、Schema 验证、熔断器和速率限制。文档提供完整的 YAML 配置字段参考、多种认证类型示例、高级功能（响应转换、动态参数注入、错误映射）和常见问题排查。
+
+### 章节导航
+- **Configuration Reference**: 完整 YAML 字段（spec_url/spec_inline/headers/query/auth 等）
+- **Authentication Types**: Bearer Token、API Key（header/query）、Basic Auth 配置方式
+- **Advanced Features**: 响应转换（Response Transform）、动态参数注入（Dynamic Parameters）、错误映射（Error Mapping）
+- **Troubleshooting**: 常见 OpenAPI 加载和调用问题的排查方法
+- **Examples**: 连接 GitHub API、Slack API、自定义 API 的完整配置示例
+
+### 与 AI Agent 体系的关联
+- 配置位置：`config/shannon.yaml` 中的 openapi_tools 段
+- OpenAPI 加载器：`python/llm-service/llm_service/tools/openapi_loader.py`
+- 工具在执行时由 role_presets 或 allowed_tools 控制可用性
+- 支持 circuit breaker 和 rate limiting，在 gateway 统一管控
+
+### 阅读建议
+需要集成第三方 REST API 的开发者必读；初学者建议从 Quick Start 入手再参考 Configuration Reference。
+
 Complete reference for configuring and using OpenAPI 3.x tools in Shannon.
 
 ---

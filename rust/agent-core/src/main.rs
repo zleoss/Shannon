@@ -1,3 +1,19 @@
+// =============================================================================
+// 文件: rust/agent-core/src/main.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   tonic gRPC 服务二进制入口，启动 AgentService + SandboxService + reflection + metrics。
+// 【关键内容】
+//   tokio::main 启动运行时（main.rs:11）
+//   加载 Config（main.rs:22-23）
+//   start_metrics_server Prometheus 端口（main.rs:26-30）
+//   监听 :50051 并构造 Server builder（main.rs:32, 47-52）
+//   AgentServiceImpl::new + SandboxServiceImpl::from_env 装配（main.rs:33-34）
+//   gRPC reflection 注册（main.rs:38-50）
+// 【协作关系】
+//   由 docker-compose / make dev 启动；对外暴露 :50051 给 go/orchestrator 调用。
+//   依赖 lib crate shannon_agent_core 暴露的 grpc_server / sandbox_service 模块。
+// =============================================================================
 use shannon_agent_core::tracing as trace_mod;
 
 use anyhow::Result;

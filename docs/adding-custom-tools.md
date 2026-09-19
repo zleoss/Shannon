@@ -1,4 +1,30 @@
 # Adding Custom Tools to Shannon
+
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档详细介绍了向 Shannon 添加自定义工具的三种方式——MCP（Model Context Protocol，零代码集成 HTTP API）、OpenAPI 规范（自动从 OpenAPI 3.x 生成工具）和内置 Python 工具（直接编写 Python 函数）。文档包含每种方式的分步配置示例、YAML 配置参考、安全最佳实践（域名白名单/速率限制/熔断器）、测试验证步骤以及常见问题排查方法。
+
+### 章节导航
+- **Overview**: 三种工具添加方式对比表——MCP（零代码，HTTP API）、OpenAPI（自动生成）、Built-in（Python 代码）
+- **Quick Start: Adding MCP Tools**: config/shannon.yaml 中配置 MCP 工具的完整示例
+- **Adding OpenAPI Tools**: 从 OpenAPI 3.x 规范自动生成工具的配置方法
+- **Adding Built-in Python Tools**: Python 注册工具函数的方式和代码示例
+- **Configuration Reference**: 各工具类型的 YAML 配置字段详解
+- **Testing & Verification**: 验证工具注册和执行的步骤
+- **Troubleshooting**: 常见问题排查
+- **Security Best Practices**: 域名白名单、速率限制、熔断器、成本控制
+
+### 与 AI Agent 体系的关联
+- MCP 工具注册：`config/shannon.yaml` 中 mcp_tools 配置段
+- OpenAPI 工具加载：`python/llm-service/llm_service/tools/openapi_loader.py`
+- 内置工具注册：`python/llm-service/llm_service/tools/registry.py`
+- 工具在执行时通过 /agent/query 的 allowed_tools 字段控制可用性
+- 不需要修改 Rust/Go/Proto 代码（通过通用容器实现）
+
+### 阅读建议
+所有需要为 Shannon 添加自定义工具的开发者必读；初学者建议从 MCP Tools（零代码）入手；高级用户可研究 Built-in Tools 的 Python 注册模式；安全最佳实践章节所有人均应阅读。
+
 **Extend Shannon with custom tools**
 
 ## Table of Contents

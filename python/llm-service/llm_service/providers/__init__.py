@@ -1,3 +1,21 @@
+"""=============================================================================
+文件: python/llm-service/llm_service/providers/__init__.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  ProviderManager 门面层：对外暴露的统一补全与事件接口。
+【关键内容】
+  ProviderType / _PROVIDER_NAME_MAP :31
+  initialize :80 / reload :84 / select_model :154
+  generate_completion :178（agent loop 实际调用入口）
+  stream_completion :300 / _serialize_completion :379
+  _serialize_usage :417 / _emit_events :465（LLM_PROMPT/PARTIAL/OUTPUT 事件）
+  generate_embedding :540
+【协作关系】
+  被 api/agent.py、api/completions.py 调用；
+  包装 llm_provider/manager.py 的 LLMManager 并附加事件发射。
+=============================================================================
+"""
+
 from typing import Dict, List, Optional, Any
 import logging
 from enum import Enum

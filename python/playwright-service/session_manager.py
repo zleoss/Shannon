@@ -1,13 +1,28 @@
-"""
-Browser Session Manager for Playwright Service
+"""=============================================================================
+文件: python/playwright-service/session_manager.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  Playwright 浏览器会话生命周期管理器（含 TTL、淘汰与统计）。
+【关键内容】
+  SESSION_TTL_SECONDS :29 / MAX_SESSIONS :31
+  BrowserSession :34 / BrowserSessionManager :53
+  start :77 / get_or_create_session :99 / close_session :168
+  _evict_oldest_unlocked :188 / _cleanup_loop :205 / get_stats :231
+【协作关系】
+  被 app.py 的 /browser/* 端点使用，按 session_id 隔离上下文。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Browser Session Manager for Playwright Service
 
-Manages stateful browser sessions using Playwright Browser Contexts.
-Each session has isolated cookies, localStorage, and state.
+  Manages stateful browser sessions using Playwright Browser Contexts.
+  Each session has isolated cookies, localStorage, and state.
 
-Session lifecycle:
-1. First action for session_id → creates new context + page
-2. Subsequent actions → reuses existing context/page
-3. Session TTL expires OR explicit close → cleanup
+  Session lifecycle:
+  1. First action for session_id → creates new context + page
+  2. Subsequent actions → reuses existing context/page
+  3. Session TTL expires OR explicit close → cleanup
+=============================================================================
 """
 
 import asyncio

@@ -1,7 +1,13 @@
 #!/bin/bash
+# =============================================================================
+# 文件: scripts/init-qdrant-collections.sh
+# -----------------------------------------------------------------------------
+# 【一句话功能】 初始化 Qdrant 向量数据库集合
+# 【关键内容】 在 Qdrant 部署后、orchestrator 启动前运行，创建所需集合
+# =============================================================================
 # Initialize Qdrant collections for Shannon
 # Run this after Qdrant is deployed but before orchestrator starts
-#
+
 # Usage:
 #   ./scripts/init-qdrant-collections.sh [qdrant-host] [port]
 #

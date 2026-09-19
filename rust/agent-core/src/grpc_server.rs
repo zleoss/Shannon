@@ -1,3 +1,19 @@
+// =============================================================================
+// 文件: rust/agent-core/src/grpc_server.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   AgentService gRPC handler 实现：工具执行、流式执行、能力发现、健康检查与直连工具调用。
+// 【关键内容】
+//   AgentServiceImpl 结构体（grpc_server.rs:48）
+//   execute_task 单次任务执行（grpc_server.rs:989）
+//   stream_execute_task 流式执行（grpc_server.rs:1472）
+//   execute_tool_calls 并行上限 TOOL_PARALLELISM≤32（grpc_server.rs:493-510）
+//   dangerous tools 拦截 bash_executor/file_write（grpc_server.rs:155-160, 531-544）
+//   workspace 配额预检（grpc_server.rs:1119-1141）；get_capabilities/discover_tools/health_check（grpc_server.rs:1702/1759/1739）
+// 【协作关系】
+//   被 main.rs 装配到 tonic Server，供 go/orchestrator 通过 gRPC 调用。
+//   依赖 tools::ToolExecutor、sandbox_service、firecracker_client 等完成实际执行。
+// =============================================================================
 use tokio::sync::mpsc;
 use tokio_stream::StreamExt;
 use tonic::{Request, Response, Status};

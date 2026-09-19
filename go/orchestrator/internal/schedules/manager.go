@@ -1,3 +1,17 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/schedules/manager.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   Temporal Schedule 管理器：创建/暂停/恢复/更新/删除定时任务及孤儿清理。
+// 【关键内容】
+//   Config :28 / Manager :35 / NewManager :44
+//   CreateSchedule :55 / PauseSchedule :186 / ResumeSchedule :219
+//   DeleteSchedule :264 / UpdateSchedule :294 / validateMinInterval :526
+//   DetectAndCleanOrphanedSchedules :495
+// 【协作关系】
+//   封装 Temporal Schedule API + schedules.DB，由 admin/HTTP 路由调用。
+// =============================================================================
+
 package schedules
 
 import (

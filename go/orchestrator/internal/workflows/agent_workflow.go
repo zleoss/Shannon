@@ -1,3 +1,15 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/workflows/agent_workflow.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 AgentWorkflow —— 单一确定性 agent 执行，自带完整 schema 校验。
+//   与 swarm/random 多 agent 不同，这是"一个具名 agent 跑一轮"的轻量入口。
+// 【定位】 "确定性单 agent 通路"：当请求 context 携带 `agent: <agentID>` 时启用。
+// 【触发】 orchestrator_router.go:587-625；并被 skip_synthesis 路由复用。
+// 【关键函数】 AgentWorkflow :42
+// 【协作】 多走 ExecuteAgent activity → HTTP Python /agent/loop 单步；与
+//   roles.AllowedTools 协同做可用工具过滤。
+// =============================================================================
+
 package workflows
 
 import (

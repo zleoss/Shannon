@@ -1,4 +1,28 @@
-"""Agent API endpoints for HTTP communication with Agent-Core."""
+"""=============================================================================
+文件: python/llm-service/llm_service/api/agent.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  最核心的 Agent 推理循环 API（/agent/query、/agent/loop 等）。
+【关键内容】
+  /agent/query 入口 agent_query :1011；完整工具迭代 while True 在 :1943
+  /agent/loop 入口 agent_loop_step :3901（返回 JSON 决策）
+  max_tool_iterations 计算 :1895；终止检查 :2130
+  工具执行 _execute_and_format_tools :2561；await tool.execute :2901
+  interpretation pass :2231-2443；build_interpretation_messages :518
+  render_system_prompt :1084 / 角色 preset :1060
+  工具选择 :1532-1537；AgentLoopStepRequest :3355（默认 max_iterations:25）
+  预算/上下文裁剪 :3680；多轮重建 _build_multi_turn_messages :3563
+  辅助端点 /agent/research-plan :4181 / /agent/decompose :4355
+  /agent/models :5207 / /roles :5221
+【协作关系】
+  由 Go orchestrator 经 HTTP 调用；
+  调 ProviderManager 生成补全、ToolRegistry 执行工具、EventEmitter 上报事件。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Agent API endpoints for HTTP communication with Agent-Core.
+=============================================================================
+"""
 
 import logging
 import os

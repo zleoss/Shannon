@@ -1,3 +1,30 @@
+// =============================================================================
+// 文件: protos/agent/agent.proto
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   定义 Rust agent-core 对外暴露的 AgentService gRPC 接口与执行相关消息。
+// 【关键 message / service】
+//   service AgentService: 6 个 RPC —— ExecuteTask / StreamExecuteTask /
+//     GetCapabilities / HealthCheck / DiscoverTools / GetToolCapability
+//   enum AgentState: 代理状态机 UNSPECIFIED/IDLE/PLANNING/EXECUTING/
+//     WAITING/COMPLETED/FAILED
+//   message ExecuteTaskRequest: metadata/query/context/ExecutionMode/
+//     available_tools/AgentConfig/SessionContext
+//   message SessionContext: session_id/history/persistent_context/
+//     files_created/tools_used/total_tokens_used/total_cost_usd/user_id
+//   message AgentConfig: max_iterations/timeout_seconds/enable_sandbox/
+//     memory_limit_mb/enable_learning
+//   message ExecuteTaskResponse: task_id/StatusCode/result/tool_calls/
+//     tool_results/ExecutionMetrics/error_message/final_state/metadata
+//   message TaskUpdate: task_id/AgentState/message/ToolCall/ToolResult/
+//     progress/delta（delta 为流式 token 增量）
+//   message ToolCapability: id/name/description/category/input_schema/
+//     output_schema/required_permissions/estimated_duration_ms/
+//     is_dangerous/version/author/tags/examples/RateLimit/cache_ttl_ms
+// 【由谁实现 / 由谁调用】
+//   实现: Rust agent-core (grpc_server.rs 约 988 行)
+//   调用: Python llm-service (python_wasi_executor.py:396)、Go orchestrator
+// =============================================================================
 syntax = "proto3";
 
 package shannon.agent;

@@ -1,3 +1,60 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/workflows/orchestrator_router.go
+// 翻译源: package workflows
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   Shannon 整个系统的"大脑总路由"——所有任务进入 Temporal 后第一个执行的
+//   workflow，按预定决策序列把任务委派给具体子 workflow。
+//
+// 【在 AI Agent 体系中的定位】
+//   "决策中枢"：不直接执行 agent，只负责"看一眼任务→选路→委派"。
+//   分层路由：
+//     1. 模板命中 → TemplateWorkflow
+//     2. skip_synthesis=true → AgentWorkflow
+//     3. force_swarm=true → SwarmWorkflow（早路由）
+//     4. force_research=true → ResearchWorkflow（早路由 + HITL plan review）
+//     5. 学习路由器 recommendStrategy（基于历史推荐策略）
+//     6. DecomposeTask activity → 复杂度评分 + 子任务
+//     7. BudgetPreflight（预检 token 配额）
+//     8. 角色处理（browser_use 等角色 → AllowedTools）
+//     9. 认知策略识别（cognitive strategy 二次路由）
+//    10. 主 switch：
+//         case isSimple && !forceP2P → SimpleTaskWorkflow（复杂度<0.3 且单子任务）
+//         case false: → SupervisorWorkflow（**已禁用**，CLAUDE.md 提及）
+//         default → DAGWorkflow（默认 fan-out/fan-in）
+//
+// 【本文件关键函数与行号】
+//   OrchestratorWorkflow         :32   主入口 workflow
+//   BudgetPreflight / EstimateTokensWithConfig :794-837  预算预检
+//   routeStrategyWorkflow        :1275 策略子路由（simple/react/exploratory/
+//                                       research/scientific/browser_use；
+//                                       **DAG 不在其中**，DAG 走主 switch default）
+//   recommendStrategy             :1414 学习路由器（基于历史记录推荐策略）
+//
+// 【关键 Temporal 工作 workflow/Activity】
+//   - workflow.ExecuteChildWorkflow 调起子 workflow（不在本文件直接跑 agent）
+//   - activities.DecomposeTask：HTTP 调 Python /complexity 得到
+//     {ComplexityScore, Mode, CognitiveStrategy, 子任务}
+//   - roles.AllowedTools(role): 角色对应允许工具集
+//   - templates.Registry().Get(name): 加载 YAML 模板
+//
+// 【复杂度阈值】
+//   simpleThreshold = cfg.SimpleThreshold（默认 0.3）—— src:103-106
+//   isSimple = decomp.ComplexityScore < simpleThreshold && simpleByShape —— src:889
+//
+// 【Temporal 编写规则】（CLAUDE.md 强制约束）
+//   - 用 workflow.Sleep 而非 time.Sleep
+//   - activity 必须 .Get(ctx, &result) 等待
+//   - 任何新代码路径必须 workflow.GetVersion() 门控以保 replay 确定性
+//
+// 【学习建议】
+//   1) 先扫 OrchestratorWorkflow 主体，看决策按什么顺序短路
+//   2) 再看 routeStrategyWorkflow 与主 switch 怎么把不同 strategy 分发到
+//      strategies/ 下的 workflow
+//   3) 想理解"为什么 Supervisor 被禁用、所有多任务都走 DAG"，看 :1070 行
+//      `case false: ...`
+// =============================================================================
+
 package workflows
 
 import (

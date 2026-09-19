@@ -1,3 +1,18 @@
+// =============================================================================
+// 文件: rust/agent-core/src/firecracker_client.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   Firecracker executor HTTP 单例客户端（默认 http://firecracker-executor:9001），503 自动回退 WASI。
+// 【关键内容】
+//   GLOBAL_CLIENT 全局单例（firecracker_client.rs:21-22）
+//   FirecrackerExecuteRequest/Response（firecracker_client.rs:25, 38）
+//   FirecrackerExecutorClient（firecracker_client.rs:48）
+//   execute 方法（firecracker_client.rs:142）；503 → WASI fallback（:164-168）
+//   download_file（:184）/ list_files（:221）
+// 【协作关系】
+//   被 tools::ToolExecutor 在 firecracker 路径调用。
+//   后端对接 rust/firecracker-executor 的 /execute、/workspace/* HTTP API。
+// =============================================================================
 use anyhow::{anyhow, Result};
 use once_cell::sync::Lazy;
 use serde::{Deserialize, Serialize};

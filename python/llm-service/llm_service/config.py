@@ -1,3 +1,18 @@
+"""=============================================================================
+文件: python/llm-service/llm_service/config.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  基于 Pydantic Settings 的环境驱动全局配置单例。
+【关键内容】
+  Settings :6；Redis 连接 :14-17；PostgreSQL :20-24
+  provider key :27-34；tier/temperature/max_tokens :37-45
+  cache :48-51；rate limit :54-62；budget :65-66；events :69-75
+  database_url :90；redis_url :94
+【协作关系】
+  被 main.py、ProviderManager、EventEmitter、MCP client 等几乎所有模块读取。
+=============================================================================
+"""
+
 from typing import Optional
 from pydantic_settings import BaseSettings
 from pydantic import Field, field_validator

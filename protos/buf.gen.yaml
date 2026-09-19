@@ -1,3 +1,14 @@
+# =============================================================================
+# 文件: protos/buf.gen.yaml
+# -----------------------------------------------------------------------------
+# Buf 代码生成插件配置：由 `make proto` 调用，将 proto 生成到各语言绑定目录。
+# - Go:     生成到 ../go/orchestrator/internal/pb（protocolbuffers/go + grpc/go）
+#           opt=paths=source_relative 保持目录结构
+# - Python: 生成到 ../python/llm-service/llm_service/generated
+#           （protocolbuffers/python + grpc/python，无 source_relative）
+# Rust 绑定由 rust/agent-core/build.rs 通过 prost 自行生成，不在此处配置。
+# 修改 .proto 后务必：make proto -> go mod tidy -> cargo build。
+# =============================================================================
 version: v1
 
 plugins:

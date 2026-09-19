@@ -1,3 +1,15 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/workflows/supervisor_workflow.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 SupervisorWorkflow —— 大型计划的 supervisor 编排。**当前已禁用**：
+//   在 orchestrator_router.go:1070 的主 switch 中由 `case false:` 门控保留，
+//   所有原本应走 Supervisor 的多任务路径现已统一走 DAGWorkflow。
+// 【定位】 "已退役的计划大总管"。保留代码以便未来用 workflow.GetVersion() 重新
+//   启用（CLAUDE.md：新代码路径必须 GetVersion 门控）。
+// 【关键函数】 SupervisorWorkflow :43
+// 【关键子结构】 见文件内 Lead/Plan 等数据结构。
+// =============================================================================
+
 package workflows
 
 import (

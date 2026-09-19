@@ -1,5 +1,19 @@
-"""
-Web Search Tool supporting multiple providers: Exa, Firecrawl, Google, Serper, and Bing
+"""=============================================================================
+文件: python/llm-service/llm_service/tools/builtin/web_search.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  多 provider 网页搜索工具（Exa/Firecrawl/Google/Serper/SerpAPI/SearchAPI/Bing）。
+【关键内容】
+  WebSearchTool :864 路由分发
+  Exa :154 / Firecrawl :274 / Google :343 / Serper :420
+  SerpAPI :496 / SearchAPI :688 / Bing :798
+【协作关系】
+  被 agent / 研究 workflow 调用获取搜索结果，作为后续 fetch 的输入。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Web Search Tool supporting multiple providers: Exa, Firecrawl, Google, Serper, and Bing
+=============================================================================
 """
 
 import aiohttp

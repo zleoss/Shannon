@@ -1,9 +1,23 @@
-"""xAI Provider implementation.
+"""=============================================================================
+文件: python/llm-service/llm_provider/xai_provider.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  xAI（Grok）provider：OpenAI 兼容 REST API 的薄封装。
+【关键内容】
+  走 OpenAI Chat Completions 表面
+  处理 reasoning 模型忽略特定参数的 quirks
+【协作关系】
+  被 LLMManager 实例化为 xAI tier provider；亦被 x_search 工具间接复用。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  xAI Provider implementation.
 
-Provides a thin wrapper around the xAI (Grok) REST API which is intentionally
-OpenAI-compatible. We keep the logic simple and reuse the OpenAI chat
-completions surface while accounting for a few xAI-specific quirks (reasoning
-models ignoring certain parameters, etc.).
+  Provides a thin wrapper around the xAI (Grok) REST API which is intentionally
+  OpenAI-compatible. We keep the logic simple and reuse the OpenAI chat
+  completions surface while accounting for a few xAI-specific quirks (reasoning
+  models ignoring certain parameters, etc.).
+=============================================================================
 """
 
 from __future__ import annotations

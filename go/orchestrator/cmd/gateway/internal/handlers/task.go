@@ -1,3 +1,14 @@
+// =============================================================================
+// 文件: go/orchestrator/cmd/gateway/internal/handlers/task.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   任务 CRUD handler：提交、流式、状态查询、取消、暂停、恢复、Swarm 消息与控制状态。
+// 【关键内容】
+//   SubmitTask(:510) / StreamTask / GetTaskStatus / CancelTask / PauseTask
+//   ResumeTask / SendSwarmMessage / GetControlState
+// 【协作关系】
+//   调 orchestrator 的 task_service 完成写操作，通过 gRPC 与 agent-core 通信。
+// =============================================================================
 package handlers
 
 import (

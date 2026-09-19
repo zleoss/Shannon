@@ -1,5 +1,28 @@
 # Multi-Agent Workflow Architecture
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档是 Shannon 多 Agent 工作流架构的总纲性文档，阐述了三层架构设计（编排层→策略层→模式库）、可组合认知模式（ReAct/ToT/辩论/反思等）及智能路由机制。文档详细介绍了 Orchestrator Router 的查询分解与复杂度评分流程，以及 DAG、React、Research 等六种策略工作流的适用场景与实现方式。最后说明如何通过合成模板定制输出格式，并提供完整的配置选项参考。
+
+### 章节导航
+- **Architecture Layers**: 三层架构图——编排器路由（查询分解、复杂度分析）、策略工作流（DAG/React/Research 等）、模式库（执行/推理模式）
+- **Core Components**: Orchestrator Router（入口路由、复杂度评分、预算管理）、Strategy Workflows（DAG/React/Research/Exploratory/Scientific）、Patterns Library（Parallel/Sequential/CoT/Reflection/Debate/ToT）
+- **Workflow Selection**: 复杂度 < 0.3 走 SimpleTaskWorkflow，复杂走 DAG，流式走 StreamingWorkflow，模板匹配走 TemplateWorkflow
+- **Patterns Library**: Execution Patterns（Parallel/Sequential/Hybrid）、Reasoning Patterns（CoT/ReAct/Reflection/Debate/ToT）
+- **Synthesis Templates**: 输出格式定制，支持命名模板和 verbatim override
+- **Configuration Reference**: 各策略模式的完整配置参数
+
+### 与 AI Agent 体系的关联
+- 对应 Go orchestrator 核心路由：`go/orchestrator/internal/workflows/orchestrator_router.go`
+- 策略工作流位于 `go/orchestrator/internal/workflows/strategies/` 目录
+- 模式库实现位于 `go/orchestrator/internal/patterns/` 目录
+- 复杂度分析：`go/orchestrator/internal/activities/complexity.go`
+- 合成模板配置：`config/templates/synthesis/`
+
+### 阅读建议
+架构师和系统集成人员必读；前端开发者可跳过 Configuration Reference 章节；初学者建议先看 Architecture Layers 概览再深入 Core Components。
+
 ## Overview
 
 Shannon implements a modern, pattern-based multi-agent workflow system that enables sophisticated AI reasoning through composable patterns. The architecture follows a clean three-layer design that eliminates code duplication while providing flexibility for complex agent orchestration.

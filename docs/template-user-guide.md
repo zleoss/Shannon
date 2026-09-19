@@ -1,5 +1,22 @@
 # Getting Started with Templates
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档是 Shannon 模板工作流的快速入门指南——面向只想快速创建和运行模板的用户。文档以最小化的 YAML 示例（simple_analysis 模板）展示如何创建、加载、列出和执行模板。包含 node type（simple/cognitive/dag/supervisor）和 strategy（react/cot/reflection/debate/tot）的可用选项列表、Loading 方式（InitTemplateRegistry）和 gRPC ListTemplates API。
+
+### 章节导航
+- **Create a Template**: 最小化 YAML 示例和字段说明
+- **Load Templates**: InitTemplateRegistry 多目录加载
+- **List Available Templates**: gRPC ListTemplates API
+- **Execute a Template**: 执行模板的完整 curl 示例
+
+### 与 AI Agent 体系的关联
+同 templates.md，但篇幅更短、侧重快速启动，适合新用户首次体验模板功能。
+
+### 阅读建议
+初次尝试模板工作流的用户优先阅读此文档，之后再阅读 templates.md 深入了解架构。
+
 This short guide shows how to create, load, and run a template‑based workflow (System 1).
 
 ## 1) Create a Template

@@ -1,3 +1,17 @@
+// =============================================================================
+// 文件: rust/firecracker-executor/src/vsock_client.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   vsock UDS 客户端协议：发 CONNECT <port> → 读 OK <local_port> → 透传 JSON。
+// 【关键内容】
+//   MAX_CONNECT_RETRIES=10（vsock_client.rs:7-11）
+//   execute_guest_via_uds（:25）
+//   try_connect_and_execute（:96）
+//   协议：CONNECT <port>\n → OK <local_port>\n → JSON 透传
+// 【协作关系】
+//   被 vm_runner 调用以与 guest-agent 在 vsock 上通信。
+//   通过 /tmp/vsock.sock UDS 到 vsock 的桥接完成 host→guest 请求。
+// =============================================================================
 use crate::models::{GuestRequest, GuestResponse};
 use anyhow::Result;
 use std::path::PathBuf;

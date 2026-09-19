@@ -1,5 +1,25 @@
 # Shannon Default Timeout Configuration
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档是 Shannon 各模块默认超时配置的参考表。涵盖 Agent 执行超时（默认 30s）、编排器活动超时（分解 30s / 合成 180s / 研究 480s / 压缩 8s 等）、HTTP 客户端超时（工具元数据 2s / gRPC 连接 3s）、LLM Provider 超时（OpenAI/Anthropic/Google 各 300s）、以及 Gateway Web 超时。所有默认值与代码对齐，并标注了环境变量覆写方式。
+
+### 章节导航
+- **Agent & Task Execution**: Agent 执行超时（30s）/ 执行强制超时（30s）/ WASI 超时（30s）
+- **Orchestrator Activities**: 各活动的超时（分解/合成/研究/验证/压缩 等）
+- **HTTP Client Timeouts**: 内部 HTTP 调用和 gRPC 连接的超时配置
+- **LLM Provider Timeouts**: OpenAI/Anthropic/Google/Bedrock 的 Provider 超时
+- **Gateway Web Timeouts**: Gateway 的读/写/空闲超时
+
+### 与 AI Agent 体系的关联
+- 配置代码：Go（`go/orchestrator/` 各文件中硬编码默认值）、Rust（`rust/agent-core/src/config.rs`）
+- 环境变量覆写：对应 .env 和 docker-compose 中的 AGENT_TIMEOUT_SECONDS 等
+- 影响 Agent 执行、分解、合成等工作流环节的响应时间
+
+### 阅读建议
+运维和性能调优开发者必读；重点关注 Agent 和 LLM Provider 超时对用户体验的影响。
+
 Reference values aligned with the current codebase. Defaults noted come from code; sample `.env` and docker‑compose overrides are called out where relevant.
 
 ## Agent & Task Execution

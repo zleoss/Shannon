@@ -1,3 +1,16 @@
+"""=============================================================================
+文件: python/llm-service/llm_service/tools/mcp.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  将 MCP 服务端能力动态包装为 Shannon 工具类。
+【关键内容】
+  create_mcp_tool_class :33 动态生成类型
+  _McpTool :59 通过 HttpStatelessClient POST {"function","args"}
+【协作关系】
+  由 api/tools.py MCP 注册调用；底层依赖 mcp_client.HttpStatelessClient。
+=============================================================================
+"""
+
 from __future__ import annotations
 
 import os

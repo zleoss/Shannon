@@ -1,5 +1,30 @@
 # Template Workflows Documentation
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档深入介绍 Shannon 模板工作流的 Dual-System 架构设计（模板 0 Token 路由 vs AI 分解全成本）、节点编排类型（simple/cognitive/dag/supervisor）、执行流程（路由→模板匹配→验证→执行→合成）、版本兼容性（Temporal workflow.GetVersion() 门控）、预算降级机制以及学习路由器的配合。文档还包含模板复用（extends 继承）、变量传递、错误处理和监控指标。
+
+### 章节导航
+- **Dual-System Design**: System 1（模板，0 Token，确定性）+ System 2（AI 分解，全成本）+ 学习路由器
+- **Node Orchestration**: node types（simple/cognitive/dag/supervisor）+ strategies + dependencies
+- **Execution Flow**: 路由 → 模板匹配 → 验证 → 节点执行 → 合成输出
+- **Versioning**: Temporal workflow.GetVersion() 保证向后兼容
+- **Budget Degradation**: 预算超限时自动降级策略
+- **Template Reuse**: extends 继承、变量覆写和组合
+- **Variable Passing**: 节点间输入/输出变量传递
+- **Error Handling & Monitoring**: 错误处理和 Prometheus 指标
+
+### 与 AI Agent 体系的关联
+- 架构决策器：`go/orchestrator/internal/workflows/orchestrator_router.go`
+- 模板工作流：`go/orchestrator/internal/workflows/template_workflow.go`
+- 模板目录：`config/workflows/examples/`
+- 学习路由器：`go/orchestrator/internal/workflows/learning_router.go`
+- 合成模板：`config/templates/synthesis/`
+
+### 阅读建议
+架构师和需要深入理解模板系统的开发者必读；初学者建议先读 template-user-guide.md 再读本文档。
+
 ## Overview
 
 Shannon's template workflow system enables zero-token routing for common patterns through YAML-defined workflows. This dual-system architecture combines deterministic template execution (System 1) with intelligent AI-driven decomposition (System 2), achieving 85-95% token savings on repeated tasks.

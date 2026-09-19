@@ -1,5 +1,20 @@
-"""
-Tool Registry - Dynamic tool discovery and management
+"""=============================================================================
+文件: python/llm-service/llm_service/tools/registry.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  ToolRegistry 单例：工具注册、自动发现与按 agent/task 过滤。
+【关键内容】
+  ToolRegistry :16；register :27
+  discover_tools :118（扫描 builtin 与插件目录）
+  filter_tools_for_agent :174 / filter_tools_by_task_type :216
+  get_registry :306 单例入口
+【协作关系】
+  被 api/tools、agent 推理循环、orchestrator 共用以发现/筛选工具。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Tool Registry - Dynamic tool discovery and management
+=============================================================================
 """
 
 import importlib

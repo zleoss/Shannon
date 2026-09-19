@@ -1,3 +1,17 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/workflows/template_workflow.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 TemplateWorkflow —— 按 YAML 模板（config/templates/*.yaml）里
+// 节点计划顺序执行 DAG/认知节点。模板可预先定义"先做 A → 再 B → 最后合成"的剧本。
+// 【定位】 "可重用剧本执行器"：用户在请求 context 里传 `template: "myTpl"` 就启用。
+// 【触发】 orchestrator_router.go:113-150 命中 templates.Registry().Get(name)
+// 【关键函数】 TemplateWorkflow :66
+// 【协作】 internal/templates/registry.go (模板加载/编译/注册)，节点的 activity
+//   视模板节点种类而定（ExecuteAgent / SynthesizeResults / 中间合成等）。
+// 【自定义答案格式】 config/templates/synthesis/*.tmpl 通过 context 参数
+//   `synthesis_template` 或 `synthesis_template_override` 触发，详见 CLAUDE.md。
+// =============================================================================
+
 package workflows
 
 import (

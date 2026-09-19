@@ -1,5 +1,28 @@
 # Shannon Memory System Architecture
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档描述 Shannon Memory 系统架构（V3.0），提供智能上下文保留与跨会话检索能力。系统采用三层存储：PostgreSQL（会话上下文、执行历史、任务元数据）、Redis（会话缓存、Token 预算、压缩状态）、Qdrant 向量数据库（语义记忆、分层记忆、Agent 记忆检索）。内存功能依赖 OpenAI Embedding API（text-embedding-3-small），无 Embedding 时静默降级为空结果，Agent 以无状态模式运行。
+
+### 章节导航
+- **Architecture Components**: 三层存储——PG（持久化/元数据）、Redis（高速缓存/实时追踪）、Qdrant（向量相似性搜索）
+- **Dependencies**: 需要 OpenAI Embedding API，无 OpenAI Key 时静默降级
+- **Collections**: task_embeddings / summaries / tool_results / cases / document_chunks / decomposition_patterns
+- **Hierarchical Memory**: 分层记忆策略——短期（当前会话）→ 中期（近期会话）→ 长期（学习模式）
+- **Semantic Search**: 混合搜索（相关性 + 时效性），Qdrant 的 payload 过滤和分块存储
+- **Data Flow**: 记忆写入/读取/压缩/归档的完整数据流
+
+### 与 AI Agent 体系的关联
+- 记忆相关活动：`go/orchestrator/internal/activities/memory_*.go`
+- Qdrant 交互：`go/orchestrator/pkg/qdrant/`
+- Embedding 调用：通过 Python LLM Service 调用 OpenAI Embedding API
+- 会话管理：`go/orchestrator/internal/activities/session.go`
+- 配置位置：`config/shannon.yaml` 中的 memory 配置段
+
+### 阅读建议
+关注 Agent 长对话和跨会话记忆的开发者必读；重点看三层存储的职责划分和降级策略；仅使用无状态场景者可略过。
+
 > **Version 3.0** - Enhanced Supervisor Memory with Learning Capabilities
 
 ## Overview

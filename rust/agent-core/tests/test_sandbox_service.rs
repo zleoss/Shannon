@@ -1,3 +1,11 @@
+// =============================================================================
+// 文件: rust/agent-core/tests/test_sandbox_service.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】 SandboxService 的端到端集成测试
+// 【关键内容】 测试通过 gRPC 服务的文件操作、会话隔离、配额执行
+//             验证安全命令执行与沙箱边界
+// 【协作关系】 依赖 agent-core 的 SandboxService gRPC 服务
+// =============================================================================
 //! Integration tests for SandboxService.
 //!
 //! Tests end-to-end file operations through the gRPC service,

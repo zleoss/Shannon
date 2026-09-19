@@ -1,3 +1,17 @@
+"""=============================================================================
+文件: python/llm-service/llm_service/mcp_client.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  MCP HTTP 无状态客户端，含熔断、allowlist、重试与最大字节限制。
+【关键内容】
+  _SimpleBreaker :15 简易熔断器
+  HttpStatelessClient :47（POST、重试、字节上限）
+  get_callable_function :142 获取可调用函数桥
+【协作关系】
+  被 tools/mcp.py 的 _McpTool 调用；上游为外部 MCP server。
+=============================================================================
+"""
+
 from __future__ import annotations
 
 import asyncio

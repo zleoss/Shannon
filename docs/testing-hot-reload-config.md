@@ -1,5 +1,24 @@
 # Dynamic Configuration Integration Test
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档展示 Shannon 热重载配置功能的集成测试。通过切换 shannon.yaml 和 shannon-test.yaml 验证配置修改无需重启服务即可生效。测试覆盖：健康检查配置变更（Port/Interval/Timeout/Checker 启用/禁用）、服务配置变更（超时/并发数/端点）、熔断器参数变更和 Agent 端点变更。文档详细列出每个测试步骤的预期行为。
+
+### 章节导航
+- **Test Overview**: 配置解析增强、逐项健康检查配置、热重载回调
+- **Test Configuration Files**: shannon.yaml（生产）vs shannon-test.yaml（测试）
+- **Key Changes Demonstrated**: 健康检查/服务/Agent 端点/熔断器各项参数的变化对比
+- **Testing Steps**: 各步骤的详细操作和验证方法
+
+### 与 AI Agent 体系的关联
+- 热重载实现：Go orchestrator 的 config manager
+- 配置文件：`config/shannon.yaml`（默认）和 `config/shannon-test.yaml`（测试）
+- 影响所有服务的运行配置变更而不中断服务
+
+### 阅读建议
+运维和平台开发者必读；了解热重载的能力范围即可。
+
 This document demonstrates the hot-reload configuration functionality implemented in Shannon.
 
 ## Test Overview

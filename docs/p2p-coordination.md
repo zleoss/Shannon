@@ -1,5 +1,28 @@
 # P2P Agent Coordination in Shannon
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档说明 Shannon 的点对点（P2P）Agent 协调机制——允许自治 Agent 基于数据依赖关系等待所需数据后再执行。系统通过分解服务自动检测子任务间的数据依赖关系（producer 产出 → consumer 消费），使用基于 Topic 的发布-订阅模式进行协调，并通过 SupervisorWorkflow 实现。文档包含配置方法（config/features.yaml）、使用示例和监控说明。
+
+### 章节导航
+- **How It Works**: 自动依赖检测→Topic 发布-订阅→工作流路由
+- **Automatic Dependency Detection**: 分解服务自动识别每个子任务产出/消费的数据
+- **Coordination Mechanism**: Producer 发布到 Topic，Consumer 等待所需 Topic 就绪后执行
+- **Workflow Routing**: 无依赖→SimpleTaskWorkflow/DAGWorkflow，有依赖→SupervisorWorkflow
+- **Configuration**: config/features.yaml 中的 p2p 配置段（enabled + timeout_seconds）
+- **Use Cases**: 多阶段分析、报告生成、研究流程等场景
+- **Monitoring**: 查看 P2P 协调状态和依赖等待情况
+
+### 与 AI Agent 体系的关联
+- SupervisorWorkflow：`go/orchestrator/internal/workflows/supervisor_workflow.go`
+- 依赖检测：分解活动 `go/orchestrator/internal/activities/decompose.go`
+- 数据交换通过 Session Workspace 的 Redis 存储实现
+- 特征开关：`config/features.yaml`
+
+### 阅读建议
+处理多步骤依赖任务的开发者必读；重点了解自动依赖检测和 Topic 发布-订阅模式。
+
 ## Overview
 
 Shannon now supports **Peer-to-Peer (P2P) Agent Coordination**, enabling autonomous agents to coordinate task execution based on data dependencies. This feature allows agents to wait for required data from other agents before proceeding, creating efficient pipelines without manual orchestration.

@@ -1,3 +1,19 @@
+// =============================================================================
+// 文件: rust/firecracker-executor/guest-agent/src/main.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   guest-agent vsock server 入口：监听 VMADDR_CID_ANY:5005，执行 Python、多线程 drain IO、超时 kill、写 ext4。
+// 【关键内容】
+//   //! 文档：vsock 5005 JSON 协议（main.rs:1-5）
+//   listener VMADDR_CID_ANY:5005（:242）
+//   execute_python（:58）
+//   多线程 drain stdout/stderr（:101-120）
+//   超时 kill 子进程（:136-155）
+//   sync 写入 ext4（:207-209）
+// 【协作关系】
+//   在 Firecracker 微虚拟机 guest 内运行，被 host 端 vsock_client 经 vsock UDS 桥接调用。
+//   通过 models::GuestRequest/GuestResponse 与 host 交换 JSON。
+// =============================================================================
 //! Guest agent for Firecracker microVMs.
 //!
 //! Listens on vsock port 5005 for JSON requests to execute Python code.

@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
+# =============================================================================
+# 文件: scripts/verify_cache_quota_invariant.sh
+# -----------------------------------------------------------------------------
+# 【一句话功能】 验证缓存配额不变性
+# 【关键内容】 检查 cache_aware_total_tokens 准确反映所有 token 类别，验证迁移 121 不变性
+# =============================================================================
 # Verifies that cache_aware_total_tokens accurately reflects all token classes
 # for every row written under or backfilled by migration 121.
 #

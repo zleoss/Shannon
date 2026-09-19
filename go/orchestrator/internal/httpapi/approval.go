@@ -1,3 +1,15 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/httpapi/approval.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   /approval HITL 审批路由：审批决策与独立审批服务器。
+// 【关键内容】
+//   NewApprovalHandler :24 / RegisterRoutes :29 / handleDecision :44
+//   StartApprovalServer :104
+// 【协作关系】
+//   通过 Temporal Signal 把人工决策回灌对应 workflow，完成 HITL。
+// =============================================================================
+
 package httpapi
 
 import (

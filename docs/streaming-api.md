@@ -1,5 +1,29 @@
 # Shannon Streaming APIs
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档详细介绍 Shannon 的流式 API 设计，涵盖两阶段持久化模型（Redis 实时 + PostgreSQL 持久化）、SSE/WebSocket/gRPC 三种传输方式的事件格式、流式过滤器与生命周期管理。文档重点说明了事件模型的确定性设计原则——流式 delta 仅存 Redis（24h TTL），关键事件（完成/失败/工具调用）持久化到 PG。还包含重连语义（resume）、客户端 SDK 使用示例以及 P2P 多 Agent 协调事件。
+
+### 章节导航
+- **Event Persistence Strategy**: 两阶段存储——Redis 存所有事件（256条/工作流，24h TTL），PG 仅持久化关键事件（减少 95% 写入）
+- **Event Model**: 最小化事件字段（workflow_id, type, agent_id, message, timestamp, seq），确定性设计
+- **Streaming Transports**: gRPC 流（内部服务间）、SSE（HTTP 客户端）、WebSocket（双向通信）
+- **Resume Semantics**: 通过 stream_id 重连已断开会话，消费 Redis 缓冲的历史事件
+- **Event Types Reference**: 完整事件类型列表及说明（80+ 种）
+- **Client SDK Examples**: Python/JavaScript/curl 的流式接入代码
+- **P2P Coordination Events**: 多智能体协调的 MESSAGE_SENT/RECEIVED 等事件
+
+### 与 AI Agent 体系的关联
+- 流式管理器：`go/orchestrator/internal/streaming/manager.go`
+- 事件类型定义：`go/orchestrator/internal/streaming/events.go`
+- SSE/WS 网关处理：`go/orchestrator/cmd/gateway/`
+- 前端 SDK：可参考示例代码接入流式事件
+- Redis 事件流：`llm:stream:*` 前缀键
+
+### 阅读建议
+前端/客户端开发者必读（Event Model + Resume Semantics）；后端开发者关注 Persistence Strategy 和 Transports；若仅使用同步 API 可略读 P2P 事件部分。
+
 This document describes the minimal, deterministic streaming interfaces exposed by the orchestrator. It covers gRPC, Server‑Sent Events (SSE), and WebSocket (WS) endpoints, including filters and resume semantics for rejoining sessions.
 
 ## Event Persistence Strategy

@@ -1,10 +1,24 @@
-"""Research supervisor identity prompt for decompose (task planning).
+"""=============================================================================
+文件: python/llm-service/llm_service/roles/deep_research/research_supervisor.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  研究任务分解身份 prompt（decompose 用）。
+【关键内容】
+  RESEARCH_SUPERVISOR_IDENTITY 元组
+  引导 LLM 产出高密度、契约一致的并行 subtasks
+【协作关系】
+  被 api/agent.py decompose_task（force_research / research context）调用。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Research supervisor identity prompt for decompose (task planning).
 
-This is the system prompt identity used when decomposing a deep research query
-into subtasks. It guides the LLM to produce parallel, contract-compliant subtasks
-with high-density descriptions.
+  This is the system prompt identity used when decomposing a deep research query
+  into subtasks. It guides the LLM to produce parallel, contract-compliant subtasks
+  with high-density descriptions.
 
-Used by: agent.py decompose_task() when force_research or research context is detected.
+  Used by: agent.py decompose_task() when force_research or research context is detected.
+=============================================================================
 """
 
 RESEARCH_SUPERVISOR_IDENTITY = (

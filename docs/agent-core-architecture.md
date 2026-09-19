@@ -1,5 +1,28 @@
 # Shannon Agent Core - Architecture Documentation
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档描述 Shannon Agent Core 的 Rust 架构设计——一个高性能的 Agent 执行层网关，提供安全沙箱（WASI）、高效内存管理和智能工具编排。文档阐述了六大架构原则（关注点分离、零拷贝、现代并发、全面错误处理、可观测性、安全优先）以及 Enforcement Gateway（超时/速率限制/熔断器）、Tool Execution Layer（工具注册/缓存/执行/WASI）、Infrastructure Layer（内存池/配置/遥测/指标）三层组件架构。
+
+### 章节导航
+- **Architecture Principles**: 六大原则——关注点分离（Rust 执行 vs Python 智能）、零拷贝、OnceLock 代替 lazy_static、thiserror 错误处理、OpenTelemetry 追踪、WASI 沙箱
+- **Component Architecture**: 三层架构图——gRPC Server / Enforcement Gateway / Tool Execution / Infrastructure
+- **Core Components**: Enforcement（执行策略/超时/限流/熔断）、Tool Registry（注册/缓存/执行）、WASI Sandbox（Python 代码沙箱执行）
+- **Memory Management**: 内存池设计、零拷贝字符串操作、智能指针使用
+- **Configuration Manager**: 配置加载与热重载
+- **Observability**: OpenTelemetry 追踪、Prometheus 指标暴露
+- **Error Handling**: 结构化错误类型、thiserror 派生
+
+### 与 AI Agent 体系的关联
+- 源码位置：`rust/agent-core/src/`——enforcement.rs（执行网关）、tool_registry.rs（工具注册）、wasi_sandbox.rs（WASI 沙箱）
+- 监听 gRPC 端口 50051，接收来自 Go Orchestrator 的请求
+- Python 智能层通过 /agent/query HTTP 接口与 Rust 执行层配合
+- 配置热重载与 `config/shannon.yaml` 联动
+
+### 阅读建议
+Rust 系统开发者必读；Go/Python 开发者可跳过代码细节但建议理解架构原则；重点关注 Enforcement Gateway 和 WASI Sandbox 章节。
+
 ## Overview
 
 The Shannon Agent Core is a high-performance Rust implementation of the agent execution layer, providing secure sandboxing, efficient memory management, and intelligent tool orchestration. This document describes the modernized architecture following 2025 best practices.

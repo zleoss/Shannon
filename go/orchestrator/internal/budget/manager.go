@@ -1,3 +1,17 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/budget/manager.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   BudgetManager：token 预算上限、背压、熔断器、优先级与幂等清理管理器。
+// 【关键内容】
+//   BudgetManager 结构体 :82 / NewBudgetManager 构造器 :130
+//   CheckBudget 预算校验 :191 / RecordUsage 记录用量 :306 / GetUsageReport :398
+//   CheckBudgetWithBackpressure 背压校验 :739
+//   CheckBudgetWithCircuitBreaker 熔断校验 :960 / CircuitBreaker 类型 :705 / PriorityTier :722
+// 【协作关系】
+//   被 orchestrator workflow/activity 在每次 LLM 调用前后调用；由 pricing 提供单价。
+// =============================================================================
+
 package budget
 
 import (

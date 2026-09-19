@@ -1,4 +1,12 @@
-"""Shannon LLM Service - Provider-agnostic LLM integration"""
+"""=============================================================================
+文件: python/llm-service/llm_service/__init__.py
+-------------------------------------------------------------------------------
+【一句话功能】 LLM Service 包的 __init__。把 grpc_gen 加入 sys.path 以支持
+protobuf 导入（由 make proto 生成）。
+【定位】 包初始化，无业务逻辑。
+=============================================================================
+
+Shannon LLM Service — Provider-agnostic LLM integration"""
 
 import sys
 import logging

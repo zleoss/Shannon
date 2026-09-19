@@ -1,5 +1,29 @@
 # Migration Guide: GPT-3.5/Claude 3 → GPT-5/Claude 4.5
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档是 Shannon 平台从 GPT-3.5/Claude 3 等遗留模型升级到 GPT-5/Claude 4.5 最新模型的迁移指南。涵盖的 Breaking Changes 包括：模型别名移除（必须使用完整规范 ID）、GPT-5 采用全新 Responses API（替代 Chat Completions）、参数映射变更（reasoning_effort 等）、Claude 4.5 扩展思考模式（Extended Thinking，输出 token 翻倍）以及各供应商的 API 差异。文档还包含自动迁移工具说明和回滚策略。
+
+### 章节导航
+- **Breaking Changes**: 模型别名移除、GPT-5 Responses API、参数映射变更、Claude 4.5 Extended Thinking
+- **Model Mapping**: 旧模型到新模型的映射表
+- **Parameter Changes**: GPT-5（reasoning_effort/responses_format 等）、Claude 4.5（thinking/betas 等）的新参数
+- **API Changes**: GPT-5 Responses API 的 endpoint/request/response 变化
+- **Automatic Migration Tools**: 自动检测和迁移脚本的使用方法
+- **Provider-Specific Differences**: OpenAI vs Anthropic vs Google 等的差异对比
+- **Migration Checklist**: 分步骤的迁移检查清单
+- **Rollback Strategy**: 迁移失败后的回滚方案和版本对齐
+
+### 与 AI Agent 体系的关联
+- 模型配置：`config/models.yaml` 的 model_catalog 段
+- 供应商适配：`python/llm-service/llm_service/llm_provider/` 下各 provider 实现
+- Provider 检测：`go/orchestrator/internal/models/provider.go`
+- 定价更新：`config/models.yaml` 的 pricing 段需同步更新
+
+### 阅读建议
+负责模型升级的运维和平台开发人员必读；重点关注 Breaking Changes 和 Migration Checklist；普通开发者了解 API 变化即可。
+
 **Version**: 1.0
 **Date**: 2025-11-03
 **Scope**: Shannon Platform Model Migration

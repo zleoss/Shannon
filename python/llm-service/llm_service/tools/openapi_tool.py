@@ -1,6 +1,21 @@
-"""
-OpenAPI tool loader for Shannon.
-Dynamically converts OpenAPI 3.x specifications into Shannon tools.
+"""=============================================================================
+文件: python/llm-service/llm_service/tools/openapi_tool.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  将 OpenAPI 3.x spec 动态转换并注册为 Shannon 工具。
+【关键内容】
+  load_openapi_tools_from_config :607 读取配置并批量加载
+  生成 Tool 子类、绑定 vendor 适配器
+  含 allowlist 与 SSRF 防护
+【协作关系】
+  启动时由 api/tools.py 调用，将外部 API 注入 ToolRegistry；
+  协作调用 openapi_parser 与 vendor_adapters。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  OpenAPI tool loader for Shannon.
+  Dynamically converts OpenAPI 3.x specifications into Shannon tools.
+=============================================================================
 """
 
 from __future__ import annotations

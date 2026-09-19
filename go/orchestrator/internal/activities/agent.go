@@ -1,3 +1,29 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/activities/agent.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 Shannon 编排器最核心的 activity 集合 —— 调用 Python
+// llm-service 完成单 agent 单步执行、强制工具执行、工具选择、上下文组装等。
+//
+// 【AI Agent 体系定位】 "运动皮层": Temporal 把执行 agent 这一原子动作以 activity
+// 形式向本文件发出，由本文件转译为对 Python /agent/loop 的 HTTP 调用。
+//
+// 【关键 activity 函数】
+//   ExecuteAgent                :1941  主入口，调用 /agent/loop 单步
+//   ExecuteAgentWithForcedTools :1961  强制给定工具集（用于跳过工具选择阶段）
+//   fetchAvailableTools         :2485  从 Python /tools 拉取候选工具 schema
+//   selectToolsForQuery         :2510  按查询自动选取工具子集
+//
+// 【关键 helper】
+//   - 组装 system prompt、历史压缩、token 估算、附件拼接、事件发射
+//   - 与 budget.CheckTokenBudget / RecordTokenUsage 协同做预算检查与记账
+//   - 通过 events 通道把 LLM_PROMPT/OUTPUT 事件回传 orchestrator:8081/events
+//
+// 【协作模块】
+//   - Python: /agent/loop（核心：单步决策）、/agent/query（含工具迭代）
+//   - 内部: budget、pricing（cost 计算）、session manager（多轮历史）
+//   - DB: PersistAgentExecution 持久化每次执行（见 persistence.go）
+// =============================================================================
+
 package activities
 
 // TODO: Add unit tests for:

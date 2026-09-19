@@ -1,3 +1,15 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/templates/types.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   模板领域类型：NodeType / TemplateNode / Template / TemplateSummary 等定义。
+// 【关键内容】
+//   NodeType 枚举 :3 / Template / TemplateNode 结构
+//   Template.NodeByID 节点查找 :69
+// 【协作关系】
+//   被 loader/registry/compiler/validation 共享作为模板数据模型。
+// =============================================================================
+
 package templates
 
 // NodeType enumerates supported template node types.

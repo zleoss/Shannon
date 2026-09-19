@@ -1,3 +1,10 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/workflows/agent_selection.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 基于历史表现的 ε-greedy 和 UCB1 算法智能选择 Agent
+// 【关键内容】 SelectAgentForTask ε-greedy 探索/利用；SelectAgentUCB UCB1 算法
+// 【协作关系】 依赖 activities.FetchAgentPerformances 等活动，版本门控上线
+// =============================================================================
 package workflows
 
 import (

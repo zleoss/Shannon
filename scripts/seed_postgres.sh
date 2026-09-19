@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
+# =============================================================================
+# 文件: scripts/seed_postgres.sh
+# -----------------------------------------------------------------------------
+# 【一句话功能】 向 PostgreSQL 数据库注入种子测试数据
+# 【关键内容】 使用 docker-compose 执行 seed_data.sql；支持自定义 COMPOSE_FILE
+#             用于开发环境与 CI 测试的数据初始化
+# 【协作关系】 被 make seed 调用；依赖 Postgres 容器与 seed_data.sql 文件
+# =============================================================================
 set -euo pipefail
 
 COMPOSE_FILE="${COMPOSE_FILE:-deploy/compose/docker-compose.yml}"

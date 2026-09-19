@@ -1,15 +1,29 @@
-"""
-Web Fetch Tool - Extract full page content for deep analysis
+"""=============================================================================
+文件: python/llm-service/llm_service/tools/builtin/web_fetch.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  网页抓取与全文提取工具，多 provider + SSRF 防护。
+【关键内容】
+  WebFetchTool :1321 / extract_with_llm :37
+  firecrawl 路径 :575
+  SSRF 防护：阻断私有 IP、云元数据端点
+【协作关系】
+  被 agent / 研究流程使用；下游走 Exa/Firecrawl/纯 Python 抓取。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Web Fetch Tool - Extract full page content for deep analysis
 
-Multi-provider architecture:
-- Exa: Semantic search + content extraction (handles JS-heavy sites)
-- Firecrawl: Smart crawling + structured extraction + actions
-- Pure Python: Free, fast, works for most pages
+  Multi-provider architecture:
+  - Exa: Semantic search + content extraction (handles JS-heavy sites)
+  - Firecrawl: Smart crawling + structured extraction + actions
+  - Pure Python: Free, fast, works for most pages
 
-Security features:
-- SSRF protection (blocks private IPs, cloud metadata endpoints)
-- Memory exhaustion prevention (50MB response limit)
-- Redirect loop protection (max 10 redirects)
+  Security features:
+  - SSRF protection (blocks private IPs, cloud metadata endpoints)
+  - Memory exhaustion prevention (50MB response limit)
+  - Redirect loop protection (max 10 redirects)
+=============================================================================
 """
 
 import aiohttp

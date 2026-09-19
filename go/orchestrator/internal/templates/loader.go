@@ -1,3 +1,14 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/templates/loader.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   模板单文件加载：从文件/io.Reader 解析 YAML 为 Template 对象。
+// 【关键内容】
+//   LoadTemplateFromFile :12 / LoadTemplate :26 / decodeTemplate :34
+// 【协作关系】
+//   被 templates.Registry.loadFile 调用产出 Entry，再交由 compiler 编译。
+// =============================================================================
+
 package templates
 
 import (

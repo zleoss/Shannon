@@ -1,3 +1,17 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/workflows/simple_workflow.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 SimpleTaskWorkflow —— 复杂度 < 0.3 且单子任务时的单 agent 直执
+// workflow。不做多 agent fan-out，直接调 ExecuteSimpleTask / ExecuteAgent 走一次
+// 推理 + 合成后返回。
+// 【定位】 "快速通道"：避免为大任务启动 DAG 的开销。
+// 【触发】 orchestrator_router.go:1021 主 switch 中
+//   `case isSimple && !forceP2P:` 分支   (isSimple= ComplexityScore<0.3 && 单子任务)
+// 【关键函数】 SimpleTaskWorkflow :22
+// 【协作】 ExecuteSimpleTask activity → HTTP Python /agent/query；
+//   SynthesizeResults activity → 中间或末尾合成。
+// =============================================================================
+
 package workflows
 
 import (

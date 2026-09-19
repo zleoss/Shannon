@@ -1,3 +1,13 @@
+// =============================================================================
+// 文件: go/orchestrator/cmd/gateway/internal/openai/handler.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   OpenAI 兼容 API 主入口 —— ChatCompletions(:84) / Completions(:644) / ListModels / GetModel。
+// 【关键内容】
+//   将 OpenAI 格式请求转为 Shannon 内部任务，经 orchestrator 处理后返回兼容响应。
+// 【协作关系】
+//   入口端点 -> translator 转换 -> orchestrator 处理 -> streamer 流式回写
+// =============================================================================
 package openai
 
 import (

@@ -1,3 +1,19 @@
+"""=============================================================================
+文件: python/llm-service/main.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  llm-service FastAPI 应用入口，组装所有路由并启动 uvicorn。
+【关键内容】
+  lifespan :74 异步生命周期；setup_tracing :51 初始化 OpenTelemetry
+  provider_manager :103 初始化 ProviderManager；app :127 创建 FastAPI 实例
+  12 个 router 注册 :148-160；prometheus metrics 挂载 :163
+  uvicorn.run :174
+【协作关系】
+  由 docker compose 启动；被 Go orchestrator 经 HTTP/gRPC 调用；
+  依赖 providers/、api/、tools/、events、metrics 等子模块。
+=============================================================================
+"""
+
 import logging
 from contextlib import asynccontextmanager
 

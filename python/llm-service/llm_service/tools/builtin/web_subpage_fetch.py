@@ -1,18 +1,11 @@
-"""
-Web Subpage Fetch Tool - Intelligent multi-page extraction from a website
-
-Uses Firecrawl Map + Scrape strategy:
-1. Map API: Get all URLs on the website (fast, up to 200 URLs)
-2. Score URLs by relevance (path matching, depth, keywords)
-3. Batch scrape top N most relevant pages
-
-Use Cases:
-- Company research: /about, /team, /ir, /products
-- Documentation: /docs, /api, /guides
-- Known domain with specific target pages
-
-For exploratory crawling where structure is unknown, use web_crawl instead.
-"""
+"""=============================================================================
+文件: python/llm-service/llm_service/tools/builtin/web_subpage_fetch.py
+-------------------------------------------------------------------------------
+【一句话功能】 基于 Firecrawl Map + Scrape 策略的智能多页内容提取工具
+【关键内容】 Map API 获取网站所有 URL（最多 200 个）；按路径/深度/关键词评分排序
+             批量抓取最相关的 N 个页面；适用于已知域名的定向提取场景
+【协作关系】 与 web_crawl 互补（定向 vs 探索）；被 tool_executor 路由调用
+============================================================================="""
 
 import aiohttp
 import asyncio

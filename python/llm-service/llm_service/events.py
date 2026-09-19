@@ -1,3 +1,17 @@
+"""=============================================================================
+文件: python/llm-service/llm_service/events.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  异步事件推送器，将 LLM/Tool 事件批量转发到 orchestrator。
+【关键内容】
+  EventEmitter :11；emit :44 入队事件
+  worker :69 后台协程，批量 POST orchestrator:8081/events
+【协作关系】
+  被 ProviderManager._emit_events 与 tools/agent 触发；
+  下游为 Go orchestrator 的事件接收端点。
+=============================================================================
+"""
+
 import asyncio
 import json
 import os

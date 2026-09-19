@@ -1,3 +1,16 @@
+// =============================================================================
+// 文件: rust/firecracker-executor/src/models.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   请求/响应 Serialize 结构定义：ExecuteRequest/Response、GuestRequest/Response、Download/List 等。
+// 【关键内容】
+//   ExecuteRequest（models.rs:4）/ ExecuteResponse（:13）
+//   GuestRequest（:23）/ GuestResponse（:30）
+//   DownloadRequest（:40）/ ListFilesRequest（:58）等
+// 【协作关系】
+//   被 main.rs / vm_runner / vsock_client / guest-agent 共享作为通信契约。
+//   serde 处理 host↔guest JSON 序列化。
+// =============================================================================
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize)]

@@ -1,3 +1,14 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/workflows/scheduled/scheduled_task_workflow.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   定时任务执行包装 workflow，按计划触发并包装实际任务执行流程。
+// 【关键内容】
+//   - ScheduledTaskWorkflow: Temporal workflow 入口
+//   - 调度触发、上下文构造与子 workflow 调用编排
+// 【协作关系】
+//   由 daemon_dispatch activity 触发，进而调用实际业务 workflow。
+// =============================================================================
 package scheduled
 
 import (

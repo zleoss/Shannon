@@ -1,3 +1,15 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/circuitbreaker/http_wrapper.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   HTTP 客户端熔断包装：HTTPWrapper 包装 http.Client.Do。
+// 【关键内容】
+//   HTTPWrapper :11 / NewHTTPWrapper :20 / Do :34
+//   httpStatusError :64
+// 【协作关系】
+//   被对外 HTTP 调用方包装 http.Client 使用，提供失败自动熔断保护。
+// =============================================================================
+
 package circuitbreaker
 
 import (

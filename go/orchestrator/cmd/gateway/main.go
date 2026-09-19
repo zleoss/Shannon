@@ -1,3 +1,56 @@
+// =============================================================================
+// 文件: go/orchestrator/cmd/gateway/main.go
+// 翻译源: package main
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   Shannon 的 HTTP 网关进程入口（监听 :8080）。所有外部用户请求从这里进入
+//   系统；它将 REST/SSE/OpenAI 兼容端点转译为对 orchestrator gRPC 的调用。
+//
+// 【在 AI Agent 体系中的定位】
+//   充当"大脑入口神经"：(1) 接 API、(2) 鉴权/限流/校验、(3) gRPC 调 orchestrator
+//   触发 Temporal workflow、(4) 通过 SSE/WS 把流式事件回吐客户端。
+//
+// 【本文件主要内容（按行号区间）】
+//   1-34  : 导入 —— handlers/middleware/openai/proxy + 内部 auth/config/daemon/
+//           db/session/skills/streaming/pb。注意同时引入 v8 与 v9 两个 redis 客户端
+//           （v8 给 daemon 老 bridge 用，v9 给主流 redis 用）。
+//   36-205: main() 启动序列 —— logger、config 加载、Redis/Postgres 连接、
+//           session manager、skills registry、streaming、daemon hub、
+//           orchestrator gRPC dial、gRPC auth token。
+//   207-890: http.NewServeMux 注册全部路由（Go 1.22 方法前缀语法）：
+//            - /api/v1/tasks*         task handler
+//            - /api/v1/sessions*      session handler
+//            - /api/v1/tools*         tools handler（dangerous 工具默认拦截）
+//            - /api/v1/agents*        agent handler
+//            - /api/v1/skills*        skills handler
+//            - /api/v1/approvals*     HITL 审批
+//            - /api/v1/schedules*     定时任务
+//            - /v1/chat/completions   OpenAI 兼容 ChatCompletions（含编排）
+//            - /v1/completions        OpenAI 兼容 Completions（薄代理，无编排）
+//            - /v1/models             模型列表
+//            - SSE/WS 代理            admin streaming/approval/websocket
+//            - daemon WebSocket       shan CLI daemon 连接
+//   891-1039: 启动 HTTP server、优雅退出（SIGTERM/SIGINT）。
+//
+// 【关键 handler/Middleware 委托】
+//   - health、auth、rate-limit、idempotency、validation、tracing 等 middleware
+//     在 cmd/gateway/internal/middleware/ 下。
+//   - 业务 handler 在 cmd/gateway/internal/handlers/*。
+//   - OpenAI 兼容入口在 cmd/gateway/internal/openai/handler.go。
+//   - 流式代理在 cmd/gateway/internal/proxy/streaming.go。
+//
+// 【四类对外 API 端点（注意：4 个入口）】
+//   POST /v1/chat/completions  —— OpenAI 兼容，经过 orchestrator 编排
+//   POST /v1/completions       —— OpenAI 兼容，薄代理，无编排
+//   POST /api/v1/tasks         —— Shannon 原生同步
+//   POST /api/v1/tasks/stream  —— Shannon 原生 SSE
+//
+// 【鉴权开关】由 GATEWAY_SKIP_AUTH=1 控制（dev/test）；prod 必须设为 0。
+//
+// 【学习建议】先按上面四个端点跟踪一次请求流；具体业务逻辑在各 handler 文件。
+//   想看路由表 → 直接定位到第 207 行 `http.NewServeMux()` 之后。
+// =============================================================================
+
 package main
 
 import (

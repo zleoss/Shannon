@@ -1,3 +1,16 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/session/manager.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   Session 管理器：基于 Redis 存储会话状态与消息流。
+// 【关键内容】
+//   NewManager :40 / CreateSession :98 / CreateSessionWithID :135
+//   GetSession :187 / UpdateSession :246 / DeleteSession :267
+//   AddMessage :297 / GetUserSessions :329
+// 【协作关系】
+//   被 server/httpapi 在新请求与会话上下文恢复时调用。
+// =============================================================================
+
 package session
 
 import (

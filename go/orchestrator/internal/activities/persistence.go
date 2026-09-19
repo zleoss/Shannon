@@ -1,3 +1,28 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/activities/persistence.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 把 agent / tool / task 执行结果异步批量写入 Postgres。
+//
+// 【AI Agent 体系定位】 "记忆存储": workflow 执行过程中产生的事件最终落库以供
+// 后续查询、回归测试、审计与统计。
+//
+// 【关键 activity 函数】
+//   PersistAgentExecutionStandalone         :44  顶层 standalone agent 执行落库
+//   PersistToolExecutionStandalone           :63  顶层 standalone tool 执行落库
+//   PersistenceActivities.PersistAgentExecution  :79  通用 agent 执行落库
+//   PersistenceActivities.PersistToolExecution   :183  通用 tool 执行落库
+//
+// 【表结构】 见 internal/db/models.go
+//   - task_executions   (主表)
+//   - agent_executions  (子表)
+//   - tool_executions   (最小粒度)
+//   - session_archives  (会话归档)
+//   - usage_daily_aggregate / audit_log
+//
+// 【异步批量写】 DB client 用 QueueWrite (db/client.go:333) 异步批量；如果熔断
+// 打开则降级为同步写或丢弃，保证 workflow 不被 DB 卡死。
+// =============================================================================
+
 package activities
 
 import (

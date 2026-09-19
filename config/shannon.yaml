@@ -1,3 +1,41 @@
+# =============================================================================
+# 文件: config/shannon.yaml
+# -----------------------------------------------------------------------------
+# Shannon orchestrator 主配置（Go 端），支持热重载。
+# 分组说明：
+#   service            —— gRPC/健康端口、超时与请求体上限
+#   auth               —— 鉴权与多租户
+#       ⚠ auth.skip_auth：prod 必须 false，仅 dev/test 才能 true。
+#          修改 .env(GATEWAY_SKIP_AUTH) 与本文件 skip_auth 后需
+#          `docker compose down && docker compose up -d` 才会重读
+#          （restart 不重读 env_file）。两处必须保持一致：
+#          gateway 处理 HTTP，orchestrator 处理 gRPC。
+#   session            —— 单会话消息上限、TTL、每任务/每代理 token 预算
+#   circuit_breakers   —— redis/database/grpc 熔断阈值（max_requests/
+#                          interval/timeout/max_failures/on_state_change）
+#   mcp_tools          —— MCP 工具注册（需同步 MCP_ALLOWED_DOMAINS）
+#   openapi_tools      —— OpenAPI 工具注册（需同步 OPENAPI_ALLOWED_DOMAINS）
+#   degradation        —— 降级阈值与规则（minor/moderate/severe 三档；
+#                          mode_downgrade: 复杂→标准→简单；
+#                          partial_results: 各类任务成功率阈值）
+#   health             —— 健康检查项（redis/database/agent_core 关键，
+#                          llm_service 非关键）
+#   agents             —— 并发上限/超时/重试；endpoint 走 docker DNS
+#   policy             —— OPA 策略引擎（off/dry-run/enforce）
+#   temporal           —— Temporal 连接与任务队列、重试策略
+#   logging            —— 日志级别/编码/输出
+#   vector             —— 向量检索（Qdrant）开关与 MMR 多样性参数
+#   embeddings         —— 嵌入服务（走 llm-service HTTP）+ 分块策略
+#   tracing            —— OTLP tracing 开关
+#   streaming          —— 每工作流回放环缓冲容量
+#   workflow           —— bypass_single_result：单成功结果跳过合成
+#   workflows          —— dag.simple_threshold/max_parallel_agents；
+#                          complexity 复杂度→模型 tier；
+#                          approval 人工审批阈值与危险工具列表
+#   cognitive_workflows —— exploratory/react/research/scientific 各自
+#                          迭代/置信度/并发上限
+#   features           —— feature flags（本文件常为空，见 features.yaml）
+# =============================================================================
 # Shannon Orchestrator Configuration
 # This file demonstrates the configuration system with hot-reload capability
 

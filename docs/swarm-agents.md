@@ -1,5 +1,30 @@
 # Swarm Agents
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档深入描述了 Shannon 的 Swarm 多智能体系统——一个由 Lead Agent 协调的持久化自治代理群体。Lead Agent 通过事件驱动决策循环分解用户查询、分派角色专业 Agent（共 12 种预定义角色）、监听进度事件（idle/completed/checkpoint）并通过 file_read 内循环零 LLM 成本地验证工作质量。Agent 运行 reason-act 循环（最多 50 轮），通过工作空间文件系统共享发现，支持向 Lead 的主动消息上报。
+
+### 章节导航
+- **Architecture**: Lead Agent 事件驱动循环 + AgentLoop child workflow 的工作流图
+- **Core Components**: SwarmWorkflow / AgentLoop / LeadDecision 活动 / Lead/Agent 协议 / 12 种角色提示词
+- **12 Agent Roles**: researcher/analyst/coder/critic/planner/architect 等角色的职责说明
+- **Event-Driven Loop**: Lead 的 3 阶段流程——initial_plan → event loop → close
+- **Swarm Model Override**: 通过 context 单独指定 Lead 和 Worker 的不同模型/provider
+- **Quality Self-Check**: Agent 空闲前的强制质量自检和关键发现归档
+- **Escalation Path**: Agent 通过 send_message("lead") 向 Lead 升级问题
+
+### 与 AI Agent 体系的关联
+- SwarmWorkflow：`go/orchestrator/internal/workflows/swarm_workflow.go`
+- Lead 协议：`python/llm-service/llm_service/roles/swarm/lead_protocol.py`
+- Agent 协议：`python/llm-service/llm_service/roles/swarm/agent_protocol.py`
+- 12 种角色提示：`python/llm-service/llm_service/roles/swarm/role_prompts.py`
+- Lead 端点：`python/llm-service/llm_service/api/lead.py`
+- 通过 context.force_swarm: true 触发
+
+### 阅读建议
+需要构建多智能体协作系统的开发者必读；重点关注 Event-Driven Loop 和 12 种角色定义；如不使用 Swarm 模式可略过；初学者建议先理解 AgentLoop 再深入 Lead 协议。
+
 ## Overview
 
 Swarm mode deploys persistent, autonomous agents orchestrated by a **Lead Agent** through an event-driven decision loop with a **file_read inner loop**. The Lead decomposes the user query into tasks, spawns role-specialized agents, monitors their progress through events (idle, completed, checkpoint), reads workspace files to verify quality (zero LLM cost), and coordinates multi-phase execution until all work is done. A closing checkpoint decides whether the Lead can reply directly or trigger LLM synthesis.

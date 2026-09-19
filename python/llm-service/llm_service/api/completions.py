@@ -1,3 +1,16 @@
+"""=============================================================================
+文件: python/llm-service/llm_service/api/completions.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  OpenAI 兼容补全薄代理（不经过 orchestrator 编排）。
+【关键内容】
+  router；调用 ProviderManager.generate_completion
+  对齐 OpenAI Chat Completions 请求/响应字段
+【协作关系】
+  被 gateway 作为单次 LLM 调用代理；与 agent 路由相互独立。
+=============================================================================
+"""
+
 import json
 import logging
 

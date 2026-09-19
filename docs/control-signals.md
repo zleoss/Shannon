@@ -1,5 +1,27 @@
 # Workflow Control Signals
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档描述 Shannon 工作流的控制信号系统——支持 Pause（暂停）、Resume（恢复）、Cancel（取消）三种操作。暂停信号在 Checkpoint（检查点）生效，检查点是工作流开发者预设的安全暂停位置（如 pre_routing、pre_dag_workflow 等），工作流在检查点通过 workflow.Await() 高效阻塞。恢复信号立即解除所有子工作流的阻塞状态。取消信号永久终止并清理。
+
+### 章节导航
+- **Signal Semantics**: Pause（检查点暂停）、Resume（立即解除阻塞）、Cancel（永久终止+清理）
+- **Checkpoint System**: 编排器检查点（pre_routing 等）和策略工作流/子工作流的各阶段检查点
+- **Propagation**: 父工作流向所有注册的子工作流传播信号
+- **State Persistence**: 暂停状态持久化到 Redis，支持服务重启后恢复
+- **SSE Events**: 各控制信号对应的流式事件（WORKFLOW_PAUSED/WORKFLOW_RESUMED 等）
+- **Implementation Details**: API 端点、活动代码结构
+
+### 与 AI Agent 体系的关联
+- 控制信号 API：`go/orchestrator/cmd/gateway/` 中的 HTTP 端点
+- 信号处理：`go/orchestrator/internal/workflows/orchestrator_workflow.go` 中的信号监听逻辑
+- 检查点常量：定义在工作流文件中的 checkpoint 名称常量
+- 通过 Temporal Signal API 实现跨工作流通信
+
+### 阅读建议
+需要管理工作流生命周期的运维开发人员必读；重点关注 Checkpoint System 理解信号生效时机。
+
 This document describes the pause/resume/cancel control signal system for Shannon workflows.
 
 ## Overview

@@ -1,3 +1,16 @@
+"""=============================================================================
+文件: python/llm-service/llm_service/api/evaluate.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  /evaluate 结果评估路由，对子 agent 输出打分。
+【关键内容】
+  router :7；EvalAgentResult 模型 :10 起
+  评估打分逻辑（多维度加权）
+【协作关系】
+  被研究策略、Swarm 评估环节调用，影响下游决策与终止。
+=============================================================================
+"""
+
 from fastapi import APIRouter, Request
 from pydantic import BaseModel, Field
 from typing import List, Optional, Dict, Any

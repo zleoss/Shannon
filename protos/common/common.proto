@@ -1,3 +1,29 @@
+// =============================================================================
+// 文件: protos/common/common.proto
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   定义 Shannon 三端（Rust/Go/Python）共享的通用枚举与消息类型，
+//   作为跨服务的统一数据契约。
+// 【关键 message / service】
+//   enum ExecutionMode: UNSPECIFIED/SIMPLE(直出)/STANDARD(单代理+LLM)/
+//     COMPLEX(多代理 DAG)
+//   enum StatusCode: UNSPECIFIED/OK/ERROR/TIMEOUT/RATE_LIMITED/BUDGET_EXCEEDED
+//   enum ModelTier: SMALL(目标 50%)/MEDIUM(40%)/LARGE(10%) —— 目标分布不强制
+//   enum CognitiveStrategy: DIRECT/DECOMPOSE/EXPLORATORY/REACT/RESEARCH/
+//     SCIENTIFIC（智能任务路由的认知策略）
+//   message TaskMetadata: task_id/user_id/session_id/tenant_id/created_at/
+//     labels/max_agents/token_budget
+//   message TokenUsage: prompt/completion/total tokens + cost_usd/
+//     model/ModelTier/provider
+//   message ExecutionMetrics: latency_ms/token_usage/cache_hit/cache_score/
+//     agents_used/ExecutionMode
+//   message ToolCall: name/parameters(Struct)/tool_id
+//   message ToolResult: tool_id/output(Value)/StatusCode/error_message/
+//     execution_time_ms
+// 【由谁实现 / 由谁调用】
+//   无独立实现：由 build.rs(Rust)、protoc(Go/Python) 生成绑定，
+//   被 agent / orchestrator / sandbox / llm / session proto 集中引用。
+// =============================================================================
 syntax = "proto3";
 
 package shannon.common;

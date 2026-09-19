@@ -1,10 +1,28 @@
-"""
-Playwright Screenshot Service
+"""=============================================================================
+文件: python/playwright-service/app.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  Playwright 截图与浏览器自动化 FastAPI 服务入口。
+【关键内容】
+  lifespan :499；app :536
+  _get_proxy_browser :77 / _do_capture :549
+  POPUP_DETECTION_JS :144 / DETECT_SCROLL_HIJACK_JS :233
+  FixedWindowRateLimiter :455 / _rate_limit :490
+  GET /health :543 / POST /capture :721 / POST /capture/sections :755
+  POST /browser/action :1129 / POST /browser/close :1293
+  GET /browser/sessions :1303
+【协作关系】
+  被 browser_use 工具经 HTTP 调用；内部使用 session_manager 与 security。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Playwright Screenshot Service
 
-A FastAPI service for capturing LP screenshots with popup dismissal.
-Primary use: Shannon ads research LP analysis.
+  A FastAPI service for capturing LP screenshots with popup dismissal.
+  Primary use: Shannon ads research LP analysis.
 
-Extended with browser session management for general browser automation.
+  Extended with browser session management for general browser automation.
+=============================================================================
 """
 
 import asyncio

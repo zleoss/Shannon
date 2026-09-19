@@ -1,3 +1,11 @@
+// =============================================================================
+// 文件: rust/agent-core/tests/integration_python_rust.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】 Python 与 Rust 跨语言集成测试
+// 【关键内容】 测试 Python LLM 服务与 Rust agent-core 的 gRPC 通信
+//             验证工具调用、沙箱执行、会话管理等跨语言流程
+// 【协作关系】 依赖 Python llm-service 与 Rust agent-core 同时运行
+// =============================================================================
 // Registry types not used in current integration tests
 use shannon_agent_core::tools::{ToolCall, ToolExecutor};
 use std::collections::HashMap;

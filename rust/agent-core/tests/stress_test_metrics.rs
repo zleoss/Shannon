@@ -1,3 +1,11 @@
+// =============================================================================
+// 文件: rust/agent-core/tests/stress_test_metrics.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】 基于 OnceLock 的 metrics 初始化压力测试
+// 【关键内容】 测试并发初始化时的竞态条件；验证 OnceLock 线程安全性
+//             高并发场景下 Prometheus 注册的稳定性
+// 【协作关系】 依赖 agent-core 的 metrics 模块；压力测试无需外部服务
+// =============================================================================
 // Stress test for OnceLock-based metrics initialization
 // Tests for race conditions and concurrent initialization
 

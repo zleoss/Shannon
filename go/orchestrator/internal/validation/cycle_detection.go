@@ -1,4 +1,14 @@
 // Package validation provides utilities for validating workflow configurations.
+// =============================================================================
+// 文件: go/orchestrator/internal/validation/cycle_detection.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   循环依赖检测 —— 校验 DAG 任务图中是否存在环。
+// 【关键内容】
+//   DetectCycle / TopologicalSort / DependencyValidation
+// 【协作关系】
+//   被任务分解和 DAGWorkflow 调用，确保任务执行顺序合法。
+// =============================================================================
 package validation
 
 import (

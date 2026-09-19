@@ -1,3 +1,23 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/workflows/swarm_workflow.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 SwarmWorkflow —— 多 agent 持久 swarm（蜂群）执行模式。
+//   "Lead Agent" 负责规划与任务分配，下属多个 swarm agent 并行执行；
+//   Lead 收到结果后做下一步决策，可来回多轮。是 Shannon 最复杂的工作流（4164 行）。
+// 【定位】 "大总管 + 工蜂"：适合开放式、多步骤、可分工的复杂任务（如深度研究）。
+// 【触发】 context `force_swarm: true`，见 orchestrator_router.go:272 早路由分支。
+// 【关键函数】
+//   SwarmWorkflow  :1737  主 workflow（Lead 决策循环、子 agent 调度）
+//   AgentLoop      :488   每个 swarm agent 的子 workflow（agent 自循环）
+// 【协作】
+//   AgentLoopStep activity (internal/activities/agent_loop.go:133) — 单步
+//   LeadDecision activity (internal/activities/lead.go:122) — lead 决策
+//   LeadExecuteTool / ListWorkspaceFiles — lead 直接动手能力
+//   事件发射经 EmitTaskUpdate
+// 【协议】 见 python/llm-service/llm_service/roles/swarm/{agent_protocol,
+//   lead_protocol, role_prompts}.py — Python 端配套 prompt 与 JSON 协议
+// =============================================================================
+
 package workflows
 
 import (

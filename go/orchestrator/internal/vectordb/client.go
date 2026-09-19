@@ -1,3 +1,10 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/vectordb/client.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 Qdrant 向量数据库 HTTP 客户端，封装增删查操作
+// 【关键内容】 search 支持 /points/query 和 /points/search 双协议；Upsert / UpsertTaskEmbedding；语义搜索 GetSessionContextSemanticByEmbedding
+// 【协作关系】 被 activities 调用，集成 circuit-breaker 和 tracing
+// =============================================================================
 package vectordb
 
 import (

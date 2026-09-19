@@ -1,3 +1,13 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/activities/supervisor_memory.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   Supervisor 记忆 activity —— 管理 supervisor agent 的任务分配记忆。
+// 【关键内容】
+//   GetSupervisorMemory / SetSupervisorMemory / UpdateSharedPlan
+// 【协作关系】
+//   被 SupervisorWorkflow 调用，保存 supervisor 对各子 agent 的任务分配历史。
+// =============================================================================
 package activities
 
 import (

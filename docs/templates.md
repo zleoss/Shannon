@@ -1,5 +1,28 @@
 # Templates
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档是 Shannon 模板工作流系统的完整指南——通过 YAML 定义确定性、零 Token 的工作流（System 1 快速路径）。文档从创建模板 YAML 起步（包含节点定义、策略选择、预算/工具限制），逐步深入到架构实现（Dual-System 设计：模板作为 System 1 零成本路由，AI 分解作为 System 2 灵活兜底）、节点类型（simple/cognitive/dag/supervisor）、输入/输出映射和最佳实践。
+
+### 章节导航
+- **Getting Started**: 创建 YAML 模板 → InitTemplateRegistry 加载 → ListTemplates 列出 → 执行
+- **Architecture**: Dual-System——System 1（模板，0 Token，确定）和 System 2（AI 分解，全成本，灵活）
+- **Node Types**: simple（单 Agent）/ cognitive（认知策略）/ dag（有向无环图）/ supervisor（编排器）
+- **Strategy Selection**: 各节点可选的策略（react/cot/reflection/debate/tot）
+- **Input/Output Mapping**: 模板变量映射和结果传递
+- **Best Practices**: 模板设计技巧、预算控制、节点依赖规划
+- **Configuration Reference**: YAML 字段（name/version/defaults/nodes/edges）完整参考
+
+### 与 AI Agent 体系的关联
+- 模板注册：`go/orchestrator/internal/workflows/template_catalog.go`
+- 模板执行工作流：`go/orchestrator/internal/workflows/template_workflow.go`
+- 模板目录：`config/workflows/examples/`
+- 学习路由器：`go/orchestrator/internal/workflows/learning_router.go`（System 1 的扩展）
+
+### 阅读建议
+需要为常见任务创建可复用工作流的开发者必读；初学者从 Getting Started 入门再到 Architecture。
+
 Deterministic, zero‑token workflows for common patterns. This guide combines getting started steps with deeper architecture and best practices.
 
 ---

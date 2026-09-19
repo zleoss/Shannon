@@ -1,3 +1,18 @@
+// =============================================================================
+// 文件: rust/agent-core/src/sandbox_service.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   SandboxService gRPC handler：WASI 隔离下的文件读写、列表、命令执行、搜索与编辑。
+// 【关键内容】
+//   SandboxServiceImpl 结构体（sandbox_service.rs:45）
+//   into_service / resolve_path（sandbox_service.rs:80, 88）
+//   check_workspace_quota / check_memory_quota（sandbox_service.rs:246, 262）
+//   validate_path_components 符号链接逃逸防护（sandbox_service.rs:455-542）
+//   RPC 实现：file_read :280 / file_write :352 / file_list :611 / execute_command :754 / file_search :869 / file_edit :1115 / file_delete :1212
+// 【协作关系】
+//   被 main.rs 装配到 tonic Server，供 grpc_server 与外部 orchestrator 调用。
+//   依赖 workspace::WorkspaceManager、memory_manager::MemoryManager、safe_commands::SafeCommand。
+// =============================================================================
 //! gRPC service for WASI-isolated file operations.
 
 use crate::memory_manager::MemoryManager;

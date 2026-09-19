@@ -1,3 +1,14 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/registry/registry.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   Temporal worker 注册中心：集中登记 workflow 与 activity。
+// 【关键内容】
+//   RegisterWorkflows :42 / RegisterActivities :91
+// 【协作关系】
+//   由 main/worker 启动流程调用，将 orchestrator 各 workflow/Activity 注册到 Temporal Worker。
+// =============================================================================
+
 package registry
 
 import (

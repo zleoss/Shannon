@@ -1,3 +1,18 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/workflows/strategies/browser_use.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 BrowserUseWorkflow —— 浏览器自动化专用编排。
+//   通过统一 agent loop 形式驱动 BrowserTool 调用 playwright-service。
+// 【定位】 "浏览器代理"，所有需要无头浏览器操作（点击/输入/截图/抽取）的请求都
+//   走这里。
+// 【触发】 context.role=='browser_use' 或自动检测的浏览器意图
+//   （orchestrator_router.go:927,951），或 strategy=='browser_use'。
+// 【关键函数】 BrowserUseWorkflow :26
+// 【协作】 BrowserTool (python/llm-service/llm_service/tools/builtin/browser_use.py:168)
+//   → HTTP 调 playwright-service :9100 的 /browser/action；roles.AllowedTools
+//   限制可用工具集。
+// =============================================================================
+
 package strategies
 
 import (

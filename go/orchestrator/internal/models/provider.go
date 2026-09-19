@@ -1,3 +1,16 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/models/provider.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   Provider 识别：依据 catalog 或模型名模式判定 LLM provider。
+// 【关键内容】
+//   DetectProvider :18
+//   detectProviderFromCatalog :53
+//   detectProviderFromPattern :68
+// 【协作关系】
+//   被 pricing、orchestrator 路由、python llm_service 元信息查询时使用。
+// =============================================================================
+
 package models
 
 import (

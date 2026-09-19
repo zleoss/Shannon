@@ -1,3 +1,18 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/activities/streaming.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 StreamingActivities.StreamExecute activity —— 在 Temporal
+// 内执行的流式 agent 推进，把 token / 工具调用事件通过 Redis pubsub 推给
+// streaming 子系统 → gateway SSE → 客户端。
+//
+// 【AI Agent 体系定位】 "流式推包站": 让流式 workflow（StreamingWorkflow /
+// ParallelStreamingWorkflow）能边跑边推送，而非等整轮跑完才返回。
+//
+// 【关键 activity 函数】 StreamingActivities.StreamExecute :42
+// 【相关 activity】 EmitTaskUpdate（registry 注册名 "EmitTaskUpdate"）——
+//   见 stream_events.go，单事件发射器（非流式全程）。
+// =============================================================================
+
 package activities
 
 import (

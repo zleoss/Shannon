@@ -1,3 +1,12 @@
+# =============================================================================
+# 文件: Makefile
+# -----------------------------------------------------------------------------
+# 【一句话功能】 Shannon 项目主 Makefile，统一管理开发/测试/部署命令
+# 【关键内容】 开发命令：dev / down / logs / ps / proto / fmt / lint
+#             测试命令：smoke / seed / replay / coverage / integration-tests
+#             部署命令：up / down / restart / clean
+# 【协作关系】 被开发者日常使用；依赖 docker-compose 与各子项目构建工具
+# =============================================================================
 .PHONY: dev down logs ps proto fmt lint seed smoke clean replay replay-export ci-replay coverage coverage-go coverage-python coverage-gate integration-tests integration-single integration-session seed-api-key
 
 COMPOSE_BASE=deploy/compose

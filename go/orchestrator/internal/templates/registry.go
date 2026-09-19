@@ -1,3 +1,15 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/templates/registry.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   模板注册表：从目录加载 YAML 模板，支持继承合并与查询。
+// 【关键内容】
+//   NewRegistry :47 / LoadDirectory :52 / Get :90 / List :98 / Find :181 / Finalize :220
+//   resolveTemplateLocked :244 / mergeTemplates :319
+// 【协作关系】
+//   由 orchestrator 启动阶段加载，给 TemplateWorkflow 选择并实例化执行计划。
+// =============================================================================
+
 package templates
 
 import (

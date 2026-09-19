@@ -1,5 +1,27 @@
 # System Prompts in Shannon
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档说明 Shannon 如何处理 System Prompt 以及如何自定义 Agent 行为。系统采用基于角色的预设（Role Preset）分配 System Prompt，优先级为 API 覆写 > Role 预设 > 默认文案。文档列出所有可用角色（generalist/analysis/research/writer/critic/developer 等）及其 System Prompt、Max Tokens、Temperature、Allowed Tools 配置。还包含技能（Skill）集成和语言提示的使用方法。
+
+### 章节导航
+- **System Prompt Priority**: context.system_prompt → role preset → 默认 fallback
+- **Role Presets**: 各角色的 System Prompt / Max Tokens / Temperature / Allowed Tools 详细对照表
+- **API Override**: 通过 context.system_prompt 运行时覆写
+- **Skill Integration**: Skill Markdown 文件作为 System Prompt 的注入方式
+- **Language Hints**: 通过 system_prompt 指定输出语言的提示方式
+- **Implementation Details**: Python 端 presets.py 的实现和 persona 配置
+
+### 与 AI Agent 体系的关联
+- 角色预设：`python/llm-service/llm_service/roles/presets.py`
+- API 覆写：`python/llm-service/llm_service/api/agent.py` 中处理 system_prompt
+- Persona 配置（尚未启用）：`config/personas.yaml`
+- Skill 注入：`config/skills/` 目录下的 Markdown 文件
+
+### 阅读建议
+需要自定义 Agent 行为的开发者必读；重点关注 System Prompt Priority 和 Role Presets 对照表。
+
 This guide explains how Shannon handles system prompts and how to customize agent behavior, based on the current code.
 
 ---

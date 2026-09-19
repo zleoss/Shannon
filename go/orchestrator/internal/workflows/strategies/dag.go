@@ -1,3 +1,17 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/workflows/strategies/dag.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 DAGWorkflow —— Shannon 的默认多任务执行策略（fan-out/fan-in）：
+//   把分解得到的多个 AgentTask 并行分发，每个由 ExecuteAgent 执行，最后由
+//   SynthesizeResults 合成。**所有未声明特定 strategy 的多任务流量默认走这里**。
+// 【AI Agent 体系定位】 "多工蜂并行 + 末尾合成"，最主流的 Agent 编排形态。
+// 【触发】 orchestrator_router.go:1110,1130 的 `default` 分支（**不在**
+//   routeStrategyWorkflow 的 switch 中，DAG 走主 switch 的 default）。
+// 【关键函数】 DAGWorkflow :27
+// 【Temporal 规则】 必须 .Get 等待 activity；workflow.Sleep 而非 time.Sleep；
+//   新代码路径必须 workflow.GetVersion() 门控。
+// =============================================================================
+
 package strategies
 
 import (

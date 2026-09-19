@@ -1,3 +1,19 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/workflows/strategies/research.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 ResearchWorkflow —— 深度研究 workflow。在 ReAct 基础上加：
+//   (1) 并行子查询；(2) HITL Plan Review（可选人工审批研究计划）；
+//   (3) 引用聚合 / 事实验证 / 覆盖度评估；(4) 中间合成。
+// 【定位】 "深度调研员"，比 React/Research 更慢更彻底，给 LLM 多轮检索能力。
+// 【触发】 context `force_research: true`（orchestrator_router.go:322 早路由），
+//   或 strategy=='research' 经由 routeStrategyWorkflow 切到（:1330）。
+// 【关键技术】
+//   - GenerateResearchPlan activity → 生成计划，可选人工 approve
+//   - GenerateSubqueries / RouteSearch / VerifyClaims / EvaluateCoverage /
+//     ExtractFacts / AddCitations 等子 activity
+//   - 中间合成 IntermediateSynthesis activity
+// =============================================================================
+
 package strategies
 
 import (

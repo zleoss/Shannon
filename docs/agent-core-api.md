@@ -1,5 +1,27 @@
 # Shannon Agent Core - API Documentation
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档是 Shannon Agent Core（Rust 网关）的 gRPC API 参考文档，涵盖 ExecuteTask 的执行接口、Tool Registry 工具注册查询接口和 Python Integration 集成接口。文档详细说明了各 RPC 的请求/响应 Protobuf 消息结构、字段语义、执行模式（Simple/Standard/Complex）、工具注册的生命周期以及错误码分类。还包含使用 grpcurl 和 Python 客户端的调用示例。
+
+### 章节导航
+- **gRPC API**: ExecuteTask（任务执行，含执行模式选择）、GetToolSchemas（获取工具 Schema 列表）、ExecuteTool（直接执行工具）
+- **Tool Registry API**: RegisterTool/UnregisterTool/ListTools——远程工具注册和管理
+- **Python Integration API**: ExecutePython（WASI 沙箱内执行 Python 代码）
+- **Error Codes**: 各类错误码及其含义（Timeout/RateLimit/SandboxError 等）
+- **Examples**: grpcurl 命令行和 Python 代码示例
+
+### 与 AI Agent 体系的关联
+- 实现位置：`rust/agent-core/src/` 的 gRPC 服务端代码
+- Protobuf 定义：`protos/agent_core.proto`
+- 端口：50051（gRPC）
+- 执行模式路由：Simple → 直接执行，Standard/Complex → 走 Go 编排器
+- WASI 沙箱执行：`rust/agent-core/src/wasi_sandbox.rs`
+
+### 阅读建议
+需要直接调用 Agent Core gRPC 接口的开发者必读；仅通过 HTTP Gateway 使用的用户可略过；重点看 ExecuteTask 的请求结构和执行模式语义。
+
 ## Table of Contents
 1. [gRPC API](#grpc-api)
 2. [Tool Registry API](#tool-registry-api)

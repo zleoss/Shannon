@@ -1,3 +1,26 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/activities/budget.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 预算管理的 Temporal activity 包装器 —— 把
+// internal/budget/manager.go 中的 BudgetManager 暴露给 workflows 调用。
+//
+// 【AI Agent 体系定位】 "成本意识": 每次 workflow 在跑 agent 前先 checkbudget，
+// 跑完后 RecordTokenUsage 记账；超出预算直接短路 / 降级。
+//
+// 【关键 activity 函数】
+//   CheckTokenBudget                   :79   基础预算检查
+//   CheckTokenBudgetWithBackpressure   :110  带背压（让 agent 等预算恢复）
+//   CheckTokenBudgetWithCircuitBreaker :151  带熔断器（连续失败时短路）
+//   RecordTokenUsage                   :211  记录实际消耗
+//   ExecuteAgentWithBudget             :297  包了预算的 agent 执行封装
+//   GenerateUsageReport                :522  生成用量报表
+//   UpdateBudgetPolicy                 :564  热改预算策略
+//
+// 【协作】 budget/manager.go :82 BudgetManager 提供 token 上限、背压、熔断、
+// 优先级；pricing/pricing.go 提供单位 token 价格；与 router 的 BudgetPreflight
+// 协同做 workflow 起始时的预检。
+// =============================================================================
+
 package activities
 
 import (

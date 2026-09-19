@@ -1,14 +1,29 @@
-"""
-Tool text formatters for the /tools/execute API.
+"""=============================================================================
+文件: python/llm-service/llm_service/tools/text_formatter.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  /tools/execute 直连端点使用的工具结果可读化格式化器。
+【关键内容】
+  format_tool_text :38 通用 fallback
+  通用剥离元数据 + 按 dict/list/scalar 格式化
+  仅有特殊结构工具覆盖 override
+【协作关系】
+  被 api/tools.py 的 /tools/execute 使用；
+  agent loop 内部使用自有格式化逻辑，互不影响。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Tool text formatters for the /tools/execute API.
 
-Generates LLM-friendly text representations of tool output.
-Used by the direct tool execution endpoint (CLI, external clients).
-Does NOT affect orchestrated workflows (agent loop has its own formatting).
+  Generates LLM-friendly text representations of tool output.
+  Used by the direct tool execution endpoint (CLI, external clients).
+  Does NOT affect orchestrated workflows (agent loop has its own formatting).
 
-Design: A generic fallback handles most tools automatically by stripping
-metadata and formatting common output shapes (dicts, lists, scalars).
-Per-tool overrides exist only for tools with unusual structures (e.g.
-web_search with nested results + relevance filtering).
+  Design: A generic fallback handles most tools automatically by stripping
+  metadata and formatting common output shapes (dicts, lists, scalars).
+  Per-tool overrides exist only for tools with unusual structures (e.g.
+  web_search with nested results + relevance filtering).
+=============================================================================
 """
 
 import html

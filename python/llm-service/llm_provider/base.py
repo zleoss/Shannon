@@ -1,7 +1,25 @@
-"""
-Base LLM Provider Abstraction Layer
-Provides a unified interface for multiple LLM providers with token management,
-caching, and model tiering support.
+"""=============================================================================
+文件: python/llm-service/llm_provider/base.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  LLM 抽象基类、模型配置、缓存、token 估算与限流的基础设施。
+【关键内容】
+  ModelTier :20 / ModelConfig :29 / ModelCapabilities :41
+  TokenUsage :96 / CompletionRequest :124 / CompletionResponse :192
+  LLMProvider :231（abstract complete :245 / stream_complete :250 / count_tokens :255）
+  LLMProviderRegistry :405 / CacheManager :459
+  TokenCounter :899 / RateLimiter :948
+  compute_token_cost :62（缓存感知，对齐 Go pricing.CostForSplitWithCache）
+【协作关系】
+  被所有具体 provider（openai/anthropic/...）实现；
+  被 manager.py 编排与组合。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Base LLM Provider Abstraction Layer
+  Provides a unified interface for multiple LLM providers with token management,
+  caching, and model tiering support.
+=============================================================================
 """
 
 from abc import ABC, abstractmethod

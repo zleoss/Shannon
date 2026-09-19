@@ -1,5 +1,29 @@
 # HTTP Task Submission API
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档是 Shannon 任务提交 HTTP API 的完整参数参考。涵盖两个端点（POST /api/v1/tasks 同步、POST /api/v1/tasks/stream 流式）的请求体参数说明：query/session_id/context/mode(简单/标准/复杂/编排器)/model_tier/model_override/provider_override 等。还包括 Swarm 模式下的 Lead 和 Worker 模型单独覆写功能、深度研究参数（research_depth/research_breadth）和模板执行参数。
+
+### 章节导航
+- **Endpoints**: POST /api/v1/tasks（同步）和 POST /api/v1/tasks/stream（流式 201 返回流 URL）
+- **Top-Level Body**: query（必填）/session_id/context/mode/model_tier/model_override/provider_override
+- **Context Parameters**: role/force_swarm/attachments/system_prompt/history_window_size 等
+- **Swarm Model Override**: lead_model_override / agent_model_override 等 Lead 和 Worker 单独覆写
+- **Research Parameters**: research_depth（1-5）/research_broad（true/false）深度研究配置
+- **Mode Semantics**: simple/standard/complex/supervisor 四种模式的语义差异
+- **Template Execution**: 通过 template_name/template_params 执行模板工作流
+- **Response Format**: 同步响应和流式响应格式
+
+### 与 AI Agent 体系的关联
+- Gateway 处理：`go/orchestrator/cmd/gateway/` 中的 HTTP handler
+- 模式路由：`go/orchestrator/internal/workflows/orchestrator_router.go`
+- Swarm 覆写：`go/orchestrator/internal/workflows/swarm_workflow.go`
+- 模板执行：`go/orchestrator/internal/workflows/template_workflow.go`
+
+### 阅读建议
+所有调用 Shannon API 的开发者必读；重点关注 mode 语义、Swarm 覆写和 Research 参数。
+
 This page documents all parameters for submitting tasks via the HTTP Gateway.
 
 ## Endpoints

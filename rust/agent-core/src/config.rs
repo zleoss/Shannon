@@ -1,3 +1,16 @@
+// =============================================================================
+// 文件: rust/agent-core/src/config.rs
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   配置中心：Config / WasiConfig / EnforcementConfig / FirecrackerExecutorConfig 等，支持文件+环境变量+全局单例。
+// 【关键内容】
+//   Config 主配置结构（含 WasiConfig / EnforcementConfig:373 / FirecrackerExecutorConfig）
+//   默认实现 Default（config.rs:420-434）
+//   支持 YAML 文件 + 环境变量覆盖 + 全局单例 RwLock
+// 【协作关系】
+//   被几乎所有模块读取（enforcement、wasi_sandbox、sandbox、tools、grpc_server、workspace 等）。
+//   config/shannon.yaml + .env 作为外部参数来源。
+// =============================================================================
 use serde::{Deserialize, Serialize};
 use std::env;
 use std::fs;

@@ -1,3 +1,13 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/attachments/consts.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   附件模块常量定义 —— 上传大小限制、支持的文件类型等。
+// 【关键内容】
+//   MaxMultimodalBodyBytes / MaxUploadSize / AllowedMimeTypes
+// 【协作关系】
+//   被附件上传和请求校验环节引用，作为安全限制的硬边界。
+// =============================================================================
 package attachments
 
 // MaxMultimodalBodyBytes is the maximum request body size for endpoints that

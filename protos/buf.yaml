@@ -1,3 +1,13 @@
+# =============================================================================
+# 文件: protos/buf.yaml
+# -----------------------------------------------------------------------------
+# Buf 模块清单：定义 protos 为模块 buf.build/shannon/protos。
+# - lint.use: DEFAULT  启用 Buf 默认 lint 规则集（命名、格式等）
+# - breaking.use: FILE 以单个 .proto 文件为粒度做破坏性变更检测，
+#   适合多服务、多 package 共存的项目（本仓库有 agent/sandbox/common/
+#   orchestrator/session/llm 六个 package）。
+# 修改 .proto 后用 `make proto` 重新生成绑定（依赖本配置）。
+# =============================================================================
 version: v1
 name: buf.build/shannon/protos
 

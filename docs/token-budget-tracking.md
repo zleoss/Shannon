@@ -1,5 +1,28 @@
 # Token Budget and Cost Tracking
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档详细说明 Shannon 的双路径 Token 追踪系统，确保每次 Agent 执行的 Token 用量精确记录一次（预算启用时由活动记录、禁用时由模式记录）。文档涵盖预算启用/禁用的完整决策流程、各模式（并行/顺序/React/Research 等）的 Token 记录方式、token_usage 数据库表结构、以及成本计算指标。还包含预算检查点的实现细节和工作流终止策略。
+
+### 章节导航
+- **Architecture**: 双路径记录——预算启用时 ExecuteAgentWithBudget 记录，禁用时各 Pattern 自行记录
+- **Budget Flow**: 预算检查点（budget_checkpoint）——在工作流关键节点检查预算是否超限
+- **Pattern Recording**: 各模式（Parallel/Sequential/React/Research/DAG）的 Token 记录策略
+- **Database Schema**: token_usage 表结构及字段说明
+- **Cost Calculation**: 基于 config/models.yaml 定价的输入/输出 Token 分别计费
+- **Termination Strategy**: 超预算后的终止策略（硬停止 vs 降级）
+
+### 与 AI Agent 体系的关联
+- 预算管理器：`go/orchestrator/internal/workflows/budget.go` 及 budget_manager.go
+- Token 记录活动：`go/orchestrator/internal/activities/agent.go` 中的 ExecuteAgentWithBudget
+- 定价配置中心：`config/models.yaml` 的 pricing 段
+- 数据库：token_usage 表记录每次调用的 Token/费用详情
+- 模式内记录：`go/orchestrator/internal/patterns/` 下各模式的 token 记录逻辑
+
+### 阅读建议
+平台运维和成本管控人员必读；AI 应用开发者重点看 Budget Flow 和 Pattern Recording 以合理设置预算；简单使用场景可略读 Termination Strategy 细节。
+
 ## Overview
 
 Shannon implements a dual-path token tracking system that ensures accurate cost reporting across all workflow patterns while preventing duplicate recordings when budgets are enabled.

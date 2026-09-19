@@ -1,3 +1,14 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/workflows/strategies/scientific.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 ScientificWorkflow —— 多模式科学方法策略。
+//   按"假设 → 实验（执行 tools）→ 评估 → 修正假设"循环推进，
+//   多模式组合 ReAct / Exploratory / Reflection 等子模式。
+// 【定位】 "科研员"，比 Research 更强调假设驱动的因果链。
+// 【触发】 strategy=='scientific'，或认知策略为 scientific。
+// 【关键函数】 ScientificWorkflow :21
+// =============================================================================
+
 package strategies
 
 import (

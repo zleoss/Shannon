@@ -1,16 +1,31 @@
-"""
-Python WASI Executor Tool - Production Implementation
+"""=============================================================================
+文件: python/llm-service/llm_service/tools/builtin/python_wasi_executor.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  Python WASI 执行工具：经 gRPC 调 Rust agent-core 沙箱运行 Python。
+【关键内容】
+  import agent_pb2(_grpc) :29
+  PythonWasiExecutorTool :54
+  grpc.aio.insecure_channel + AgentServiceStub :396-397
+【协作关系】
+  被 agent loop 作为代码执行工具调用；
+  下游为 Rust agent-core 的 WASI 沙箱服务。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Python WASI Executor Tool - Production Implementation
 
-This tool provides secure Python code execution via WebAssembly System Interface (WASI).
-It uses a full CPython 3.11.4 interpreter compiled to WebAssembly for true sandboxing.
+  This tool provides secure Python code execution via WebAssembly System Interface (WASI).
+  It uses a full CPython 3.11.4 interpreter compiled to WebAssembly for true sandboxing.
 
-Features:
-- Full Python standard library support
-- Memory and CPU resource limits
-- Timeout protection
-- Secure filesystem isolation
-- Output streaming capability
-- Session persistence (optional)
+  Features:
+  - Full Python standard library support
+  - Memory and CPU resource limits
+  - Timeout protection
+  - Secure filesystem isolation
+  - Output streaming capability
+  - Session persistence (optional)
+=============================================================================
 """
 
 import os

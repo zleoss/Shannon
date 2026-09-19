@@ -1,3 +1,13 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/activities/consensus_memory.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】
+//   共识记忆 activity —— 在 swarm agent 间共享和同步状态信息。
+// 【关键内容】
+//   ReadConsensusMemory / WriteConsensusMemory
+// 【协作关系】
+//   被 SwarmWorkflow 调用，实现多个 agent 间的信息共享。
+// =============================================================================
 package activities
 
 import (

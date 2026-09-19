@@ -1,5 +1,24 @@
 # Providers Models Endpoint
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档说明 Python LLM Service 的 `/providers/models` 端点——一个实时模型注册表调试接口。通过 GET 请求可查看各 Provider（OpenAI/Anthropic 等）当前可用的模型列表、按 tier（small/medium/large）筛选、验证 config/models.yaml 中的模型配置是否正确加载、快速排查 API Key 和连接等环境问题。文档还包含 workflow stage 的模型覆写说明。
+
+### 章节导航
+- **Purpose**: 查看可用模型、验证配置、调试环境问题
+- **Endpoint**: GET /providers/models，可选 tier 查询参数
+- **Response Schema**: 每个模型的 id/name/tier/context_window/cost/supports_tools/available 等字段
+- **Model Override**: 在 workflow 的不同阶段覆写模型（decompose/synthesis/agent 分别指定）
+
+### 与 AI Agent 体系的关联
+- 端点实现：`python/llm-service/llm_service/api/providers.py`
+- 模型数据源：`config/models.yaml` 的 model_catalog 段
+- 用于调试 Provider 连接和模型配置问题
+
+### 阅读建议
+运维和调试人员必读；部署后建议用此端点验证模型配置是否正确。
+
 This page documents the live model registry endpoint exposed by the Python LLM service and how to override models for specific workflow stages.
 
 ## Purpose

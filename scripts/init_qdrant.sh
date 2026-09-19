@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
+# =============================================================================
+# 文件: scripts/init_qdrant.sh
+# -----------------------------------------------------------------------------
+# 【一句话功能】 初始化 Qdrant 集合的包装脚本
+# 【关键内容】 调用共享迁移脚本初始化 Qdrant 集合
+#             设计在 qdrant-init Docker 服务内运行，也支持本地执行
+# 【协作关系】 被 docker-compose qdrant-init 服务调用；依赖 Qdrant 实例
+# =============================================================================
 set -euo pipefail
 
 # Wrapper to initialize Qdrant collections using the shared migrations script.

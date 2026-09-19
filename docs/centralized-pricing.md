@@ -1,5 +1,25 @@
 # Centralized Pricing Configuration
 
+## 📖 中文学习注解
+
+### 本文核心摘要
+本文档说明 Shannon 的集中式定价配置系统——所有服务（Go 编排器、Rust Agent Core、Python LLM Service）共享 `config/models.yaml` 作为定价单一数据源。文档详细介绍了 YAML 中 `pricing` 段的结构（defaults 通用默认值 + models 各 model 输入/输出/合并单价）、Go/Rust/Python 三端的实现位置与使用方式、热重载机制以及验证步骤。
+
+### 章节导航
+- **Configuration Structure**: pricing.defaults（未知模型的通用单价）和 pricing.models（按 provider > model_id 细粒度定价）
+- **Implementation Details**: Go 端定价计算（pricing.go）、Rust 端（pricing.rs）、Python 端价格获取
+- **Hot Reload**: models.yaml 被 config manager 监听，修改后自动重新加载
+- **Validation**: 基本校验（禁止负值）和完整的验证脚本
+
+### 与 AI Agent 体系的关联
+- 配置源文件：`config/models.yaml` 的 pricing 段
+- Go 定价实现：`go/orchestrator/internal/pricing/pricing.go`
+- Rust 定价实现：`rust/agent-core/src/pricing.rs`
+- 用于每次 Agent 调用的成本计算，记录到 token_usage 表
+
+### 阅读建议
+平台运维和计费相关开发者必读；普通应用开发者了解即可。
+
 ## Overview
 
 The Shannon platform now has a centralized pricing configuration system that manages model costs across all services (Go orchestrator, Rust agent-core, Python llm-service). All pricing data is maintained in a single source of truth: `config/models.yaml`.

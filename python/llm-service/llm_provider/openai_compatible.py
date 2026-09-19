@@ -1,6 +1,19 @@
-"""
-OpenAI-Compatible Provider Implementation
-For providers that implement OpenAI's API (DeepSeek, Qwen, local models, etc.)
+"""=============================================================================
+文件: python/llm-service/llm_provider/openai_compatible.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  OpenAI 兼容通用 provider（DeepSeek/Qwen/本地模型等）。
+【关键内容】
+  complete :229 / stream_complete :426 / count_tokens :181
+  使用 AsyncOpenAI 客户端统一对接
+【协作关系】
+  作为兼容 API 的兜底/默认 provider，被 LLMManager 动态加载。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  OpenAI-Compatible Provider Implementation
+  For providers that implement OpenAI's API (DeepSeek, Qwen, local models, etc.)
+=============================================================================
 """
 
 import logging

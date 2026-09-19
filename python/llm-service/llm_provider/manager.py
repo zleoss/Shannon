@@ -1,6 +1,27 @@
-"""
-Unified LLM Manager
-Orchestrates multiple providers with caching, routing, and token management
+"""=============================================================================
+文件: python/llm-service/llm_provider/manager.py
+-------------------------------------------------------------------------------
+【一句话功能】
+  LLMManager 主管理器：多 provider 编排、缓存、对冲、熔断、预算、热重载。
+【关键内容】
+  LLMManager :119；load_config :178 / load_default_config :205
+  _translate_unified_config :376；_initialize_providers :283
+  complete :574 / stream_complete :729
+  _select_provider :794 / _get_fallback_provider :870
+  _call_provider_with_cb :931 / _hedged_complete :1013
+  _check_session_budget :1054（默认禁用，预算由 Go 管）
+  reload :1162 / generate_embedding :1190
+  _RedisCacheManager :1225 / _CircuitBreaker :1346
+  单例 get_llm_manager :1214
+【协作关系】
+  被 providers/__init__.py 的 ProviderManager 包装对外暴露；
+  下层调用各 concrete provider 实现。
+=============================================================================
+-------------------------------------------------------------------------------
+【原 docstring】
+  Unified LLM Manager
+  Orchestrates multiple providers with caching, routing, and token management
+=============================================================================
 """
 
 import os

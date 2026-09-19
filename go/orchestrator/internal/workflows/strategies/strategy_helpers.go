@@ -1,3 +1,12 @@
+// =============================================================================
+// 文件: go/orchestrator/internal/workflows/strategies/strategy_helpers.go
+// -----------------------------------------------------------------------------
+// 【一句话功能】 策略 workflow 的公共辅助与类型转换工具，被 dag/react/research/
+//   exploratory/scientific/browser_use/domain_analysis 共用。统一 Signal/版本
+//   迁移 helper，确保 replay 确定性。
+// 【AI Agent 体系定位】 "策略层共用基础设施"，不直接实现业务流程。
+// =============================================================================
+
 package strategies
 
 import (
